@@ -2,20 +2,21 @@ package edu.br.ifsp.domain.usecases.tools;
 
 import edu.br.ifsp.domain.entities.tools.ToolItem;
 import edu.br.ifsp.domain.usecases.utils.EntityAlreadyExistsException;
+import edu.br.ifsp.domain.usecases.utils.EntityNotFoundException;
 import edu.br.ifsp.domain.usecases.utils.Notification;
 import edu.br.ifsp.domain.usecases.utils.Validator;
 
 import java.util.UUID;
 
-public class CreateToolItemUseCase {
+public class UpdateToolItemUseCase {
 
     private ToolItemDAO toolItemDAO;
 
-    public CreateToolItemUseCase(ToolItemDAO toolItemDAO) {
+    public UpdateToolItemUseCase(ToolItemDAO toolItemDAO) {
         this.toolItemDAO = toolItemDAO;
     }
 
-    public String insert(ToolItem toolItem) {
+    public boolean update(ToolItem toolItem) {
         Validator<ToolItem> validator = new ToolItemInputRequestValidator();
         Notification notification = validator.validate(toolItem);
 
@@ -23,11 +24,12 @@ public class CreateToolItemUseCase {
             throw new IllegalArgumentException(notification.errorMessage());
         }
 
-        String toolItemPatrimony = toolItem.getPatrimony();
-        if (toolItemDAO.findByPatrimony(toolItemPatrimony).isPresent()) {
-            throw new EntityAlreadyExistsException("This patrimony is already in use!");
+        // turning UUID from database to String to findOne method
+        String id = toolItem.getId().toString();
+        if (toolItemDAO.findOne(id).isEmpty()) {
+            throw new EntityNotFoundException("Tool Item not found!");
         }
-        return toolItemDAO.create(toolItem);
+        return toolItemDAO.update(toolItem);
     }
 
 }
