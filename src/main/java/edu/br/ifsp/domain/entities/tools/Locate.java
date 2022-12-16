@@ -8,7 +8,7 @@ public class Locate {
     private String name;
     private String description;
 
-    public Locate(UUID id, String name, String description) {
+    public Locate(UUID id, String name,  String description) {
         this.id = id;
         this.name = name;
         this.description = description;
