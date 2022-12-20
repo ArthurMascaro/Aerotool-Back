@@ -7,10 +7,10 @@ import java.util.UUID;
 
 public class Event {
 
-    //Find specific variable types for entity's
+    //Method System.
     private UUID id;
-    private User entity1;
-    private User entity2;
+    private User responsible;
+    private User subject;
     private Timestamp date;
     private EventSituation situation;
     private EventType type;
@@ -24,10 +24,10 @@ public class Event {
         this.id = id;
     }
 
-    public Event(UUID id, User entity1, User entity2, Timestamp date, EventSituation situation, EventType type, String description) {
+    public Event(UUID id, User responsible, User subject, Timestamp date, EventSituation situation, EventType type, String description) {
         this.id = id;
-        this.entity1 = entity1;
-        this.entity2 = entity2;
+        this.responsible = responsible;
+        this.subject = subject;
         this.date = date;
         this.situation = situation;
         this.type = type;
@@ -42,20 +42,20 @@ public class Event {
         this.id = id;
     }
 
-    public User getEntity1() {
-        return entity1;
+    public User getResponsible() {
+        return responsible;
     }
 
-    public void setEntity1(User entity1) {
-        this.entity1 = entity1;
+    public void setResponsible(User responsible) {
+        this.responsible = responsible;
     }
 
-    public User getEntity2() {
-        return entity2;
+    public User getSubject() {
+        return subject;
     }
 
-    public void setEntity2(User entity2) {
-        this.entity2 = entity2;
+    public void setSubject(User subject) {
+        this.subject = subject;
     }
 
     public Timestamp getDate() {
@@ -94,8 +94,8 @@ public class Event {
     public String toString() {
         return "Event{" +
                 "id=" + id +
-                ", entity1=" + entity1 +
-                ", entity2=" + entity2 +
+                ", entity1=" + responsible +
+                ", entity2=" + subject +
                 ", date=" + date +
                 ", situation=" + situation +
                 ", type=" + type +

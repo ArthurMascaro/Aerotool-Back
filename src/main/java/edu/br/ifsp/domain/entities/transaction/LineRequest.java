@@ -1,28 +1,19 @@
 package edu.br.ifsp.domain.entities.transaction;
 
+import edu.br.ifsp.domain.entities.tools.ToolItem;
+
 import java.sql.Timestamp;
 import java.util.UUID;
 
-public class LineRequest extends Request{
+public class LineRequest{
 
+    private Request request;
+    private ToolItem toolItem;
     private Timestamp expectedReturnDate;
     private Timestamp realReturnDate;
     private Timestamp expectedWithdrawDate;
     private Timestamp realWithdrawDate;
     private RequestSituation situation;
-
-    public LineRequest(UUID id, Timestamp date) {
-        super(id, date);
-    }
-
-    public LineRequest(UUID id, Timestamp date, Timestamp expectedReturnDate, Timestamp realReturnDate, Timestamp expectedWithdrawDate, Timestamp realWithdrawDate, RequestSituation situation) {
-        super(id, date);
-        this.expectedReturnDate = expectedReturnDate;
-        this.realReturnDate = realReturnDate;
-        this.expectedWithdrawDate = expectedWithdrawDate;
-        this.realWithdrawDate = realWithdrawDate;
-        this.situation = situation;
-    }
 
     public Timestamp getExpectedReturnDate() {
         return expectedReturnDate;

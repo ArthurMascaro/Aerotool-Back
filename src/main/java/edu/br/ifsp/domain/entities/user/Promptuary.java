@@ -4,16 +4,26 @@ import javax.swing.*;
 
 public class Promptuary {
 
-    //Search for a specific variable type
+    //alter login to value
     private String login;
     private String password;
 
-    public Promptuary() {
+    private Promptuary() {
     }
 
-    public Promptuary(String login, String password) {
-        this.login = login;
-        this.password = password;
+    public static void main(String[] args) {
+        Promptuary p = Promptuary.valueOf("banana");
+    }
+
+    public static Promptuary valueOf(String value){
+
+        if (!isValid(value)) throw new IllegalArgumentException("String value is not a valid Promptuary");
+
+        return new Promptuary();
+    }
+
+    private static boolean isValid(String value) {
+        return false;
     }
 
     public String getLogin() {
