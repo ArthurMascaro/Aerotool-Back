@@ -15,6 +15,23 @@ public class LineRequest{
     private Timestamp realWithdrawDate;
     private RequestSituation situation;
 
+    public LineRequest() {
+    }
+
+    public LineRequest(Request request) {
+        this.request = request;
+    }
+
+    public LineRequest(Request request, ToolItem toolItem, Timestamp expectedReturnDate, Timestamp realReturnDate, Timestamp expectedWithdrawDate, Timestamp realWithdrawDate, RequestSituation situation) {
+        this.request = request;
+        this.toolItem = toolItem;
+        this.expectedReturnDate = expectedReturnDate;
+        this.realReturnDate = realReturnDate;
+        this.expectedWithdrawDate = expectedWithdrawDate;
+        this.realWithdrawDate = realWithdrawDate;
+        this.situation = situation;
+    }
+
     public Timestamp getExpectedReturnDate() {
         return expectedReturnDate;
     }
