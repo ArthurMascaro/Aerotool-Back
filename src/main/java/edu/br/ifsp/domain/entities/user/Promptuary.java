@@ -23,6 +23,8 @@ public class Promptuary {
     }
 
     private static boolean isValid(String value) {
+        //Verificar se os dois primeiros digitos são: LETRAS, MAIUSCULAS, e validas (correspondentes a algum if)
+        //Verificar se os 7 caracteres posteriores são numeros naturais.
         return false;
     }
 
