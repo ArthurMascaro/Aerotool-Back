@@ -1,6 +1,6 @@
-package edu.br.ifsp.domain.usecases.tools;
+package edu.br.ifsp.domain.usecases.events;
 
-import edu.br.ifsp.domain.entities.tools.ToolItem;
+import edu.br.ifsp.domain.entities.event.Event;
 import edu.br.ifsp.domain.usecases.utils.Notification;
 import edu.br.ifsp.domain.usecases.utils.Validator;
 
@@ -14,7 +14,7 @@ public class EventRequestValidator extends Validator<Event> {
             return notification;
         }
 
-        if (nullOrEmpty(event.getId())) {
+        if (nullOrEmpty(event.getId().toString())) {
             notification.addError("Id is null or empty!");
         }
         if (nullOrEmpty(event.getResponsible().toString())) {
