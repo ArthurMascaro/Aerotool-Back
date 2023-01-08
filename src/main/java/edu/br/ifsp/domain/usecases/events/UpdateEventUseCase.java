@@ -1,33 +1,26 @@
 package edu.br.ifsp.domain.usecases.events;
 
 import edu.br.ifsp.domain.entities.event.Event;
-import edu.br.ifsp.domain.usecases.utils.EntityAlreadyExistsException;
+import edu.br.ifsp.domain.usecases.utils.EntityNotFoundException;
 import edu.br.ifsp.domain.usecases.utils.Notification;
 import edu.br.ifsp.domain.usecases.utils.Validator;
 
-import java.util.UUID;
-
-public class CreateEventUseCase{
-
+public class UpdateEventUseCase {
     private EventDAO eventDAO;
 
-    public CreateEventUseCase(EventDAO eventDAO) { this.eventDAO = eventDAO; }
+    public UpdateEventUseCase(EventDAO eventDAO){ this.eventDAO = eventDAO; }
 
-    public UUID insert(Event event){
-
+    public boolean update(Event event) {
         Validator<Event> validator = new EventRequestValidator();
         Notification notification = validator.validate(event);
 
         if (notification.hasErros()) {
             throw new IllegalArgumentException(notification.errorMessage());
         }
-
-        UUID eventId = event.getId();
-
-        if(eventDAO.findByUUID(eventId).isPresent()){
-            throw new EntityAlreadyExistsException("This id is already in use!");
+        if (eventDAO.findOne(event.getId()).isEmpty()) {
+            throw new EntityNotFoundException("Event not found!");
         }
-
-        return eventDAO.create(event);
+        return eventDAO.update(event);
     }
+
 }

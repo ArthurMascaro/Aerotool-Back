@@ -12,5 +12,5 @@ import java.util.UUID;
 
 public interface EventDAO extends DAO<Event, UUID> {
 
-    Optional<Event> findById(UUID id);
+    Optional<Event> findByUUID(UUID id);
 }
