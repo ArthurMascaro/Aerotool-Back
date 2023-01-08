@@ -1,7 +1,7 @@
 package edu.br.ifsp.domain.entities.user;
 
 import java.util.UUID;
-import java.util.regex;
+import java.util.regex.*;
 
 public class User {
 
@@ -63,7 +63,7 @@ public class User {
         Promptuary regex = Promptuary.valueOf("^(AR|SC|SP)\d[0-9]{6,7}$");
 
         // Compile the ReGex
-        Pattern p = Pattern.compile(regex);
+        Pattern p = Pattern.compile(String.valueOf(regex));
 
         // If the promptuary is empty
         // return false
