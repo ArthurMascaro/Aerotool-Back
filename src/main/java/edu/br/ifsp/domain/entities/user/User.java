@@ -1,6 +1,7 @@
 package edu.br.ifsp.domain.entities.user;
 
 import java.util.UUID;
+import java.util.regex.*;
 
 public class User {
 
@@ -54,6 +55,30 @@ public class User {
 
     public void setPromptuary(Promptuary promptuary) {
         this.promptuary = promptuary;
+    }
+
+    public static boolean User(Promptuary promptuary){
+
+        // Regex to check valid promptuary
+        Promptuary regex = Promptuary.valueOf("^(AR|SC|SP)\d[0-9]{6,7}$");
+
+        // Compile the ReGex
+        Pattern p = Pattern.compile(String.valueOf(regex));
+
+        // If the promptuary is empty
+        // return false
+        if (promptuary == null) {
+            return false;
+        }
+
+        // Pattern class contains matcher() method
+        // to find matching between given promptuary
+        // and regular expression.
+        Matcher m = p.matcher(promptuary);
+
+        // Return if the promptuary
+        // matched the ReGex
+        return m.matches();
     }
 
     @Override
