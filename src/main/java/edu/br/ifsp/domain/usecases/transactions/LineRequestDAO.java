@@ -11,4 +11,6 @@ import java.util.UUID;
 public interface LineRequestDAO extends DAO<LineRequest, UUID> {
 
     Optional<LineRequest> findByRequest(Request request);
+
+    Optional<LineRequest> findByUUID(UUID id);
 }

@@ -15,16 +15,19 @@ public class CreateLineRequestUseCase {
 
     private LineRequestDAO lineRequestDAO;
     private FindToolItemUseCase findToolItemUseCaseUseCase;
+    private FindRequestUseCase findRequestUseCase;
     private UpdateToolItemUseCase updateToolItemUseCase;
 
 
     public CreateLineRequestUseCase(
             LineRequestDAO lineRequestDAO,
+            FindRequestUseCase findRequestUseCase,
             FindToolItemUseCase findToolItemUseCaseUseCase,
             UpdateToolItemUseCase updateToolItemUseCase){
 
 
         this.lineRequestDAO = lineRequestDAO;
+        this.findRequestUseCase = findRequestUseCase;
         this.findToolItemUseCaseUseCase = findToolItemUseCaseUseCase;
         this.updateToolItemUseCase = updateToolItemUseCase;
     }
@@ -40,6 +43,9 @@ public class CreateLineRequestUseCase {
 
         ToolItem toolItem = findToolItemUseCaseUseCase.findOne(toolItemID).orElseThrow(() ->
                 new EntityNotFoundException("Can not find a Tool Item with ID" + toolItemID));
+
+        Request request = findRequestUseCase.findOne(requestID).orElseThrow(() ->
+                new EntityNotFoundException("Can not find a Request with ID" + requestID));
 
         if(toolItem.getSituation() == ToolSituation.BUSY) {
             throw new LineRequestNotAllowedException("The Tool Item with ID" + toolItemID + "is unavailable.");

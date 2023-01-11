@@ -25,7 +25,7 @@ public class UpdateRequestUseCase {
             throw new IllegalArgumentException(notification.errorMessage());
         }
         if (requestDAO.findOne(request.getId().toString()).isEmpty()) {
-            throw new EntityNotFoundException("Tool not found!");
+            throw new EntityNotFoundException("Request not found!");
         }
         return requestDAO.update(request);
     }

@@ -7,6 +7,7 @@ import java.util.UUID;
 
 public class LineRequest{
 
+    private UUID id;
     private Request request;
     private ToolItem toolItem;
     private Timestamp expectedReturnDate;
@@ -18,12 +19,13 @@ public class LineRequest{
     public LineRequest() {
     }
 
-    public LineRequest(Request request) {
-        this.request = request;
+    public LineRequest(UUID id) {
+        this.id = id;
     }
 
-    public LineRequest(Request request, ToolItem toolItem, Timestamp expectedReturnDate,
+    public LineRequest(UUID id, Request request, ToolItem toolItem, Timestamp expectedReturnDate,
                        Timestamp expectedWithdrawDate, RequestSituation situation) {
+        this.id = id;
         this.request = request;
         this.toolItem = toolItem;
         this.expectedReturnDate = expectedReturnDate;
@@ -31,7 +33,8 @@ public class LineRequest{
         this.situation = situation;
     }
 
-    public LineRequest(Request request, ToolItem toolItem, Timestamp expectedReturnDate, Timestamp realReturnDate, Timestamp expectedWithdrawDate, Timestamp realWithdrawDate, RequestSituation situation) {
+    public LineRequest(UUID id,Request request, ToolItem toolItem, Timestamp expectedReturnDate, Timestamp realReturnDate, Timestamp expectedWithdrawDate, Timestamp realWithdrawDate, RequestSituation situation) {
+        this.id = id;
         this.request = request;
         this.toolItem = toolItem;
         this.expectedReturnDate = expectedReturnDate;
@@ -40,6 +43,14 @@ public class LineRequest{
         this.realWithdrawDate = realWithdrawDate;
         this.situation = situation;
     }
+
+    public UUID getId(){ return id;}
+
+    public void setId(UUID id){this.id = id;}
+
+    public Request getRequest(){return request;}
+
+    public ToolItem getToolItem(){return toolItem;}
 
     public Timestamp getExpectedReturnDate() {
         return expectedReturnDate;
