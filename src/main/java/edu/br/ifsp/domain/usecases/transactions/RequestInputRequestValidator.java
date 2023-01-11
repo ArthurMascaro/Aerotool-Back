@@ -11,18 +11,18 @@ public class RequestInputRequestValidator extends Validator<Request>{
     public Notification validate(Request request) {
         Notification notification = new Notification();
         if (request == null) {
-            notification.addError("Tool Item is null!");
+            notification.addError("Request is null!");
             return notification;
         }
 
         if (nullOrEmpty(request.getId().toString())){
-            notification.addError("Patrimony is null or empty!");
+            notification.addError("Request ID is null or empty");
         }
         if (nullOrEmpty(request.getUser().toString())) {
-            notification.addError("Tool is null or empty!");
+            notification.addError("User promptuary is null or empty!");
         }
         if (nullOrEmpty(request.getDate().toString())) {
-            notification.addError("Location is null or empty!");
+            notification.addError("Date is null or empty!");
         }
 
         return notification;
