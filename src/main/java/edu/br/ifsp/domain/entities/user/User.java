@@ -1,6 +1,7 @@
 package edu.br.ifsp.domain.entities.user;
 
 import java.util.UUID;
+import java.util.regex.*;
 
 public class User {
 

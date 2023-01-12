@@ -1,6 +1,8 @@
 package edu.br.ifsp.domain.entities.user;
 
 import javax.swing.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Promptuary {
 
@@ -11,26 +13,30 @@ public class Promptuary {
     private Promptuary() {
     }
 
-    public static void main(String[] args) {
-        Promptuary p = Promptuary.valueOf("banana");
+    private Promptuary(String login){
+        this.login = login;
     }
 
-    public static Promptuary valueOf(String value){
+    public static Promptuary valueOf(String login){
 
-        if (!isValid(value)) throw new IllegalArgumentException("String value is not a valid Promptuary");
+        if (!isValid(login)) throw new IllegalArgumentException("Login value is not a valid Promptuary");
 
-        return new Promptuary();
+        return new Promptuary(login);
     }
 
-    private static boolean isValid(String value) {
-        return false;
+    private static boolean isValid(String login) {
+        if (login == null) {
+            return false;
+        }
+
+        return Pattern.matches("^(AR|SC|SP)\\d{6,7}$", login);
     }
 
     public String getLogin() {
         return login;
     }
 
-    public void setLogin(String login) {
+    public void setLogin (String login) {
         this.login = login;
     }
 
