@@ -1,4 +1,4 @@
-package edu.br.ifsp.domain.entities.event.user;
+package edu.br.ifsp.domain.entities.user;
 
 public enum Role {
 

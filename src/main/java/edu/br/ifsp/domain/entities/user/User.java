@@ -1,4 +1,4 @@
-package edu.br.ifsp.domain.entities.event.user;
+package edu.br.ifsp.domain.entities.user;
 
 import java.util.UUID;
 
