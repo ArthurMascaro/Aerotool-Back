@@ -1,6 +1,6 @@
 package edu.br.ifsp.domain.entities.transaction;
 
-import edu.br.ifsp.domain.entities.user.User;
+import edu.br.ifsp.domain.entities.event.user.User;
 
 import java.sql.Timestamp;
 import java.util.UUID;

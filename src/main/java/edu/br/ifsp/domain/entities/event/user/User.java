@@ -1,7 +1,6 @@
-package edu.br.ifsp.domain.entities.user;
+package edu.br.ifsp.domain.entities.event.user;
 
 import java.util.UUID;
-import java.util.regex.*;
 
 public class User {
 

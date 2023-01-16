@@ -1,9 +1,8 @@
 package edu.br.ifsp.domain.usecases.user;
 
-import edu.br.ifsp.domain.entities.user.Promptuary;
-import edu.br.ifsp.domain.entities.user.User;
+import edu.br.ifsp.domain.entities.event.user.User;
 import edu.br.ifsp.domain.usecases.utils.EntityNotFoundException;
-import edu.br.ifsp.domain.usecases.user.UserDAO;
+
 import java.util.UUID;
 
 public class RemoveUserUseCase {

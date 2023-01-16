@@ -1,7 +1,5 @@
-package edu.br.ifsp.domain.entities.user;
+package edu.br.ifsp.domain.entities.event.user;
 
-import javax.swing.*;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Promptuary {
