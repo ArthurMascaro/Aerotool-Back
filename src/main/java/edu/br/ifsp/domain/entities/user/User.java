@@ -1,7 +1,6 @@
 package edu.br.ifsp.domain.entities.user;
 
 import java.util.UUID;
-import java.util.regex.*;
 
 public class User {
 
@@ -15,6 +14,8 @@ public class User {
     }
 
     public User(UUID id) {
+        if (id == null)
+            throw new IllegalArgumentException("id cannot be null");
         this.id = id;
     }
 

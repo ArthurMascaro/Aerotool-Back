@@ -14,6 +14,12 @@ public class Locate {
         this.description = description;
     }
 
+    public Locate(UUID id) {
+        if (id == null)
+            throw new IllegalArgumentException("ID can't be null.");
+        this.id = id;
+    }
+
     public Locate() {
         this.id = UUID.randomUUID();
     }
