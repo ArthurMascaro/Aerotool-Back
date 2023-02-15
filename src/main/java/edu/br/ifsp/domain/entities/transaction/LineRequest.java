@@ -16,12 +16,11 @@ public class LineRequest{
     private Timestamp realWithdrawDate;
     private RequestSituation situation;
 
-    public LineRequest() {
-    }
-
     public LineRequest(UUID id) {
         this.id = id;
     }
+
+    public LineRequest() { this.id = UUID.randomUUID(); }
 
     public LineRequest(UUID id, Request request, ToolItem toolItem, Timestamp expectedReturnDate,
                        Timestamp expectedWithdrawDate, RequestSituation situation) {
