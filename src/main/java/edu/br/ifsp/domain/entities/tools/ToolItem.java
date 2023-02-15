@@ -10,12 +10,14 @@ public class ToolItem {
     private Tool tool;
     private ToolSituation situation;
 
-    ToolItem(){
+    public ToolItem(){
         situation = ToolSituation.FREE;
         this.id = UUID.randomUUID();
     }
 
     public ToolItem(UUID id) {
+        if (id == null)
+            throw new IllegalArgumentException("ID can't be null.");
         this.id = id;
     }
 

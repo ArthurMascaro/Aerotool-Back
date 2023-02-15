@@ -1,13 +1,8 @@
 package edu.br.ifsp.domain.usecases.transactions;
 
-import edu.br.ifsp.domain.entities.tools.ToolItem;
-import edu.br.ifsp.domain.entities.tools.ToolSituation;
-import edu.br.ifsp.domain.entities.transaction.LineRequest;
 import edu.br.ifsp.domain.entities.transaction.Request;
 import edu.br.ifsp.domain.entities.user.Promptuary;
 import edu.br.ifsp.domain.entities.user.User;
-import edu.br.ifsp.domain.usecases.tools.FindToolItemUseCase;
-import edu.br.ifsp.domain.usecases.tools.UpdateToolItemUseCase;
 import edu.br.ifsp.domain.usecases.user.FindUserUseCase;
 import edu.br.ifsp.domain.usecases.utils.EntityNotFoundException;
 

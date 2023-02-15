@@ -1,6 +1,5 @@
 package edu.br.ifsp.domain.usecases.user;
 
-import edu.br.ifsp.domain.entities.tools.Tool;
 import edu.br.ifsp.domain.entities.user.User;
 import edu.br.ifsp.domain.usecases.utils.Notification;
 import edu.br.ifsp.domain.usecases.utils.Validator;
@@ -15,10 +14,10 @@ public class UserInputRequestValidator extends Validator<User> {
          }
          if (nullOrEmpty(user.getNome()))
              notification.addError("Name is null or empty");
-        if (nullOrEmpty(user.getRole().toString()))
-            notification.addError("Role is null or empty");
-        if (nullOrEmpty(user.getPromptuary().toString()))
-            notification.addError("Promptuary is null or empty");
+        if (user.getRole() == null)
+            notification.addError("Role is null");
+        if (user.getPromptuary() == null)
+            notification.addError("Promptuary is null");
 
         return notification;
     }

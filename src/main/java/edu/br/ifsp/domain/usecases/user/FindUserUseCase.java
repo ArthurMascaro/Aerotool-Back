@@ -1,9 +1,7 @@
 package edu.br.ifsp.domain.usecases.user;
 
-import edu.br.ifsp.domain.entities.tools.Tool;
 import edu.br.ifsp.domain.entities.user.Promptuary;
 import edu.br.ifsp.domain.entities.user.User;
-import edu.br.ifsp.domain.usecases.user.UserDAO;
 import edu.br.ifsp.domain.usecases.utils.Validator;
 
 import java.util.List;
