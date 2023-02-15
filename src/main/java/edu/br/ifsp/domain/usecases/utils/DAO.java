@@ -4,17 +4,17 @@ import java.util.List;
 import java.util.Optional;
 
 public interface DAO <T, K> {
-    K create(T Type);
+    T create(T Type);
 
     Optional<T> findOne(K  key);
 
     List<T> findALL();
 
-    boolean update(T type);
+    T update(T type);
 
-    boolean deleteByKey(K key);
+    T deleteByKey(K key);
 
-    boolean delete(T type);
+    T delete(T type);
 
 
 }
