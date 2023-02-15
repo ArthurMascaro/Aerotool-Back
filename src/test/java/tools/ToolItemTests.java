@@ -9,7 +9,7 @@ import java.util.UUID;
 public class ToolItemTests {
 
     @Test
-    public void ToolItemConstructor_WithoutArguments_ObjectToolItemUUID() {
+    public void ToolItemConstructor_WithoutArguments_ObjectUserUUID() {
         Assertions.assertEquals(UUID.class, new ToolItem().getId().getClass());
     }
 

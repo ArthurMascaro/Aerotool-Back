@@ -15,8 +15,6 @@ public class Tool {
     }
 
     public Tool(UUID id) {
-        if (id == null)
-            throw new IllegalArgumentException("ID can't be null.");
         this.id = id;
     }
 
