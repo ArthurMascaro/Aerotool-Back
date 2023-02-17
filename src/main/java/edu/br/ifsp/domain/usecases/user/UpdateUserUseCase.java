@@ -13,14 +13,14 @@ public class UpdateUserUseCase {
         this.userDAO = userDAO;
     }
 
-    public boolean update(User user) {
+    public User update(User user) {
         Validator<User> validator = new UserInputRequestValidator();
         Notification notification = validator.validate(user);
 
         if (notification.hasErros()) {
             throw new IllegalArgumentException(notification.errorMessage());
         }
-        if (userDAO.findOne(user.getId().toString()).isEmpty()) {
+        if (userDAO.findOne(user.getPromptuary()).isEmpty()) {
             throw new EntityNotFoundException("User not found!");
         }
         return userDAO.update(user);

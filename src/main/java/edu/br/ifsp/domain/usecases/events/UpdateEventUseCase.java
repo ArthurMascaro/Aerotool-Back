@@ -10,7 +10,7 @@ public class UpdateEventUseCase {
 
     public UpdateEventUseCase(EventDAO eventDAO){ this.eventDAO = eventDAO; }
 
-    public boolean update(Event event) {
+    public Event update(Event event) {
         Validator<Event> validator = new EventRequestValidator();
         Notification notification = validator.validate(event);
 

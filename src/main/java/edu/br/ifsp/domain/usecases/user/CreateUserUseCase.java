@@ -14,7 +14,7 @@ public class CreateUserUseCase {
         this.userDAO = userDAO;
     }
 
-    public String insert(User user){
+    public User insert(User user){
         Validator<User> validator = new UserInputRequestValidator();
         Notification notification = validator.validate(user);
 

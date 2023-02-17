@@ -10,7 +10,7 @@ public class RemoveEventUseCase {
 
     public RemoveEventUseCase(EventDAO eventDAO) { this.eventDAO = eventDAO; }
 
-    public boolean remove(Event event) {
+    public Event remove(Event event) {
         if (event == null || eventDAO.findByUUID(event.getId()).isEmpty()) {
             throw new EntityNotFoundException("Event not found!");
         }
@@ -18,7 +18,7 @@ public class RemoveEventUseCase {
         return eventDAO.delete(event);
     }
 
-    public boolean remove(UUID id) {
+    public Event remove(UUID id) {
         if (id == null || eventDAO.findOne(id).isEmpty()) {
             throw new EntityNotFoundException("Event not found!");
         }

@@ -15,7 +15,7 @@ public class CreateToolItemUseCase {
         this.toolItemDAO = toolItemDAO;
     }
 
-    public String insert(ToolItem toolItem) {
+    public ToolItem insert(ToolItem toolItem) {
         Validator<ToolItem> validator = new ToolItemInputRequestValidator();
         Notification notification = validator.validate(toolItem);
 

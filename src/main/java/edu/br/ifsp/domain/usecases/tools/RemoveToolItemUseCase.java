@@ -13,14 +13,14 @@ public class RemoveToolItemUseCase {
         this.toolItemDAO = toolItemDAO;
     }
 
-    public boolean remove(UUID id) {
+    public ToolItem remove(UUID id) {
         if (id == null || toolItemDAO.findOne(id.toString()).isEmpty()) {
             throw new EntityNotFoundException("Tool Item not found!");
         }
         return toolItemDAO.deleteByKey(id.toString());
     }
 
-    public boolean remove(ToolItem toolItem) {
+    public ToolItem remove(ToolItem toolItem) {
         if (toolItem == null || toolItemDAO.findOne(toolItem.getId().toString()).isEmpty()) {
             throw new EntityNotFoundException("Tool Item not found!");
         }

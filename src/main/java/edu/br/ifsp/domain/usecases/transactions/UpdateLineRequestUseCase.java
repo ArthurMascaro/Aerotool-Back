@@ -15,7 +15,7 @@ public class UpdateLineRequestUseCase {
         this.lineRequestDAO = lineRequestDAO;
     }
 
-    public boolean update(LineRequest lineRequest) {
+    public LineRequest update(LineRequest lineRequest) {
         Validator<LineRequest> validator = new LineRequestInputRequestValidator();
         Notification notification = validator.validate(lineRequest);
 

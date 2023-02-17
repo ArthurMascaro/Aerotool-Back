@@ -22,7 +22,7 @@ public class CreateRequestUseCase {
         this.findUserUseCase = findUserUseCase;
     }
 
-    public String createARequest(Promptuary userPromptuary, UUID id) throws RequestNotAllowedException {
+    public Request createARequest(Promptuary userPromptuary, UUID id) throws RequestNotAllowedException {
         if (id == null){
             throw new IllegalArgumentException("Request ID is null.");
         }

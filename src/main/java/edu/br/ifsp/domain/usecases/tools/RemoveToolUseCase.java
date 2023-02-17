@@ -13,14 +13,14 @@ public class RemoveToolUseCase {
         this.toolDAO = toolDAO;
     }
 
-    public boolean remove(UUID id) {
+    public Tool remove(UUID id) {
         if (id == null || toolDAO.findOne(id).isEmpty()) {
             throw new EntityNotFoundException("Tool not found!");
         }
         return toolDAO.deleteByKey(id);
     }
 
-    public boolean remove(Tool tool) {
+    public Tool remove(Tool tool) {
         if (tool == null || toolDAO.findOne(tool.getId()).isEmpty()) {
             throw new EntityNotFoundException("Tool not found!");
         }

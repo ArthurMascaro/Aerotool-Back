@@ -1,5 +1,6 @@
 package edu.br.ifsp.domain.usecases.tools;
 
+import edu.br.ifsp.domain.entities.tools.Tool;
 import edu.br.ifsp.domain.entities.tools.ToolItem;
 import edu.br.ifsp.domain.usecases.utils.EntityAlreadyExistsException;
 import edu.br.ifsp.domain.usecases.utils.EntityNotFoundException;
@@ -16,7 +17,7 @@ public class UpdateToolItemUseCase {
         this.toolItemDAO = toolItemDAO;
     }
 
-    public boolean update(ToolItem toolItem) {
+    public ToolItem update(ToolItem toolItem) {
         Validator<ToolItem> validator = new ToolItemInputRequestValidator();
         Notification notification = validator.validate(toolItem);
 

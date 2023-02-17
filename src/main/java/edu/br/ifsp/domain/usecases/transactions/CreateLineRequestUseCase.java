@@ -32,7 +32,7 @@ public class CreateLineRequestUseCase {
         this.updateToolItemUseCase = updateToolItemUseCase;
     }
 
-    public UUID createALineRequest(UUID requestID, UUID toolItemID) throws LineRequestNotAllowedException {
+    public LineRequest createALineRequest(UUID requestID, UUID toolItemID) throws LineRequestNotAllowedException {
         if (toolItemID == null){
             throw new IllegalArgumentException("Tool Item ID is null.");
         }

@@ -14,7 +14,7 @@ public class CreateToolUseCase {
         this.toolDAO = toolDAO;
     }
 
-    public UUID insert(Tool tool){
+    public Tool insert(Tool tool){
         Validator<Tool> validator = new ToolInputRequestValidator();
         Notification notification = validator.validate(tool);
 

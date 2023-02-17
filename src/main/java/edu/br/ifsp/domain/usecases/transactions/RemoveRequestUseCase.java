@@ -15,14 +15,14 @@ public class RemoveRequestUseCase {
         this.requestDAO = requestDAO;
     }
 
-    public boolean remove(UUID id) {
+    public Request remove(UUID id) {
         if (id == null || requestDAO.findOne(id.toString()).isEmpty()) {
             throw new EntityNotFoundException("Request not found!");
         }
         return requestDAO.deleteByKey(id.toString());
     }
 
-    public boolean remove(Request request) {
+    public Request remove(Request request) {
         if (request == null || requestDAO.findOne(request.getId().toString()).isEmpty()) {
             throw new EntityNotFoundException("Tool Item not found!");
         }

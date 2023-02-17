@@ -17,7 +17,7 @@ public class UpdateRequestUseCase {
         this.requestDAO = requestDAO;
     }
 
-    public boolean update(Request request) {
+    public Request update(Request request) {
         Validator<Request> validator = new RequestInputRequestValidator();
         Notification notification = validator.validate(request);
 

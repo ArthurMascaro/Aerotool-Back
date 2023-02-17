@@ -1,5 +1,6 @@
 package edu.br.ifsp.domain.usecases.user;
 
+import edu.br.ifsp.domain.entities.user.Promptuary;
 import edu.br.ifsp.domain.entities.user.User;
 import edu.br.ifsp.domain.usecases.utils.EntityNotFoundException;
 
@@ -13,15 +14,15 @@ public class RemoveUserUseCase {
         this.userDAO = userDAO;
     }
 
-    public boolean remove(UUID id) {
-        if (id == null || userDAO.findOne(id.toString()).isEmpty()) {
+    public User remove(Promptuary promptuary) {
+        if (promptuary == null || userDAO.findOne(promptuary).isEmpty()) {
             throw new EntityNotFoundException("User not found!");
         }
-        return userDAO.deleteByKey(id.toString());
+        return userDAO.deleteByKey(promptuary);
     }
 
-    public boolean remove(User user) {
-        if (user == null || userDAO.findOne(user.getId().toString()).isEmpty()) {
+    public User remove(User user) {
+        if (user == null || userDAO.findOne(user.getPromptuary()).isEmpty()) {
             throw new EntityNotFoundException("User not found!");
         }
         return userDAO.delete(user);

@@ -13,7 +13,7 @@ public class CreateEventUseCase{
 
     public CreateEventUseCase(EventDAO eventDAO) { this.eventDAO = eventDAO; }
 
-    public UUID insert(Event event){
+    public Event insert(Event event){
 
         Validator<Event> validator = new EventRequestValidator();
         Notification notification = validator.validate(event);

@@ -16,11 +16,11 @@ public class FindUserUseCase {
         this.userDAO = userDAO;
     }
 
-    public Optional<User> findOne(UUID id) {
-        if (id == null) {
-            throw new IllegalArgumentException("ID cannot be null!");
+    public Optional<User> findOne(User user) {
+        if (user == null) {
+            throw new IllegalArgumentException("User cannot be null!");
         }
-        return userDAO.findOne(id.toString());
+        return userDAO.findOne(user.getPromptuary());
     }
 
     public Optional<User> findByPromptuary(Promptuary promptuary) {

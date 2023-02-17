@@ -13,7 +13,7 @@ public class UpdateToolUseCase {
         this.toolDAO = toolDAO;
     }
 
-    public boolean update(Tool tool) {
+    public Tool update(Tool tool) {
         Validator<Tool> validator = new ToolInputRequestValidator();
         Notification notification = validator.validate(tool);
 
