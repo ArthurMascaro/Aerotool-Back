@@ -4,6 +4,7 @@ import edu.br.ifsp.domain.entities.user.Promptuary;
 import edu.br.ifsp.domain.entities.user.User;
 import edu.br.ifsp.domain.usecases.utils.Validator;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -24,8 +25,8 @@ public class FindUserUseCase {
     }
 
     public Optional<User> findByPromptuary(Promptuary promptuary) {
-        if (Validator.nullOrEmpty(promptuary.toString())) {
-            throw new IllegalArgumentException("Promptuary cannot be null or empty!");
+        if (promptuary == null) {
+            throw new IllegalArgumentException("Promptuary cannot be null");
         }
         return userDAO.findByPromptuary(promptuary);
     }

@@ -1,5 +1,6 @@
 package edu.br.ifsp.domain.entities.user;
 
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class Promptuary {
@@ -52,5 +53,20 @@ public class Promptuary {
                 "login='" + login + '\'' +
                 ", password='" + password + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Promptuary that = (Promptuary) o;
+
+        return login.equals(that.login);
+    }
+
+    @Override
+    public int hashCode() {
+        return login.hashCode();
     }
 }

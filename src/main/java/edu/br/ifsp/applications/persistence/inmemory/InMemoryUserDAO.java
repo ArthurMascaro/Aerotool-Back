@@ -1,8 +1,10 @@
 package edu.br.ifsp.applications.persistence.inmemory;
 
 import edu.br.ifsp.domain.entities.user.Promptuary;
+import edu.br.ifsp.domain.entities.user.Role;
 import edu.br.ifsp.domain.entities.user.User;
 import edu.br.ifsp.domain.usecases.user.UserDAO;
+import edu.br.ifsp.domain.usecases.utils.EntityAlreadyExistsException;
 
 import java.util.*;
 
@@ -10,19 +12,19 @@ public class InMemoryUserDAO implements UserDAO {
 
     private static final Map<Promptuary, User> db = new LinkedHashMap<>();
 
-    public Map getDb(){
+    public Map getDb() {
         return db;
     }
 
     @Override
     public Optional<User> findByPromptuary(Promptuary promptuary) {
-        return Optional.empty();
+        return findOne(promptuary);
     }
 
     @Override
     public User create(User type) {
         if (db.containsKey(type.getPromptuary()))
-            throw new IllegalStateException("User already exists");
+            throw new EntityAlreadyExistsException("This promptuary is already in use");
         db.put(type.getPromptuary(), type);
         return db.get(type.getPromptuary());
     }
@@ -39,7 +41,7 @@ public class InMemoryUserDAO implements UserDAO {
 
     @Override
     public User update(User type) {
-        if(!db.containsKey(type.getPromptuary()))
+        if (!db.containsKey(type.getPromptuary()))
             throw new NoSuchElementException("User dont exists");
         db.replace(type.getPromptuary(), type);
         return db.get(type.getPromptuary());
@@ -47,7 +49,7 @@ public class InMemoryUserDAO implements UserDAO {
 
     @Override
     public User deleteByKey(Promptuary promptuary) {
-        if(!db.containsKey(promptuary))
+        if (!db.containsKey(promptuary))
             throw new NoSuchElementException("User dont exists");
         return db.remove(promptuary);
     }
@@ -56,6 +58,5 @@ public class InMemoryUserDAO implements UserDAO {
     public User delete(User type) {
         return deleteByKey(type.getPromptuary());
     }
-
 
 }

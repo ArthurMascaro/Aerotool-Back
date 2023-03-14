@@ -9,11 +9,11 @@ public class Notification {
     private List<Error> erros = new ArrayList<>();
 
     public void addError(String message){
-        addError(message, null);
+        erros.add(new Error(message));
     }
 
     public void addError(String message, Exception exception){
-        addError(message, exception);
+        erros.add(new Error(message, exception));
     }
 
     public boolean isCorrect(){
@@ -31,6 +31,10 @@ public class Notification {
         public Error(String message, Exception cause) {
             this.message = message;
             this.cause = cause;
+        }
+
+        public Error(String message){
+            this.message = message;
         }
     }
 

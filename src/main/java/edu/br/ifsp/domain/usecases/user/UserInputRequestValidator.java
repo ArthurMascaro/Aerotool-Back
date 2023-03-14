@@ -9,15 +9,15 @@ public class UserInputRequestValidator extends Validator<User> {
     public Notification validate(User user) {
         Notification notification = new Notification();
          if (user == null){
-             notification.addError("User is null");
+             notification.addError("User is null", new IllegalArgumentException("User is Null"));
              return notification;
          }
          if (nullOrEmpty(user.getNome()))
-             notification.addError("Name is null or empty");
+             notification.addError("Name is null or empty", new IllegalArgumentException());
         if (user.getRole() == null)
-            notification.addError("Role is null");
+            notification.addError("Role is null", new IllegalArgumentException());
         if (user.getPromptuary() == null)
-            notification.addError("Promptuary is null");
+            notification.addError("Promptuary is null", new IllegalArgumentException());
 
         return notification;
     }
