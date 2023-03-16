@@ -10,6 +10,7 @@ import edu.br.ifsp.domain.usecases.user.RemoveUserUseCase;
 import edu.br.ifsp.domain.usecases.user.UpdateUserUseCase;
 import edu.br.ifsp.domain.usecases.utils.EntityAlreadyExistsException;
 import edu.br.ifsp.domain.usecases.utils.EntityNotFoundException;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.runner.notification.RunListener;

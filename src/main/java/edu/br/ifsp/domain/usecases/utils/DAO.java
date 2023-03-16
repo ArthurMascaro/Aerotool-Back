@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface DAO <T, K> {
-    T create(T Type);
+    T create(T type);
 
     Optional<T> findOne(K  key);
 
