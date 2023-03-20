@@ -4,8 +4,6 @@ import edu.br.ifsp.applications.persistence.inmemory.InMemoryEventDAO;
 import edu.br.ifsp.domain.entities.event.Event;
 import edu.br.ifsp.domain.entities.event.EventSituation;
 import edu.br.ifsp.domain.entities.event.EventType;
-import edu.br.ifsp.domain.entities.user.Promptuary;
-import edu.br.ifsp.domain.entities.user.Role;
 import edu.br.ifsp.domain.entities.user.User;
 import edu.br.ifsp.domain.usecases.events.CreateEventUseCase;
 import edu.br.ifsp.domain.usecases.events.FindEventUseCase;
