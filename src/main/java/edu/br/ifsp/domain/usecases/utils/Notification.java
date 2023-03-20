@@ -40,6 +40,6 @@ public class Notification {
 
     public String errorMessage(){
         return erros.stream()
-                .map(e -> e.message).collect(Collectors.joining(" ,"));
+                .map(e -> e.message).collect(Collectors.joining(", "));
     }
 }
