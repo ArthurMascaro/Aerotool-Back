@@ -59,12 +59,6 @@ class EventTest {
         Assertions.assertThrows(EntityAlreadyExistsException.class, () -> createEventUseCase.insert(event));
     }
 
-//    @Test
-//    public void insertEvent_OnlyWithUUID_IllegalStateException() {
-//        Event event = new Event(UUID.randomUUID());
-//        Assertions.assertThrows(new IllegalArgumentException().getClass(), () -> createEventUseCase.insert(event));
-//    }
-
     @Test
     public void insertEvent_WithCorrectEvent_EventClass(){
         User respTest = new User(UUID.randomUUID());
@@ -93,10 +87,10 @@ class EventTest {
         Assertions.assertEquals(Event.class, findEventUseCase.findOne(event.getId()).get().getClass());
     }
 
-//    @Test
-//    public void findByUUIDEvent_withUUIDEqualsNull_IllegalArgumentException(){
-//        Assertions.assertThrows(IllegalArgumentException.class, () -> findEventUseCase.findByUUID(null));
-//    }
+    @Test
+    public void findByUUIDEvent_withUUIDEqualsNull_IllegalArgumentException(){
+        Assertions.assertThrows(IllegalArgumentException.class, () -> findEventUseCase.findByUUID(null));
+    }
 
     @Test
     public void findByUUIDEvent_withCorrectUUIDEvent_OptionalEvent(){
@@ -132,20 +126,21 @@ class EventTest {
         Assertions.assertEquals(Event.class, removeEventUseCase.remove(event.getId()).getClass());
     }
 
-//    @Test
-//    public void deleteEventByEvent_EventNotExists_EntityNotFoundException(){
-//        User respTest = new User(UUID.randomUUID());
-//        User subjTest = new User(UUID.randomUUID());
-//        Timestamp date = new Timestamp(System.currentTimeMillis());
-//        Event event = new Event(UUID.randomUUID(), respTest, subjTest, date,
-//                EventSituation.SENT, EventType.ACTION_USERS,
-//                "Standard description 5");
-//        createEventUseCase.insert(event);
-//        Assertions.assertThrows(EntityNotFoundException.class, () -> removeEventUseCase.remove(event).getClass());
-//    }
+    //Failed test.
+    @Test
+    public void deleteEventByEvent_EventNotExists_EntityNotFoundException(){
+        User respTest = new User(UUID.randomUUID());
+        User subjTest = new User(UUID.randomUUID());
+        Timestamp date = new Timestamp(System.currentTimeMillis());
+        Event event = new Event(UUID.randomUUID(), respTest, subjTest, date,
+                EventSituation.SENT, EventType.ACTION_USERS,
+                "Standard description 5");
+        createEventUseCase.insert(event);
+        Assertions.assertThrows(EntityNotFoundException.class, () -> removeEventUseCase.remove(event).getClass());
+    }
 
     @Test
-    public void deleteUserByUser_UserExists_UserClass(){
+    public void deleteEventByEvent_EventExists_EventClass(){
         User respTest = new User(UUID.randomUUID());
         User subjTest = new User(UUID.randomUUID());
         Timestamp date = new Timestamp(System.currentTimeMillis());
@@ -156,14 +151,16 @@ class EventTest {
         Assertions.assertEquals(Event.class, removeEventUseCase.remove(event).getClass());
     }
 
-//    @Test
-//    public void updateUser_OnlyWithUUID_IllegalStateException(){
-//        Event event = new Event(UUID.randomUUID());
-//        Assertions.assertThrows(new IllegalArgumentException().getClass(), () -> updateEventUseCase.update(event));
-//    }
+    //Not sure if it's really NullPointerException
+    // that should be used here.
+    @Test
+    public void updateEvent_OnlyWithUUID_NullPointerException(){
+        Event event = new Event(UUID.randomUUID());
+        Assertions.assertThrows(new NullPointerException().getClass(), () -> updateEventUseCase.update(event));
+    }
 
     @Test
-    public void updateUser_UserNotExists_EntityNotFoundException(){
+    public void updateEvent_EventNotExists_EntityNotFoundException(){
         User respTest = new User(UUID.randomUUID());
         User subjTest = new User(UUID.randomUUID());
         Timestamp date = new Timestamp(System.currentTimeMillis());
@@ -173,16 +170,17 @@ class EventTest {
         Assertions.assertThrows(EntityNotFoundException.class, () -> updateEventUseCase.update(event));
     }
 
-//    @Test
-//    public void updateUser_UserExists_NewUser(){
-//        User respTest = new User(UUID.randomUUID());
-//        User subjTest = new User(UUID.randomUUID());
-//        Timestamp date = new Timestamp(System.currentTimeMillis());
-//        Event event = new Event(UUID.randomUUID(), respTest, subjTest, date,
-//                EventSituation.NOT_VISUALIZED, EventType.NOTIFICATION,
-//                "Standard description 2");
-//
-//        event.setDescription("No description");
-//        Assertions.assertEquals(Event.class, updateEventUseCase.update(event));
-//    }
+    //Failed test.
+    @Test
+    public void updateEvent_EventExists_NewEvent(){
+        User respTest = new User(UUID.randomUUID());
+        User subjTest = new User(UUID.randomUUID());
+        Timestamp date = new Timestamp(System.currentTimeMillis());
+        Event event = new Event(UUID.randomUUID(), respTest, subjTest, date,
+                EventSituation.NOT_VISUALIZED, EventType.NOTIFICATION,
+                "Standard description 2");
+
+        event.setDescription("No description");
+        Assertions.assertEquals(Event.class, updateEventUseCase.update(event));
+    }
 }
