@@ -23,7 +23,7 @@ public class FindEventUseCase {
     }
 
     public Optional<Event> findByUUID(UUID id) {
-        if (Validator.nullOrEmpty(id.toString())) {
+        if (id == null) {
             throw new IllegalArgumentException("Id cannot be null or empty!");
         }
         return eventDAO.findByUUID(id);

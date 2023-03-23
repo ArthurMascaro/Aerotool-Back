@@ -42,7 +42,7 @@ public class InMemoryUserDAO implements UserDAO {
     @Override
     public User update(User type) {
         if (!db.containsKey(type.getPromptuary()))
-            throw new NoSuchElementException("User dont exists");
+            throw new NoSuchElementException("User doesn't exist");
         db.replace(type.getPromptuary(), type);
         return db.get(type.getPromptuary());
     }
@@ -50,7 +50,7 @@ public class InMemoryUserDAO implements UserDAO {
     @Override
     public User deleteByKey(Promptuary promptuary) {
         if (!db.containsKey(promptuary))
-            throw new NoSuchElementException("User dont exists");
+            throw new NoSuchElementException("User doesn't exist");
         return db.remove(promptuary);
     }
 
