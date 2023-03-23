@@ -17,16 +17,16 @@ public class ToolItemInputRequestValidator extends Validator<ToolItem> {
         if (nullOrEmpty(toolItem.getPatrimony())) {
             notification.addError("Patrimony is null or empty!");
         }
-        if (nullOrEmpty(toolItem.getTool().toString())) {
+        if (toolItem.getTool() == null) {
             notification.addError("Tool is null or empty!");
         }
         if (nullOrEmpty(toolItem.getId().toString())) {
             notification.addError("ID is null or empty!");
         }
-        if (nullOrEmpty(toolItem.getLocate().toString())) {
+        if (toolItem.getLocate() == null) {
             notification.addError("Location is null or empty!");
         }
-        if (nullOrEmpty(toolItem.getSituation().toString())) {
+        if (toolItem.getSituation() == null) {
             notification.addError("Tool Situation is null or empty!");
         }
 
