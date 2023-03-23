@@ -34,21 +34,26 @@ public class InMemoryToolDAO implements ToolDAO {
 
     @Override
     public List<Tool> findALL() {
-        return null;
+        return new ArrayList<Tool>(db.values());
     }
 
     @Override
     public Tool update(Tool type) {
-        return null;
+        if (!db.containsKey(type.getId()))
+            throw new NoSuchElementException("There is no tools with this ID.");
+        db.replace(type.getId(), type);
+        return db.get(type.getId());
     }
 
     @Override
     public Tool deleteByKey(UUID key) {
-        return null;
+        if (!db.containsKey(key))
+            throw new NoSuchElementException("There is no tools with this ID.");
+        return db.remove(key);
     }
 
     @Override
     public Tool delete(Tool type) {
-        return null;
+        return deleteByKey(type.getId());
     }
 }
