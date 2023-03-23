@@ -18,10 +18,10 @@ public class RequestInputRequestValidator extends Validator<Request>{
         if (nullOrEmpty(request.getId().toString())){
             notification.addError("Request ID is null or empty");
         }
-        if (nullOrEmpty(request.getUser().toString())) {
+        if (null == request.getUser()) {
             notification.addError("User promptuary is null or empty!");
         }
-        if (nullOrEmpty(request.getDate().toString())) {
+        if (null == request.getDate()) {
             notification.addError("Date is null or empty!");
         }
 
