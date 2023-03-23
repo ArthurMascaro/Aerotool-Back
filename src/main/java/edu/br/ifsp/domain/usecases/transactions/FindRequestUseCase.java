@@ -1,8 +1,7 @@
 package edu.br.ifsp.domain.usecases.transactions;
 
-import edu.br.ifsp.domain.entities.tools.Tool;
+
 import edu.br.ifsp.domain.entities.transaction.Request;
-import edu.br.ifsp.domain.usecases.tools.ToolDAO;
 import edu.br.ifsp.domain.usecases.utils.Validator;
 
 import java.util.List;
@@ -11,7 +10,7 @@ import java.util.UUID;
 
 public class FindRequestUseCase {
 
-    private RequestDAO requestDAO;
+    private final RequestDAO requestDAO;
     public FindRequestUseCase(RequestDAO requestDAO) {
         this.requestDAO = requestDAO;
     }
