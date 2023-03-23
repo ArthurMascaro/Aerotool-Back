@@ -135,7 +135,6 @@ class EventTest {
         Event event = new Event(UUID.randomUUID(), respTest, subjTest, date,
                 EventSituation.SENT, EventType.ACTION_USERS,
                 "Standard description 5");
-        createEventUseCase.insert(event);
         Assertions.assertThrows(EntityNotFoundException.class, () -> removeEventUseCase.remove(event).getClass());
     }
 
@@ -151,12 +150,10 @@ class EventTest {
         Assertions.assertEquals(Event.class, removeEventUseCase.remove(event).getClass());
     }
 
-    //Not sure if it's really NullPointerException
-    // that should be used here.
     @Test
     public void updateEvent_OnlyWithUUID_NullPointerException(){
         Event event = new Event(UUID.randomUUID());
-        Assertions.assertThrows(new NullPointerException().getClass(), () -> updateEventUseCase.update(event));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> updateEventUseCase.update(event));
     }
 
     @Test
@@ -169,8 +166,6 @@ class EventTest {
                 "Standard description 4");
         Assertions.assertThrows(EntityNotFoundException.class, () -> updateEventUseCase.update(event));
     }
-
-    //Failed test.
     @Test
     public void updateEvent_EventExists_NewEvent(){
         User respTest = new User(UUID.randomUUID());
@@ -181,6 +176,7 @@ class EventTest {
                 "Standard description 2");
 
         event.setDescription("No description");
-        Assertions.assertEquals(Event.class, updateEventUseCase.update(event));
+        createEventUseCase.insert(event);
+        Assertions.assertEquals(Event.class, updateEventUseCase.update(event).getClass());
     }
 }
