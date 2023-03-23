@@ -5,6 +5,8 @@ import edu.br.ifsp.domain.entities.user.Promptuary;
 import edu.br.ifsp.domain.entities.user.User;
 import edu.br.ifsp.domain.usecases.user.FindUserUseCase;
 import edu.br.ifsp.domain.usecases.utils.EntityNotFoundException;
+import edu.br.ifsp.domain.usecases.utils.Notification;
+import edu.br.ifsp.domain.usecases.utils.Validator;
 
 import java.util.UUID;
 
@@ -23,6 +25,8 @@ public class CreateRequestUseCase {
     }
 
     public Request createARequest(Promptuary userPromptuary, UUID id) throws RequestNotAllowedException {
+
+        Validator<Request> validator = new RequestInputRequestValidator();
         if (id == null){
             throw new IllegalArgumentException("Request ID is null.");
         }

@@ -17,19 +17,19 @@ public class EventRequestValidator extends Validator<Event> {
         if (nullOrEmpty(event.getId().toString())) {
             notification.addError("Id is null or empty!");
         }
-        if (nullOrEmpty(event.getResponsible().toString())) {
+        if (null == event.getResponsible()) {
             notification.addError("Responsible is null or empty!");
         }
-        if (nullOrEmpty(event.getSubject().toString())) {
+        if (null == event.getSubject()) {
             notification.addError("Subject is null or empty!");
         }
-        if (nullOrEmpty(event.getDate().toString())) {
+        if (null == event.getDate()) {
             notification.addError("Date is null or empty!");
         }
-        if (nullOrEmpty(event.getSituation().toString())) {
+        if (null == event.getSituation()) {
             notification.addError("Event situation is null or empty!");
         }
-        if(nullOrEmpty(event.getType().toString())){
+        if(null == event.getType()){
             notification.addError("Event type is null or empty");
         }
         if(nullOrEmpty(event.getDescription())){
