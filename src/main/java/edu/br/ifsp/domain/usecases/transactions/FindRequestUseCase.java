@@ -23,7 +23,7 @@ public class FindRequestUseCase {
     }
 
     public Optional<Request> findByUUID(UUID id) {
-        if (Validator.nullOrEmpty(id.toString())) {
+        if (id == null) {
             throw new IllegalArgumentException("Id cannot be null or empty!");
         }
         return requestDAO.findByUUID(id);

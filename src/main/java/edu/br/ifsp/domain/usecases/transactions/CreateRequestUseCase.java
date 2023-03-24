@@ -5,9 +5,9 @@ import edu.br.ifsp.domain.entities.user.Promptuary;
 import edu.br.ifsp.domain.entities.user.User;
 import edu.br.ifsp.domain.usecases.user.FindUserUseCase;
 import edu.br.ifsp.domain.usecases.utils.EntityNotFoundException;
-import edu.br.ifsp.domain.usecases.utils.Notification;
 import edu.br.ifsp.domain.usecases.utils.Validator;
 
+import java.sql.Timestamp;
 import java.util.UUID;
 
 public class CreateRequestUseCase {
@@ -24,7 +24,7 @@ public class CreateRequestUseCase {
         this.findUserUseCase = findUserUseCase;
     }
 
-    public Request createARequest(Promptuary userPromptuary, UUID id) throws RequestNotAllowedException {
+    public Request createARequest(Promptuary userPromptuary, UUID id, Timestamp date) throws RequestNotAllowedException {
 
         Validator<Request> validator = new RequestInputRequestValidator();
         if (id == null){
