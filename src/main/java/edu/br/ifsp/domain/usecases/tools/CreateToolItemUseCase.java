@@ -23,10 +23,6 @@ public class CreateToolItemUseCase {
             throw new IllegalArgumentException(notification.errorMessage());
         }
 
-        String toolItemPatrimony = toolItem.getPatrimony();
-        if (toolItemDAO.findByPatrimony(toolItemPatrimony).isPresent()) {
-            throw new EntityAlreadyExistsException("This patrimony is already in use!");
-        }
         return toolItemDAO.create(toolItem);
     }
 

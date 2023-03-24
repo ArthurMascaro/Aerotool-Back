@@ -19,14 +19,7 @@ public class FindToolItemUseCase {
         if (id == null) {
             throw new IllegalArgumentException("ID cannot be null!");
         }
-        return toolItemDAO.findOne(id.toString());
-    }
-
-    public Optional<ToolItem> findOneByPatrimony(String patrimony) {
-        if (Validator.nullOrEmpty(patrimony)) {
-            throw new IllegalArgumentException("Patrimony cannot be null or empty!");
-        }
-        return toolItemDAO.findByPatrimony(patrimony);
+        return toolItemDAO.findOne(id);
     }
 
     public List<ToolItem> findAll() {

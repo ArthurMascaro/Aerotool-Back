@@ -20,9 +20,8 @@ public class FindToolUseCase {
         return toolDAO.findOne(id);
     }
     public Optional<Tool> findByUUID(UUID id) {
-        if (Validator.nullOrEmpty(id.toString())) {
+        if (id == null)
             throw new IllegalArgumentException("Id cannot be null or empty!");
-        }
         return toolDAO.findByUUID(id);
     }
     public List<Tool> findAll() {

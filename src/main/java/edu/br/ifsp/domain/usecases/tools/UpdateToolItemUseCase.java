@@ -27,7 +27,7 @@ public class UpdateToolItemUseCase {
 
         // turning UUID from database to String to findOne method
         String id = toolItem.getId().toString();
-        if (toolItemDAO.findOne(id).isEmpty()) {
+        if (id == null) {
             throw new EntityNotFoundException("Tool Item not found!");
         }
         return toolItemDAO.update(toolItem);
