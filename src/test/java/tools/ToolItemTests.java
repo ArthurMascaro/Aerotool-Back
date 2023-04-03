@@ -9,6 +9,7 @@ import edu.br.ifsp.domain.usecases.tools.CreateToolItemUseCase;
 import edu.br.ifsp.domain.usecases.tools.FindToolItemUseCase;
 import edu.br.ifsp.domain.usecases.tools.RemoveToolItemUseCase;
 import edu.br.ifsp.domain.usecases.tools.UpdateToolItemUseCase;
+import edu.br.ifsp.domain.usecases.utils.EntityNotFoundException;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
@@ -37,7 +38,7 @@ public class ToolItemTests {
     @Test
     public void insert_CreateToolItemWithNullUUID_NullPointerException() {
         ToolItem toolItem = new ToolItem();
-        Assertions.assertThrows(NullPointerException.class, () -> createToolItemUseCase.insert(toolItem));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> createToolItemUseCase.insert(toolItem));
     }
 
     @Test
@@ -76,5 +77,25 @@ public class ToolItemTests {
         ToolItem toolItem = new ToolItem(UUID.randomUUID(), "SCL12345678", new Locate(UUID.randomUUID(), "Hangar", "Busy"), new Tool(UUID.randomUUID()), ToolSituation.BUSY);
         createToolItemUseCase.insert(toolItem);
         Assertions.assertEquals(ToolItem.class, removeToolItemUseCase.remove(toolItem).getClass());
+    }
+
+    @Test
+    public void udpate_UpdateWithInvalidArguments_ToolItemClass(){
+        ToolItem toolItem = new ToolItem(UUID.randomUUID(), "SCL1223345", new Locate(UUID.randomUUID(), "Hangar", "Busy"), new Tool(UUID.randomUUID()), ToolSituation.BUSY);
+        createToolItemUseCase.insert(toolItem);
+        Assertions.assertThrows(new IllegalArgumentException().getClass(), () -> updateToolItemUseCase.update(new ToolItem(UUID.randomUUID(), "SCL1223345", new Locate(UUID.randomUUID(), "Hangar", "Busy"), new Tool(UUID.randomUUID()), null)));
+    }
+
+    @Test
+    public void udpate_EntityNotExists_ToolItemClass(){
+        Assertions.assertThrows(EntityNotFoundException.class, () -> updateToolItemUseCase.update(new ToolItem(UUID.randomUUID(), "SCL1223345", new Locate(UUID.randomUUID(), "Hangar", "Busy"), new Tool(UUID.randomUUID()), ToolSituation.BUSY)));
+    }
+
+    @Test
+    public void udpate_WithCorrectArguments_ToolItemClass(){
+        UUID id = UUID.randomUUID();
+        ToolItem toolItem = new ToolItem(id, "SCL1233456", new Locate(UUID.randomUUID(), "Armário 123", "Busy"), new Tool(UUID.randomUUID()), ToolSituation.BUSY);
+        createToolItemUseCase.insert(toolItem);
+        Assertions.assertEquals(ToolItem.class, updateToolItemUseCase.update(new ToolItem(id, "SC123456", new Locate(UUID.randomUUID(), "Hangar", "Busy"), new Tool(UUID.randomUUID()), ToolSituation.FREE)).getClass());
     }
 }

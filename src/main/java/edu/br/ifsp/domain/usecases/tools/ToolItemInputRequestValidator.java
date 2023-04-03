@@ -14,6 +14,10 @@ public class ToolItemInputRequestValidator extends Validator<ToolItem> {
             return notification;
         }
 
+        if (toolItem.getId() == null){
+            notification.addError("ID is null!");
+        }
+
         if (nullOrEmpty(toolItem.getPatrimony())) {
             notification.addError("Patrimony is null or empty!");
         }
