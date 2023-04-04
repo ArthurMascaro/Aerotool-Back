@@ -24,23 +24,22 @@ public class CreateRequestUseCase {
         this.findUserUseCase = findUserUseCase;
     }
 
-    public Request createARequest(Promptuary userPromptuary, UUID id, Timestamp date) throws RequestNotAllowedException {
+    public Request createARequest(Request request) throws RequestNotAllowedException {
 
         Validator<Request> validator = new RequestInputRequestValidator();
-        if (id == null){
+        validator.validate(request);
+        if (request.getId() == null){
             throw new IllegalArgumentException("Request ID is null.");
         }
 
-        if (userPromptuary == null){
+        if (request.getUser().getPromptuary() == null){
             throw new IllegalArgumentException("User's promptuary is null.");
         }
 
-        User user = findUserUseCase.findByPromptuary(userPromptuary).orElseThrow(() ->
-                new EntityNotFoundException("Can not find a User with promptuary" + userPromptuary));
+        User user = findUserUseCase.findByPromptuary(request.getUser().getPromptuary()).orElseThrow(() ->
+                new EntityNotFoundException("Can not find a User with promptuary" + request.getUser().getPromptuary()));
 
 
-
-        Request request = new Request(id, user);
         return requestDAO.create(request);
 
     }

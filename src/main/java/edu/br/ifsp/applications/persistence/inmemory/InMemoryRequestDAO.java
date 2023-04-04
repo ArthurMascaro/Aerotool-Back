@@ -17,7 +17,7 @@ public class InMemoryRequestDAO implements RequestDAO{
     }
 
     public Optional<Request> findByUUID(UUID id) {
-        return findOne(String.valueOf(id));
+        return findOne(id);
     }
 
 
@@ -30,27 +30,30 @@ public class InMemoryRequestDAO implements RequestDAO{
     }
 
     @Override
-    public Optional<Request> findOne(String key) {
-        return Optional.empty();
+    public Optional<Request> findOne(UUID id) {
+        return Optional.ofNullable(db.get(id));
     }
 
     @Override
-    public List<Request> findALL() {
-        return null;
+    public List<Request> findALL() {  return new ArrayList<>(db.values());
     }
 
     @Override
     public Request update(Request type) {
-        return null;
+        if (!db.containsKey(type.getId()))
+            throw new NoSuchElementException("Request doesn't exist");
+        db.replace(type.getId(), type);
+        return db.get(type.getId());
     }
 
     @Override
-    public Request deleteByKey(String key) {
-        return null;
+    public Request deleteByKey(UUID key) {
+
+        if (!db.containsKey(key))
+            throw new NoSuchElementException("Request doesn't exist");
+        return db.remove(key);
     }
 
     @Override
-    public Request delete(Request type) {
-        return null;
-    }
+    public Request delete(Request type){ return deleteByKey(type.getId()); }
 }

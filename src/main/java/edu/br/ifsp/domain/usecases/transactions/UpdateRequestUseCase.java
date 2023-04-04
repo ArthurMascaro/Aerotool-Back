@@ -24,7 +24,7 @@ public class UpdateRequestUseCase {
         if (notification.hasErros()) {
             throw new IllegalArgumentException(notification.errorMessage());
         }
-        if (requestDAO.findOne(request.getId().toString()).isEmpty()) {
+        if (requestDAO.findOne(request.getId()).isEmpty()) {
             throw new EntityNotFoundException("Request not found!");
         }
         return requestDAO.update(request);

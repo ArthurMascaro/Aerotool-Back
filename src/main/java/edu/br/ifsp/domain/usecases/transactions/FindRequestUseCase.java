@@ -19,7 +19,7 @@ public class FindRequestUseCase {
         if (id == null) {
             throw new IllegalArgumentException("ID cannot be null!");
         }
-        return requestDAO.findOne(id.toString());
+        return requestDAO.findOne(id);
     }
 
     public Optional<Request> findByUUID(UUID id) {
