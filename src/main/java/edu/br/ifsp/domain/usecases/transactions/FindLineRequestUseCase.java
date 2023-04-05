@@ -11,7 +11,7 @@ import java.util.UUID;
 public class FindLineRequestUseCase {
 
     private LineRequestDAO lineRequestDAO;
-    public FindLineRequestUseCase(RequestDAO requestDAO) {
+    public FindLineRequestUseCase(LineRequestDAO lineRequestDAO) {
         this.lineRequestDAO = lineRequestDAO;
     }
 
