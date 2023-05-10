@@ -14,7 +14,7 @@ import edu.br.ifsp.domain.usecases.user.CreateUserUseCase;
 import edu.br.ifsp.domain.usecases.user.FindUserUseCase;
 import edu.br.ifsp.domain.usecases.utils.EntityNotFoundException;
 import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -35,13 +35,13 @@ public class RequestClassTest {
     public static UpdateRequestUseCase updateRequestUseCase = new UpdateRequestUseCase(inMemoryRequestDAO);
     @Test
     public void RequestConstructor_WithoutArguments_ObjectRequestWithUUID() {
-        Assertions.assertEquals(UUID.class, new Request().getId().getClass());
+        assertEquals(UUID.class, new Request().getId().getClass());
     }
 
     @Test
     public void RequestConstructor_WithArguments_ObjectRequestWithUUIDAndUser() {
         User user = new User(UUID.randomUUID(), "Renan", Role.TEACHER, Promptuary.valueOf("SC123456"));
-        Assertions.assertEquals(UUID.class, new Request(UUID.randomUUID(), user).getId().getClass());
+        assertEquals(UUID.class, new Request(UUID.randomUUID(), user).getId().getClass());
     }
 
     @Test
@@ -50,24 +50,24 @@ public class RequestClassTest {
         User user = new User(UUID.randomUUID(), "Renan", Role.TEACHER, Promptuary.valueOf("SC123456"));
         Request request = new Request(UUID.randomUUID(), Timestamp.valueOf("2023-03-13 13:02:21"), user);
         createUserUseCase.insert(user);
-        Assertions.assertEquals(Request.class,  createRequestUseCase.createARequest(request).getClass());
+        assertEquals(Request.class,  createRequestUseCase.createARequest(request).getClass());
     }
 
     @Test
     public void createARequest_WithUserEqualsNull_IllegalArgumentException(){
-        Assertions.assertThrows(IllegalArgumentException.class, () -> findUserUseCase.findOne(null));
+        assertThrows(IllegalArgumentException.class, () -> findUserUseCase.findOne(null));
     }
 
     @Test
     public void createARequest_withRequestIdNull_IllegalArgumentException(){
-        Assertions.assertThrows(IllegalArgumentException.class, ()-> findRequestUseCase.findByUUID(null));
+        assertThrows(IllegalArgumentException.class, ()-> findRequestUseCase.findByUUID(null));
     }
 
     @Test
     public void createARequest_withDateNull_IllegalArgumentException(){
         User user = new User(UUID.randomUUID());
         Request request = new Request(UUID.randomUUID(),null, user);
-        Assertions.assertThrows(IllegalArgumentException.class, ()-> createRequestUseCase.createARequest(request));
+        assertThrows(IllegalArgumentException.class, ()-> createRequestUseCase.createARequest(request));
     }
 
     @Test
@@ -76,17 +76,17 @@ public class RequestClassTest {
         createUserUseCase.insert(user);
         Request request = new Request(UUID.randomUUID(), Timestamp.valueOf("2023-03-13 13:02:21"), user);
         createRequestUseCase.createARequest(request);
-        Assertions.assertEquals(Request.class, findRequestUseCase.findOne(request.getId()).get().getClass());
+        assertEquals(Request.class, findRequestUseCase.findOne(request.getId()).get().getClass());
     }
 
     @Test
     public void findRequestByUUID_withUUIDEqualsNull_IllegalArgumentException(){
-        Assertions.assertThrows(IllegalArgumentException.class, () -> findRequestUseCase.findByUUID(null));
+        assertThrows(IllegalArgumentException.class, () -> findRequestUseCase.findByUUID(null));
     }
 
     @Test
     public void FindAllRequests_Normal_ListOfRequests() {
-        Assertions.assertEquals(ArrayList.class, findRequestUseCase.findAll().getClass());
+        assertEquals(ArrayList.class, findRequestUseCase.findAll().getClass());
     }
 
     @Test
@@ -95,27 +95,27 @@ public class RequestClassTest {
         createUserUseCase.insert(test);
         Request request = new Request(UUID.randomUUID(), Timestamp.valueOf("2023-03-13 13:02:21"), test);
         createRequestUseCase.createARequest(request);
-        Assertions.assertEquals(Request.class, removeRequestUseCase.remove(request.getId()).getClass());
+        assertEquals(Request.class, removeRequestUseCase.remove(request.getId()).getClass());
     }
 
     @Test
     public void deleteRequestByRequest_RequestNotExists_EntityNotFoundException(){
         User test = new User(UUID.randomUUID(), "Teste 2", Role.TEACHER, Promptuary.valueOf("SC987654"));
         createUserUseCase.insert(test);
-        Assertions.assertThrows(EntityNotFoundException.class, () -> removeRequestUseCase.remove(new Request(UUID.randomUUID(), Timestamp.valueOf("2023-03-13 13:02:21"), test)).getClass());
+        assertThrows(EntityNotFoundException.class, () -> removeRequestUseCase.remove(new Request(UUID.randomUUID(), Timestamp.valueOf("2023-03-13 13:02:21"), test)).getClass());
     }
 
     @Test
     public void updateRequest_OnlyWithUUID_IllegalStateException(){
         Request request = new Request();
-        Assertions.assertThrows(new IllegalArgumentException().getClass(), () -> updateRequestUseCase.update(request));
+        assertThrows(new IllegalArgumentException().getClass(), () -> updateRequestUseCase.update(request));
     }
 
     @Test
     public void updateRequest_RequestNotExists_EntityNotFoundException(){
         User test = new User(UUID.randomUUID(), "Teste 2", Role.TEACHER, Promptuary.valueOf("SC987444"));
         createUserUseCase.insert(test);
-        Assertions.assertThrows(EntityNotFoundException.class, () -> updateRequestUseCase.update(new Request(UUID.randomUUID(), Timestamp.valueOf("2023-03-13 13:02:21"), test))).getClass();
+        assertThrows(EntityNotFoundException.class, () -> updateRequestUseCase.update(new Request(UUID.randomUUID(), Timestamp.valueOf("2023-03-13 13:02:21"), test))).getClass();
     }
 
     @Test
@@ -125,7 +125,7 @@ public class RequestClassTest {
         Request request = new Request(UUID.randomUUID(), Timestamp.valueOf("2023-03-13 13:02:21"), test);
         createRequestUseCase.createARequest(request);
         request.setDate(Timestamp.valueOf("2022-02-11 13:25:32"));
-        Assertions.assertEquals(Request.class, updateRequestUseCase.update(request).getClass());
+        assertEquals(Request.class, updateRequestUseCase.update(request).getClass());
     }
 }
 

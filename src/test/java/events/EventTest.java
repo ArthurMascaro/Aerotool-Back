@@ -12,18 +12,12 @@ import edu.br.ifsp.domain.usecases.events.UpdateEventUseCase;
 import edu.br.ifsp.domain.usecases.utils.EntityAlreadyExistsException;
 import edu.br.ifsp.domain.usecases.utils.EntityNotFoundException;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.Before;
-import org.junit.jupiter.api.Assertions;
-import org.junit.runner.notification.RunListener;
 
-import java.awt.*;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Optional;
 import java.util.UUID;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 
 class EventTest {
@@ -39,12 +33,12 @@ class EventTest {
     public UpdateEventUseCase updateEventUseCase = new UpdateEventUseCase(inMemoryEventDAO);
     @Test
     public void EventConstructor_WithUUIDArguments_ObjectEventWithUUID() {
-        Assertions.assertEquals(UUID.class, new Event(UUID.randomUUID()).getId().getClass());
+        assertEquals(UUID.class, new Event(UUID.randomUUID()).getId().getClass());
     }
 
     @Test
     public void EventConstructor_WithoutArguments_ObjectEventWithUUID() {
-        Assertions.assertEquals(UUID.class, new Event().getId().getClass());
+        assertEquals(UUID.class, new Event().getId().getClass());
     }
 
     @Test
@@ -56,7 +50,7 @@ class EventTest {
                 EventSituation.ACCEPTED, EventType.ACTION_USERS,
                 "Standard description");
         createEventUseCase.insert(event);
-        Assertions.assertThrows(EntityAlreadyExistsException.class, () -> createEventUseCase.insert(event));
+        assertThrows(EntityAlreadyExistsException.class, () -> createEventUseCase.insert(event));
     }
 
     @Test
@@ -67,12 +61,12 @@ class EventTest {
         Event event = new Event(UUID.randomUUID(), respTest, subjTest, date,
                 EventSituation.NOT_VISUALIZED, EventType.NOTIFICATION,
                 "Standard description 2");
-        Assertions.assertEquals(Event.class, createEventUseCase.insert(event).getClass());
+        assertEquals(Event.class, createEventUseCase.insert(event).getClass());
     }
 
     @Test
     public void findOneEvent_withEventEqualsNull_IllegalArgumentException(){
-        Assertions.assertThrows(IllegalArgumentException.class, () -> findEventUseCase.findOne(null));
+        assertThrows(IllegalArgumentException.class, () -> findEventUseCase.findOne(null));
     }
 
     @Test
@@ -84,12 +78,12 @@ class EventTest {
                 EventSituation.SENT, EventType.SYSTEM_LOG,
                 "Standard description 3");
         createEventUseCase.insert(event);
-        Assertions.assertEquals(Event.class, findEventUseCase.findOne(event.getId()).get().getClass());
+        assertEquals(Event.class, findEventUseCase.findOne(event.getId()).get().getClass());
     }
 
     @Test
     public void findByUUIDEvent_withUUIDEqualsNull_IllegalArgumentException(){
-        Assertions.assertThrows(IllegalArgumentException.class, () -> findEventUseCase.findByUUID(null));
+        assertThrows(IllegalArgumentException.class, () -> findEventUseCase.findByUUID(null));
     }
 
     @Test
@@ -101,17 +95,17 @@ class EventTest {
                 EventSituation.REJECTED, EventType.ACTION_USERS,
                 "Standard description 4");
         createEventUseCase.insert(event);
-        Assertions.assertEquals(Event.class, findEventUseCase.findByUUID(event.getId()).get().getClass());
+        assertEquals(Event.class, findEventUseCase.findByUUID(event.getId()).get().getClass());
     }
 
     @Test
     public void FindAllEvents(){
-        Assertions.assertEquals(ArrayList.class, findEventUseCase.findAll().getClass());
+        assertEquals(ArrayList.class, findEventUseCase.findAll().getClass());
     }
 
     @Test
     public void deleteEventByUUID_EventNotExists_EntityNotFoundException(){
-        Assertions.assertThrows(EntityNotFoundException.class, () -> removeEventUseCase.remove(new Event(UUID.randomUUID())).getId().getClass());
+        assertThrows(EntityNotFoundException.class, () -> removeEventUseCase.remove(new Event(UUID.randomUUID())).getId().getClass());
     }
 
     @Test
@@ -123,10 +117,9 @@ class EventTest {
                 EventSituation.VISUALIZED, EventType.ACTION_USERS,
                 "Standard description 4");
         createEventUseCase.insert(event);
-        Assertions.assertEquals(Event.class, removeEventUseCase.remove(event.getId()).getClass());
+        assertEquals(Event.class, removeEventUseCase.remove(event.getId()).getClass());
     }
 
-    //Failed test.
     @Test
     public void deleteEventByEvent_EventNotExists_EntityNotFoundException(){
         User respTest = new User(UUID.randomUUID());
@@ -135,7 +128,7 @@ class EventTest {
         Event event = new Event(UUID.randomUUID(), respTest, subjTest, date,
                 EventSituation.SENT, EventType.ACTION_USERS,
                 "Standard description 5");
-        Assertions.assertThrows(EntityNotFoundException.class, () -> removeEventUseCase.remove(event).getClass());
+        assertThrows(EntityNotFoundException.class, () -> removeEventUseCase.remove(event).getClass());
     }
 
     @Test
@@ -147,13 +140,13 @@ class EventTest {
                 EventSituation.VISUALIZED, EventType.ACTION_USERS,
                 "Standard description 4");
         createEventUseCase.insert(event);
-        Assertions.assertEquals(Event.class, removeEventUseCase.remove(event).getClass());
+        assertEquals(Event.class, removeEventUseCase.remove(event).getClass());
     }
 
     @Test
     public void updateEvent_OnlyWithUUID_NullPointerException(){
         Event event = new Event(UUID.randomUUID());
-        Assertions.assertThrows(IllegalArgumentException.class, () -> updateEventUseCase.update(event));
+        assertThrows(IllegalArgumentException.class, () -> updateEventUseCase.update(event));
     }
 
     @Test
@@ -164,7 +157,7 @@ class EventTest {
         Event event = new Event(UUID.randomUUID(), respTest, subjTest, date,
                 EventSituation.VISUALIZED, EventType.ACTION_USERS,
                 "Standard description 4");
-        Assertions.assertThrows(EntityNotFoundException.class, () -> updateEventUseCase.update(event));
+        assertThrows(EntityNotFoundException.class, () -> updateEventUseCase.update(event));
     }
     @Test
     public void updateEvent_EventExists_NewEvent(){
@@ -177,6 +170,6 @@ class EventTest {
 
         event.setDescription("No description");
         createEventUseCase.insert(event);
-        Assertions.assertEquals(Event.class, updateEventUseCase.update(event).getClass());
+        assertEquals(Event.class, updateEventUseCase.update(event).getClass());
     }
 }

@@ -15,7 +15,7 @@ import edu.br.ifsp.domain.usecases.user.CreateUserUseCase;
 import edu.br.ifsp.domain.usecases.user.FindUserUseCase;
 import edu.br.ifsp.domain.usecases.utils.EntityNotFoundException;
 import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.Timestamp;
 import java.util.UUID;
@@ -41,11 +41,11 @@ public class LineRequestClassTest {
 
     @Test
     public void LineRequestConstructor_WithoutArguments_ObjectRequestLineWithUUID() {
-        Assertions.assertEquals(UUID.class, new LineRequest().getId().getClass());
+        assertEquals(UUID.class, new LineRequest().getId().getClass());
     }
     @Test
     public void LineRequestConstructor_WithArguments_ObjectRequestLineWithUUID() {
-        Assertions.assertEquals(UUID.class, new LineRequest(UUID.randomUUID()).getId().getClass());
+        assertEquals(UUID.class, new LineRequest(UUID.randomUUID()).getId().getClass());
     }
 
     @Test
@@ -53,7 +53,7 @@ public class LineRequestClassTest {
         Timestamp value = Timestamp.valueOf("2018-11-12 01:02:03");
         LineRequest request = new LineRequest();
         request.setRealReturnDate(value);
-        Assertions.assertEquals(Timestamp.class, request.getRealReturnDate().getClass());
+        assertEquals(Timestamp.class, request.getRealReturnDate().getClass());
     }
 
     @Test
@@ -73,7 +73,7 @@ public class LineRequestClassTest {
         createRequestUseCase.createARequest(request);
 
         LineRequest lineRequest = new LineRequest(UUID.randomUUID(), request, toolItem, value, value, value, value, RequestSituation.ACCEPTED);
-        Assertions.assertEquals(LineRequest.class, createLineRequestUseCase.insert(lineRequest).getClass());
+        assertEquals(LineRequest.class, createLineRequestUseCase.insert(lineRequest).getClass());
     }
 
     @Test
@@ -95,12 +95,12 @@ public class LineRequestClassTest {
         LineRequest lineRequest = new LineRequest(UUID.randomUUID(), request, toolItem, value, value, value, value, RequestSituation.ACCEPTED);
         UUID id = createLineRequestUseCase.insert(lineRequest).getId();
 
-        Assertions.assertEquals(lineRequest, findLineRequestUseCase.findOne(id).get());
+        assertEquals(lineRequest, findLineRequestUseCase.findOne(id).get());
     }
 
     @Test
     public void removeLineRequest_WithoutCorrectId_EntityNotFoundException(){
-        Assertions.assertThrows(EntityNotFoundException.class, () -> removeLineRequestUseCase.remove(UUID.randomUUID()));
+        assertThrows(EntityNotFoundException.class, () -> removeLineRequestUseCase.remove(UUID.randomUUID()));
     }
 
     @Test
@@ -122,7 +122,7 @@ public class LineRequestClassTest {
         LineRequest lineRequest = new LineRequest(UUID.randomUUID(), request, toolItem, value, value, value, value, RequestSituation.ACCEPTED);
         UUID id = createLineRequestUseCase.insert(lineRequest).getId();
 
-        Assertions.assertEquals(LineRequest.class, removeLineRequestUseCase.remove(id).getClass());
+        assertEquals(LineRequest.class, removeLineRequestUseCase.remove(id).getClass());
     }
 
     @Test
@@ -152,7 +152,7 @@ public class LineRequestClassTest {
 
         LineRequest lineRequest2 = new LineRequest(id, request2, toolItem, value, value, value, value, RequestSituation.ACCEPTED);
 
-        Assertions.assertEquals(LineRequest.class, updateLineRequestUseCase.update(lineRequest2).getClass());
+        assertEquals(LineRequest.class, updateLineRequestUseCase.update(lineRequest2).getClass());
     }
 
     @Test
@@ -173,7 +173,7 @@ public class LineRequestClassTest {
 
         LineRequest lineRequest = new LineRequest(UUID.randomUUID(), request, toolItem, value, value, value, value, RequestSituation.ACCEPTED);
 
-        Assertions.assertThrows(EntityNotFoundException.class, () -> updateLineRequestUseCase.update(lineRequest));
+        assertThrows(EntityNotFoundException.class, () -> updateLineRequestUseCase.update(lineRequest));
     }
 
 }
