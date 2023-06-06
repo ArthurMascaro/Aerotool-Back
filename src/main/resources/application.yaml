@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: aerotool-application
+  datasource:
+    url: jdbc:postgresql://localhost:5432/aerotool
+    username: aerotool-app
+    password: aerotool-app
+    driver-class-name: org.postgresql.Driver
+    jpa:
+      hibernate:
+        ddl-auto: update
+      properties:
+        hibernate:
+          dialetc: org.hibernate.dialect.PostgreSQLDialect
+          format_sql: true
