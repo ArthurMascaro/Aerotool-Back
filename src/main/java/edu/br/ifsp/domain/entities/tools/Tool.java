@@ -25,6 +25,16 @@ public class Tool {
         this.type = type;
     }
 
+    public Tool(String name, String description, ToolType type) {
+        this.name = name;
+        this.description = description;
+        this.type = type;
+    }
+
+    public Tool instanceWithId(UUID id){
+        return new Tool(id, this.name, this.description, this.type);
+    }
+
     public UUID getId() {
         return id;
     }

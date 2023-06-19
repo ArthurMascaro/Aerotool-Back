@@ -13,3 +13,10 @@ spring:
         hibernate:
           dialetc: org.hibernate.dialect.PostgreSQLDialect
           format_sql: true
+
+queries:
+  sql:
+    tool-dao:
+      insert:
+        tool: >
+            INSERT INTO aerotool_platform.tool(id, name, description, type) VALUES (?, ?, ?, ?::aerotool_platform.tool_type)

@@ -4,7 +4,9 @@ import edu.br.ifsp.domain.entities.tools.Tool;
 import edu.br.ifsp.domain.usecases.utils.EntityNotFoundException;
 import edu.br.ifsp.domain.usecases.utils.Notification;
 import edu.br.ifsp.domain.usecases.utils.Validator;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UpdateToolUseCase {
 
     private ToolDAO toolDAO;

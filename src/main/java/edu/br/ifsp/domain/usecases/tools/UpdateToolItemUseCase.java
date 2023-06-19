@@ -6,9 +6,9 @@ import edu.br.ifsp.domain.usecases.utils.EntityAlreadyExistsException;
 import edu.br.ifsp.domain.usecases.utils.EntityNotFoundException;
 import edu.br.ifsp.domain.usecases.utils.Notification;
 import edu.br.ifsp.domain.usecases.utils.Validator;
+import org.springframework.stereotype.Service;
 
 import java.util.UUID;
-
 public class UpdateToolItemUseCase {
 
     private ToolItemDAO toolItemDAO;

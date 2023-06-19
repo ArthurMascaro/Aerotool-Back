@@ -4,9 +4,11 @@ import edu.br.ifsp.domain.entities.tools.Tool;
 import edu.br.ifsp.domain.usecases.utils.EntityAlreadyExistsException;
 import edu.br.ifsp.domain.usecases.utils.Notification;
 import edu.br.ifsp.domain.usecases.utils.Validator;
+import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
+@Service
 public class CreateToolUseCase {
 
     private ToolDAO toolDAO;
@@ -19,12 +21,9 @@ public class CreateToolUseCase {
         Validator<Tool> validator = new ToolInputRequestValidator();
         Notification notification = validator.validate(tool);
 
-        if (toolDAO.findByUUID(tool.getId()).isPresent())
-            throw new EntityAlreadyExistsException("This Tool is already in use.");
-
         if (notification.hasErros())
             throw new IllegalArgumentException(notification.errorMessage());
 
-        return toolDAO.create(tool);
+        return toolDAO.create(tool.instanceWithId(UUID.randomUUID()));
     }
 }

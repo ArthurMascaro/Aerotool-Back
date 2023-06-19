@@ -2,9 +2,9 @@ package edu.br.ifsp.domain.usecases.tools;
 
 import edu.br.ifsp.domain.entities.tools.ToolItem;
 import edu.br.ifsp.domain.usecases.utils.EntityNotFoundException;
+import org.springframework.stereotype.Service;
 
 import java.util.UUID;
-
 public class RemoveToolItemUseCase {
 
     private ToolItemDAO toolItemDAO;

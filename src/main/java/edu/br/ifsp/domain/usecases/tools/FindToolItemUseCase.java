@@ -2,11 +2,11 @@ package edu.br.ifsp.domain.usecases.tools;
 
 import edu.br.ifsp.domain.entities.tools.ToolItem;
 import edu.br.ifsp.domain.usecases.utils.Validator;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-
 public class FindToolItemUseCase {
 
     private ToolItemDAO toolItemDAO;
