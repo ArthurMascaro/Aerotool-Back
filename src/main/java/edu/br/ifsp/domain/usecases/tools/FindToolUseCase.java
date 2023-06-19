@@ -14,16 +14,20 @@ public class FindToolUseCase {
     public FindToolUseCase(ToolDAO toolDAO) {
         this.toolDAO = toolDAO;
     }
-    public Optional<Tool> findOne(UUID id) {
+    public Tool findOne(UUID id) {
         if (id == null) {
             throw new IllegalArgumentException("ID cannot be null!");
         }
-        return toolDAO.findOne(id);
+        return toolDAO.findOne(id).orElseThrow(
+                () -> new IllegalArgumentException("Tool not found!")
+        );
     }
-    public Optional<Tool> findByUUID(UUID id) {
+    public Tool findByUUID(UUID id) {
         if (id == null)
             throw new IllegalArgumentException("Id cannot be null or empty!");
-        return toolDAO.findByUUID(id);
+        return toolDAO.findByUUID(id).orElseThrow(
+                () -> new IllegalArgumentException("Tool not found!")
+        );
     }
     public List<Tool> findAll() {
         return toolDAO.findALL();

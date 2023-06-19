@@ -20,3 +20,14 @@ queries:
       insert:
         tool: >
             INSERT INTO aerotool_platform.tool(id, name, description, type) VALUES (?, ?, ?, ?::aerotool_platform.tool_type)
+      update:
+        tool: >
+            UPDATE aerotool_platform.tool SET name=?, description=?, type=?::aerotool_platform.tool_type WHERE id=?
+      select:
+        tool-by-id: >
+          SELECT * FROM aerotool_platform.tool WHERE id=?
+        tool-all: >
+          SELECT * FROM aerotool_platform.tool
+      delete:
+        tool-by-id: >
+          DELETE FROM aerotool_platform.tool WHERE id=?
