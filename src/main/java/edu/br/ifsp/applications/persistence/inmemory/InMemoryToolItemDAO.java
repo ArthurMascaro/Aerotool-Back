@@ -1,5 +1,6 @@
 package edu.br.ifsp.applications.persistence.inmemory;
 
+import edu.br.ifsp.domain.entities.tools.Locate;
 import edu.br.ifsp.domain.entities.tools.Tool;
 import edu.br.ifsp.domain.entities.tools.ToolItem;
 import edu.br.ifsp.domain.usecases.tools.ToolItemDAO;
@@ -51,5 +52,20 @@ public class InMemoryToolItemDAO implements ToolItemDAO {
     @Override
     public ToolItem delete(ToolItem type) {
         return deleteByKey(type.getId());
+    }
+
+    @Override
+    public Locate createLocate(Locate locate) {
+        return null;
+    }
+
+    @Override
+    public List<Locate> findAllLocates() {
+        return null;
+    }
+
+    @Override
+    public Optional<Locate> findLocateById(UUID id) {
+        return Optional.empty();
     }
 }
