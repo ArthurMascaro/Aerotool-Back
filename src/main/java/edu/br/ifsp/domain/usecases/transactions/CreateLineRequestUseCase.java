@@ -47,8 +47,7 @@ public class CreateLineRequestUseCase {
         if (requestID == null)
             throw new IllegalArgumentException("Request ID is null.");
 
-        ToolItem toolItem = findToolItemUseCaseUseCase.findOne(toolItemID).orElseThrow(() ->
-                new EntityNotFoundException("Can not find a Tool Item with ID" + toolItemID));
+        ToolItem toolItem = findToolItemUseCaseUseCase.findOne(toolItemID);
 
         Request request = findRequestUseCase.findOne(requestID).orElseThrow(() ->
                 new EntityNotFoundException("Can not find a Request with ID" + requestID));
