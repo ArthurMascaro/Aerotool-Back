@@ -1,5 +1,6 @@
 package edu.br.ifsp.domain.usecases.tools;
 
+import edu.br.ifsp.domain.entities.tools.Locate;
 import edu.br.ifsp.domain.entities.tools.ToolItem;
 import edu.br.ifsp.domain.usecases.utils.EntityAlreadyExistsException;
 import edu.br.ifsp.domain.usecases.utils.Notification;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
+@Service
 public class CreateToolItemUseCase {
 
     private ToolItemDAO toolItemDAO;
@@ -25,6 +27,10 @@ public class CreateToolItemUseCase {
         }
 
         return toolItemDAO.create(toolItem);
+    }
+
+    public Locate insertLocate(Locate locate){
+        return toolItemDAO.createLocate(locate.instanceWithId(UUID.randomUUID()));
     }
 
 }
