@@ -18,6 +18,10 @@ public class Locate {
         this.id = UUID.randomUUID();
     }
 
+    public Locate instanceWithId(UUID id) {
+        return new Locate(id, this.name, this.description);
+    }
+
     public UUID getId() {
         return id;
     }
@@ -34,5 +38,11 @@ public class Locate {
         this.description = description;
     }
 
+    public String getName() {
+        return name;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 }
