@@ -9,6 +9,8 @@ import edu.br.ifsp.domain.usecases.utils.Validator;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
+
+@Service
 public class UpdateToolItemUseCase {
 
     private ToolItemDAO toolItemDAO;
@@ -29,6 +31,7 @@ public class UpdateToolItemUseCase {
         if (toolItemDAO.findOne(toolItem.getId()).isEmpty()){
             throw new EntityNotFoundException("Tool Item not found!");
         }
+
         return toolItemDAO.update(toolItem);
     }
 
