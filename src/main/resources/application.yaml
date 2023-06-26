@@ -31,3 +31,29 @@ queries:
       delete:
         tool-by-id: >
           DELETE FROM aerotool_platform.tool WHERE id=?
+    tool-item-dao:
+        insert:
+            tool-item: >
+                INSERT INTO aerotool_platform.tool_item(id, patrimony, situation, locate_id, tool_id) VALUES (?, ?, ?::aerotool_platform.tool_situation, ?, ?)
+        update:
+            tool-item: >
+                UPDATE aerotool_platform.tool_item SET patrimony=?, situation=?::aerotool_platform.tool_situation, locate_id=?, tool_id=? WHERE id=?
+        select:
+            tool-item-by-id: >
+                SELECT * FROM aerotool_platform.tool_item WHERE id=?
+            tool-item-all: >
+                SELECT * FROM aerotool_platform.tool_item
+        delete:
+            tool-item-by-id: >
+                DELETE FROM aerotool_platform.tool_item WHERE id=?
+              
+
+    locate-dao:
+      insert:
+        locate: >
+            INSERT INTO aerotool_platform.locate(id, name, description) VALUES (?, ?, ?)
+      select:
+        find-all: >
+            SELECT * FROM aerotool_platform.locate
+        find-by-id: >
+            SELECT * FROM aerotool_platform.locate WHERE id=?
