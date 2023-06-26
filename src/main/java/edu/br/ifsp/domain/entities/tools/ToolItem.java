@@ -6,8 +6,8 @@ public class ToolItem {
 
     private UUID id;
     private String patrimony;
-    private Locate locate;
-    private Tool tool;
+    private UUID locateId;
+    private UUID toolId;
     private ToolSituation situation;
 
     public ToolItem(){
@@ -21,12 +21,23 @@ public class ToolItem {
         this.id = id;
     }
 
-    public ToolItem(UUID id, String patrimony, Locate locate, Tool tool, ToolSituation situation) {
+    public ToolItem(UUID id, String patrimony, UUID locateId, UUID toolId, ToolSituation situation) {
         this.id = id;
         this.patrimony = patrimony;
-        this.locate = locate;
-        this.tool = tool;
+        this.locateId = locateId;
+        this.toolId = toolId;
         this.situation = situation;
+    }
+
+    public ToolItem(String patrimony, UUID locateId, UUID toolId, ToolSituation situation) {
+        this.patrimony = patrimony;
+        this.locateId = locateId;
+        this.toolId = toolId;
+        this.situation = situation;
+    }
+
+    public ToolItem newInstanceWithId(UUID id){
+        return new ToolItem(id, patrimony, locateId, toolId, situation);
     }
 
     public UUID getId() {
@@ -45,20 +56,20 @@ public class ToolItem {
         this.patrimony = patrimony;
     }
 
-    public Locate getLocate() {
-        return locate;
+    public UUID getLocateId() {
+        return locateId;
     }
 
-    public void setLocate(Locate locate) {
-        this.locate = locate;
+    public void setLocateId(UUID locateId) {
+        this.locateId = locateId;
     }
 
-    public Tool getTool() {
-        return tool;
+    public UUID getToolId() {
+        return toolId;
     }
 
-    public void setTool(Tool tool) {
-        this.tool = tool;
+    public void setToolId(UUID toolId) {
+        this.toolId = toolId;
     }
 
     public ToolSituation getSituation() {
@@ -74,8 +85,8 @@ public class ToolItem {
         return "ToolItem{" +
                 "id=" + id +
                 ", patrimony='" + patrimony + '\'' +
-                ", locate=" + locate +
-                ", tool=" + tool +
+                ", locateId=" + locateId +
+                ", toolId=" + toolId +
                 ", situation=" + situation +
                 '}';
     }
