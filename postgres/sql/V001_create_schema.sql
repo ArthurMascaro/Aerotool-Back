@@ -2,6 +2,24 @@ CREATE SCHEMA aerotool_platform;
 
 ALTER SCHEMA aerotool_platform OWNER TO "aerotool";
 
+CREATE TABLE aerotool_platform.promptuary (
+    login varchar(255) NOT NULL,
+    password varchar(255) NOT NULL
+);
+
+CREATE TYPE aerotool_platform.role AS ENUM (
+    'ADMIN',
+    'TEACHER',
+    'STUDENT'
+);
+
+CREATE TABLE aerotool_platform.user (
+    id uuid NOT NULL,
+    name varchar(255) NOT NULL,
+    role aerotool_platform.role NOT NULL,
+    promptuary_login aerotool_platform.promptuary NOT NULL
+);
+
 CREATE TYPE aerotool_platform.tool_type as ENUM (
     'PROPERTY',
     'COMMON'
@@ -61,3 +79,28 @@ ALTER TABLE aerotool_platform.tool_item
 ALTER TABLE aerotool_platform.tool_item
     ADD CONSTRAINT toolItem_tool_id_fkey FOREIGN KEY (tool_id)
         REFERENCES aerotool_platform.tool(id) ON DELETE CASCADE;
+
+CREATE TYPE aerotool_platform.request_situation as ENUM (
+    'WAITING',
+    'ACCEPTED',
+    'REJECTED'
+);
+
+CREATE TABLE aerotool_platform.line_request (
+    id uuid NOT NULL,
+    expected_return_date timestamp NOT NULL,
+    real_return_date timestamp,
+    expected_withdrawal_date timestamp NOT NULL,
+    real_withdrawal_date timestamp,
+    request_situation aerotool_platform.request_situation,
+    tool_item_id aerotool_platform.tool_item NOT NULL
+);
+
+ALTER TABLE aerotool_platform.line_request OWNER TO "aerotool";
+
+ALTER TABLE aerotool_platform.line_request
+    ADD CONSTRAINT lineRequest_pk PRIMARY KEY (id);
+
+ALTER TABLE aerotool_platform.line_request
+    ADD CONSTRAINT lineRequest_tool_item_id_fkey FOREIGN KEY (tool_item_id)
+        REFERENCES aerotool_platform.tool_item(id) ON DELETE CASCADE;
