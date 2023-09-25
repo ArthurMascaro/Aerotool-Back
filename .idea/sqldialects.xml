@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/postgres/sql/V000_setup.sql" dialect="PostgreSQL" />
     <file url="file://$PROJECT_DIR$/postgres/sql/V001_create_schema.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/postgres/sql/V002_populate_schema.sql" dialect="PostgreSQL" />
   </component>
 </project>

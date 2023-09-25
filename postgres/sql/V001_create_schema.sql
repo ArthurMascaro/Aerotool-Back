@@ -2,7 +2,7 @@ CREATE SCHEMA aerotool_platform;
 
 ALTER SCHEMA aerotool_platform OWNER TO "aerotool";
 
-DROP TYPE IF EXISTS aerotool_platform.promptuary CASCADE;
+DROP TABLE IF EXISTS aerotool_platform.promptuary CASCADE;
 
 CREATE TABLE aerotool_platform.promptuary (
     login varchar(255) NOT NULL,
@@ -30,7 +30,7 @@ CREATE TABLE aerotool_platform.user (
     id uuid NOT NULL,
     name varchar(255) NOT NULL,
     role aerotool_platform.role NOT NULL,
-    promptuary_login aerotool_platform.promptuary NOT NULL
+    promptuary_login varchar(255) NOT NULL
 );
 
 ALTER TABLE aerotool_platform.user OWNER TO "aerotool";
@@ -38,7 +38,11 @@ ALTER TABLE aerotool_platform.user OWNER TO "aerotool";
 ALTER TABLE aerotool_platform.user
     ADD CONSTRAINT user_pk PRIMARY KEY (id);
 
-DROP TABLE IF EXISTS aerotool_platform.tool_type CASCADE;
+ALTER TABLE aerotool_platform.user
+    ADD CONSTRAINT user_promptuary_login_fkey FOREIGN KEY (promptuary_login)
+        REFERENCES aerotool_platform.promptuary(login) ON DELETE CASCADE;
+
+DROP TYPE IF EXISTS aerotool_platform.tool_type CASCADE;
 
 CREATE TYPE aerotool_platform.tool_type as ENUM (
     'PROPERTY',
@@ -61,17 +65,6 @@ ALTER TABLE aerotool_platform.tool OWNER TO "aerotool";
 ALTER TABLE aerotool_platform.tool
     ADD CONSTRAINT tool_pk PRIMARY KEY (id);
 
-DROP TYPE IF EXISTS aerotool_platform.tool_situation CASCADE;
-
-CREATE TYPE aerotool_platform.tool_situation as ENUM (
-    'BROKEN',
-    'LOST',
-    'BUSY',
-    'FREE'
-);
-
-ALTER TYPE aerotool_platform.tool_situation OWNER TO "aerotool";
-
 DROP TABLE IF EXISTS aerotool_platform.locate CASCADE;
 
 CREATE TABLE aerotool_platform.locate (
@@ -84,6 +77,17 @@ ALTER TABLE aerotool_platform.locate OWNER TO "aerotool";
 
 ALTER TABLE aerotool_platform.locate
     ADD CONSTRAINT locate_pk PRIMARY KEY (id);
+
+DROP TYPE IF EXISTS aerotool_platform.tool_situation CASCADE;
+
+CREATE TYPE aerotool_platform.tool_situation as ENUM (
+    'BROKEN',
+    'LOST',
+    'BUSY',
+    'FREE'
+);
+
+ALTER TYPE aerotool_platform.tool_situation OWNER TO "aerotool";
 
 DROP TABLE IF EXISTS aerotool_platform.tool_item CASCADE;
 
@@ -161,7 +165,7 @@ ALTER TABLE aerotool_platform.line_request
     ADD CONSTRAINT lineRequest_request_id_fkey FOREIGN KEY (request_id)
         REFERENCES aerotool_platform.request(id) ON DELETE CASCADE;
 
-DROP TYPE IF EXISTS aerotool_platform.event_situation CASCADE;
+DROP TYPE IF EXISTS aerotool_platform.event_type CASCADE;
 
 CREATE TYPE aerotool_platform.event_type as ENUM (
     'NOTIFICATION',
