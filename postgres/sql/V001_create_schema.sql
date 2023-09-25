@@ -144,7 +144,7 @@ CREATE TABLE aerotool_platform.line_request (
     expected_withdrawal_date timestamp NOT NULL,
     real_withdrawal_date timestamp,
     request_situation aerotool_platform.request_situation NOT NULL,
-    tool_item_id aerotool_platform.tool_item NOT NULL,
+    tool_item_id uuid NOT NULL,
     request_id uuid NOT NULL
 );
 
