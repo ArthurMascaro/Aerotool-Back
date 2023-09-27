@@ -9,6 +9,6 @@ import java.util.UUID;
 
 public interface RequestDAO extends DAO<Request, UUID> {
 
-    Optional<Request> findByUUID(UUID Id);
+    Optional<Request> findByUUID(UUID id);
 
 }

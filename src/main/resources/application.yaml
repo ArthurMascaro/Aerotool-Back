@@ -23,11 +23,30 @@ queries:
       select:
         user-and-login-and-password-from-promptuary-by-promptuary-login: >
           SELECT u.id, u.name, u.role, p.login, p.password FROM aerotool_platform.user u INNER JOIN aerotool_platform.promptuary p ON u.promptuary_login = p.login WHERE u.promptuary_login= ?
+        user-by-id:
+            SELECT * FROM aerotool_platform.user WHERE id=?
+        user-by-name:
+            SELECT * FROM aerotool_platform.user WHERE LIKE '%' || ? || '%' OR name LIKE '%' || ? || '%';
         user-all: >
           SELECT * FROM aerotool_platform.user
+      update:
+        user-name: >
+          UPDATE aerotool_platform.user SET name=? WHERE id=?
       delete:
         user-by-promptuary:
           DELETE FROM aerotool_platform.user WHERE promptuary_login=?
+    request-dao:
+      insert:
+        request: >
+            INSERT INTO aerotool_platform.request(id, request_date, user_id) VALUES (?, ?, ?)
+      select:
+        request-by-id: >
+            SELECT * FROM aerotool_platform.request WHERE id=?
+        request-all: >
+            SELECT * FROM aerotool_platform.request
+      delete:
+        request-by-id: >
+            DELETE FROM aerotool_platform.request WHERE id=?
     tool-dao:
       insert:
         tool: >

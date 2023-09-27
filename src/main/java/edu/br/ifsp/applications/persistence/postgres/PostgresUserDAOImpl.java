@@ -24,8 +24,17 @@ public class PostgresUserDAOImpl implements UserDAO {
     @Value("${queries.sql.user-dao.select.user-and-login-and-password-from-promptuary-by-promptuary-login}")
     private String findUserByPromptuaryQuery;
 
+    @Value("${queries.sql.user-dao.select.user-by-id}")
+    private String findUserByIdQuery;
+
+    @Value("${queries.sql.user-dao.select.user-by-name}")
+    private String findUserByNameQuery;
+
     @Value("${queries.sql.user-dao.select.user-all}")
     private String findAllUsersQuery;
+
+    @Value("${queries.sql.user-dao.update.user-name}")
+    private String updateUserNameQuery;
 
     @Value("${queries.sql.user-dao.delete.user-by-promptuary}")
     private String deleteUserByPromptuary;
@@ -37,15 +46,27 @@ public class PostgresUserDAOImpl implements UserDAO {
     }
 
     @Override
+    public User create(User type) {
+        jdbcTemplate.update(insertUserQuery, type.getId(), type.getNome(), type.getRole(), type.getPromptuary());
+        return type;
+    }
+
+    @Override
     public Optional<User> findByPromptuary(Promptuary promptuary) {
         User user = jdbcTemplate.queryForObject(findUserByPromptuaryQuery, this::mapperUserFromRs, promptuary);
         return Optional.of(user);
     }
 
     @Override
-    public User create(User type) {
-        jdbcTemplate.update(insertUserQuery, type.getId(), type.getNome(), type.getRole(), type.getPromptuary());
-        return type;
+    public Optional<User> findByUUID(UUID id) {
+        User user = jdbcTemplate.queryForObject(findUserByIdQuery, this::mapperUserFromRs, id);
+        return Optional.of(user);
+    }
+
+    @Override
+    public Optional<User> findByName(String name) {
+        User user = jdbcTemplate.queryForObject(findUserByNameQuery, this::mapperUserFromRs, name);
+        return Optional.of(user);
     }
 
     @Override
@@ -66,7 +87,8 @@ public class PostgresUserDAOImpl implements UserDAO {
 
     @Override
     public User update(User type) {
-        return null;
+        jdbcTemplate.update(updateUserNameQuery, type.getNome(), type.getId());
+        return type;
     }
 
     @Override
@@ -82,7 +104,7 @@ public class PostgresUserDAOImpl implements UserDAO {
 
     private User mapperUserFromRs(ResultSet rs, int rowNum) throws SQLException {
         UUID id = UUID.fromString(rs.getString("id"));
-        String nome = rs.getString("nome");
+        String nome = rs.getString("name");
         Role role = Role.valueOf(rs.getString("role"));
         String login = rs.getString("login");
         String password = rs.getString("password");

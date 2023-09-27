@@ -35,6 +35,16 @@ public class InMemoryUserDAO implements UserDAO {
     }
 
     @Override
+    public Optional<User> findByUUID(UUID id) {
+        return Optional.ofNullable(db.get(id));
+    }
+
+    @Override
+    public Optional<User> findByName(String name) {
+        return Optional.ofNullable(db.get(name));
+    }
+
+    @Override
     public List<User> findALL() {
         return new ArrayList<>(db.values());
     }
