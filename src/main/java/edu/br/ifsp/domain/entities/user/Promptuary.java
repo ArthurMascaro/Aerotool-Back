@@ -16,6 +16,11 @@ public class Promptuary {
         this.login = login;
     }
 
+    public Promptuary(String login, String password) {
+        this.login = login;
+        this.password = password;
+    }
+
     public static Promptuary valueOf(String login){
 
         if (!isValid(login)) throw new IllegalArgumentException("Login value is not a valid Promptuary");

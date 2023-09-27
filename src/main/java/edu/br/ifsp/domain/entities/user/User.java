@@ -13,16 +13,20 @@ public class User {
         this.id = UUID.randomUUID();
     }
 
+    public User(UUID id, String nome, Role role, Promptuary promptuary) {
+        this.id = id;
+        this.nome = nome;
+        this.role = role;
+        this.promptuary = promptuary;
+    }
+
     public User(UUID id) {
         if (id == null)
             throw new IllegalArgumentException("id cannot be null");
         this.id = id;
     }
 
-    public User(UUID id, String nome, Role role, Promptuary promptuary) {
-        this.id = id;
-        this.nome = nome;
-        this.role = role;
+    public User(Promptuary promptuary) {
         this.promptuary = promptuary;
     }
 

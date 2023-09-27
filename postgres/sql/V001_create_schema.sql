@@ -93,7 +93,7 @@ DROP TABLE IF EXISTS aerotool_platform.tool_item CASCADE;
 
 CREATE TABLE aerotool_platform.tool_item (
     id uuid NOT NULL,
-    patrimony varchar(255) NOT NULL,
+    patrimony varchar(255) NOT NULL UNIQUE,
     situation aerotool_platform.tool_situation NOT NULL,
     locate_id uuid NOT NULL,
     tool_id uuid NOT NULL
