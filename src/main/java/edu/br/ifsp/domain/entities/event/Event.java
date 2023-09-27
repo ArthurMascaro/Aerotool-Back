@@ -7,7 +7,6 @@ import java.util.UUID;
 
 public class Event {
 
-    //Method System.
     private UUID id;
     private User responsible;
     private User subject;
