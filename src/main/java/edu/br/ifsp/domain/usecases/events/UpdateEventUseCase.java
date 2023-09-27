@@ -4,7 +4,9 @@ import edu.br.ifsp.domain.entities.event.Event;
 import edu.br.ifsp.domain.usecases.utils.EntityNotFoundException;
 import edu.br.ifsp.domain.usecases.utils.Notification;
 import edu.br.ifsp.domain.usecases.utils.Validator;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UpdateEventUseCase {
     private EventDAO eventDAO;
 

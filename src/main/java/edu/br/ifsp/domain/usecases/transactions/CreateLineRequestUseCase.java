@@ -13,32 +13,23 @@ import edu.br.ifsp.domain.usecases.utils.EntityAlreadyExistsException;
 import edu.br.ifsp.domain.usecases.utils.EntityNotFoundException;
 import edu.br.ifsp.domain.usecases.utils.Notification;
 import edu.br.ifsp.domain.usecases.utils.Validator;
+import org.springframework.stereotype.Service;
 
 import javax.sound.sampled.Line;
 import java.util.UUID;
 
+@Service
 public class CreateLineRequestUseCase {
 
     private LineRequestDAO lineRequestDAO;
     private FindToolItemUseCase findToolItemUseCaseUseCase;
     private FindRequestUseCase findRequestUseCase;
-    private UpdateToolItemUseCase updateToolItemUseCase;
 
-
-    public CreateLineRequestUseCase(
-            LineRequestDAO lineRequestDAO,
-            FindRequestUseCase findRequestUseCase,
-            FindToolItemUseCase findToolItemUseCaseUseCase,
-            UpdateToolItemUseCase updateToolItemUseCase){
-
-
+    public CreateLineRequestUseCase(LineRequestDAO lineRequestDAO, FindToolItemUseCase findToolItemUseCaseUseCase, FindRequestUseCase findRequestUseCase) {
         this.lineRequestDAO = lineRequestDAO;
-        this.findRequestUseCase = findRequestUseCase;
         this.findToolItemUseCaseUseCase = findToolItemUseCaseUseCase;
-        this.updateToolItemUseCase = updateToolItemUseCase;
+        this.findRequestUseCase = findRequestUseCase;
     }
-
-    public CreateLineRequestUseCase(LineRequestDAO lineRequestDAO){ this.lineRequestDAO = lineRequestDAO; }
 
     public LineRequest createLineRequest(UUID requestID, UUID toolItemID) throws LineRequestNotAllowedException {
         if (toolItemID == null)

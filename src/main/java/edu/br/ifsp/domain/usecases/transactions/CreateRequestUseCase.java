@@ -6,10 +6,12 @@ import edu.br.ifsp.domain.entities.user.User;
 import edu.br.ifsp.domain.usecases.user.FindUserUseCase;
 import edu.br.ifsp.domain.usecases.utils.EntityNotFoundException;
 import edu.br.ifsp.domain.usecases.utils.Validator;
+import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.util.UUID;
 
+@Service
 public class CreateRequestUseCase {
     private RequestDAO requestDAO;
     private FindUserUseCase findUserUseCase;

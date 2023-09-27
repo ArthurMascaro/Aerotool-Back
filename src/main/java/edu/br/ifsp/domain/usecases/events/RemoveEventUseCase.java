@@ -2,9 +2,11 @@ package edu.br.ifsp.domain.usecases.events;
 
 import edu.br.ifsp.domain.entities.event.Event;
 import edu.br.ifsp.domain.usecases.utils.EntityNotFoundException;
+import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
+@Service
 public class RemoveEventUseCase {
     private EventDAO eventDAO;
 

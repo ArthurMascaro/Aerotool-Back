@@ -4,9 +4,11 @@ import edu.br.ifsp.domain.entities.tools.ToolItem;
 import edu.br.ifsp.domain.entities.transaction.Request;
 import edu.br.ifsp.domain.usecases.tools.ToolItemDAO;
 import edu.br.ifsp.domain.usecases.utils.EntityNotFoundException;
+import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
+@Service
 public class RemoveRequestUseCase {
 
     private RequestDAO requestDAO;

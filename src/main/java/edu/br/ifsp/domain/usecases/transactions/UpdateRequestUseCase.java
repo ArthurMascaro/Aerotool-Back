@@ -8,7 +8,9 @@ import edu.br.ifsp.domain.usecases.tools.ToolInputRequestValidator;
 import edu.br.ifsp.domain.usecases.utils.EntityNotFoundException;
 import edu.br.ifsp.domain.usecases.utils.Notification;
 import edu.br.ifsp.domain.usecases.utils.Validator;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UpdateRequestUseCase {
 
     private RequestDAO requestDAO;
