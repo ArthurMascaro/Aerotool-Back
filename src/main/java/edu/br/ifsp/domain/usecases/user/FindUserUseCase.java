@@ -3,12 +3,14 @@ package edu.br.ifsp.domain.usecases.user;
 import edu.br.ifsp.domain.entities.user.Promptuary;
 import edu.br.ifsp.domain.entities.user.User;
 import edu.br.ifsp.domain.usecases.utils.Validator;
+import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+@Service
 public class FindUserUseCase {
 
     private UserDAO userDAO;

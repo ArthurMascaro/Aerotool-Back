@@ -5,7 +5,9 @@ import edu.br.ifsp.domain.entities.user.User;
 import edu.br.ifsp.domain.usecases.utils.EntityAlreadyExistsException;
 import edu.br.ifsp.domain.usecases.utils.Notification;
 import edu.br.ifsp.domain.usecases.utils.Validator;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CreateUserUseCase {
 
     private UserDAO userDAO;

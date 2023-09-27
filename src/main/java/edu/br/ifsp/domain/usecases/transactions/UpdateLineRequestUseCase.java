@@ -6,7 +6,9 @@ import edu.br.ifsp.domain.entities.transaction.Request;
 import edu.br.ifsp.domain.usecases.utils.EntityNotFoundException;
 import edu.br.ifsp.domain.usecases.utils.Notification;
 import edu.br.ifsp.domain.usecases.utils.Validator;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UpdateLineRequestUseCase {
 
     private LineRequestDAO lineRequestDAO;

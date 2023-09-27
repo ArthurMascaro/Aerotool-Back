@@ -3,10 +3,12 @@ package edu.br.ifsp.domain.usecases.transactions;
 import edu.br.ifsp.domain.entities.transaction.LineRequest;
 import edu.br.ifsp.domain.entities.transaction.Request;
 import edu.br.ifsp.domain.usecases.utils.EntityNotFoundException;
+import org.springframework.stereotype.Service;
 
 import javax.sound.sampled.Line;
 import java.util.UUID;
 
+@Service
 public class RemoveLineRequestUseCase {
 
     private LineRequestDAO lineRequestDAO;
