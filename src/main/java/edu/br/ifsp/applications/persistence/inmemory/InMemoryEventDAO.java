@@ -33,6 +33,16 @@ public class InMemoryEventDAO implements EventDAO {
     }
 
     @Override
+    public List<Event> findByUserResponsibleId(UUID id) {
+        return Optional.ofNullable(db.get(id)).map(Arrays::asList).orElse(new ArrayList<>());
+    }
+
+    @Override
+    public List<Event> findByUserSubjectId(UUID id) {
+        return Optional.ofNullable(db.get(id)).map(Arrays::asList).orElse(new ArrayList<>());
+    }
+
+    @Override
     public List<Event> findALL() {
         return new ArrayList<>(db.values());
     }

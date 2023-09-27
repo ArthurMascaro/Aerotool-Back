@@ -47,6 +47,15 @@ queries:
       delete:
         request-by-id: >
             DELETE FROM aerotool_platform.request WHERE id=?
+    locate-dao:
+      insert:
+        locate: >
+          INSERT INTO aerotool_platform.locate(id, name, description) VALUES (?, ?, ?)
+      select:
+        find-all: >
+          SELECT * FROM aerotool_platform.locate
+        find-by-id: >
+          SELECT * FROM aerotool_platform.locate WHERE id=?
     tool-dao:
       insert:
         tool: >
@@ -77,12 +86,22 @@ queries:
         delete:
             tool-item-by-id: >
                 DELETE FROM aerotool_platform.tool_item WHERE id=?
-    locate-dao:
-      insert:
-        locate: >
-            INSERT INTO aerotool_platform.locate(id, name, description) VALUES (?, ?, ?)
-      select:
-        find-all: >
-            SELECT * FROM aerotool_platform.locate
-        find-by-id: >
-            SELECT * FROM aerotool_platform.locate WHERE id=?
+    event-dao:
+        insert:
+            event: >
+                INSERT INTO aerotool_platform.event(id, description, event_date, event_type, event_situation, user_responsible_id, user_subject_id) VALUES (?, ?, ?, ?, ?, ?, ?)
+        select:
+            event-by-id: >
+                SELECT * FROM aerotool_platform.event WHERE id=?
+            event-all: >
+                SELECT * FROM aerotool_platform.event
+            event-all-by-user-responsible: >
+                SELECT * FROM aerotool_platform.event WHERE user_responsible_id=?
+            event-all-by-user-subject: >
+                SELECT * FROM aerotool_platform.event WHERE user_subject_id=?
+        update:
+          event-situation: >
+            UPDATE aerotool_platform.event SET event_situation = ?::aerotool_platform.event_situation WHERE id=?
+        delete:
+            event-by-id: >
+                DELETE FROM aerotool_platform.event WHERE id=?

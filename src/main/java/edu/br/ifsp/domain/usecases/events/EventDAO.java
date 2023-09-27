@@ -7,10 +7,15 @@ import edu.br.ifsp.domain.usecases.utils.EntityAlreadyExistsException;
 import edu.br.ifsp.domain.usecases.utils.Notification;
 import edu.br.ifsp.domain.usecases.utils.Validator;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 public interface EventDAO extends DAO<Event, UUID> {
-
     Optional<Event> findByUUID(UUID id);
+
+    List<Event> findByUserResponsibleId(UUID id);
+
+    List<Event> findByUserSubjectId(UUID id);
+
 }
