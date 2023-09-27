@@ -22,6 +22,10 @@ public class Request {
         this.date = new Timestamp(System.currentTimeMillis());
     }
 
+    public Request(UUID id) {
+        this.id = id;
+    }
+
     public Request(UUID id, User user) {
         this.id = id;
         this.user = user;
