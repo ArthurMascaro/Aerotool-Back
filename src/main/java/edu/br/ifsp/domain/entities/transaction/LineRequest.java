@@ -12,8 +12,8 @@ public class LineRequest{
     private ToolItem toolItem;
     private Timestamp expectedReturnDate;
     private Timestamp realReturnDate;
-    private Timestamp expectedWithdrawDate;
-    private Timestamp realWithdrawDate;
+    private Timestamp expectedWithdrawalDate;
+    private Timestamp realWithdrawalDate;
     private RequestSituation situation;
 
     public LineRequest(UUID id) {
@@ -23,23 +23,23 @@ public class LineRequest{
     public LineRequest() { this.id = UUID.randomUUID(); }
 
     public LineRequest(UUID id, Request request, ToolItem toolItem, Timestamp expectedReturnDate,
-                       Timestamp expectedWithdrawDate, RequestSituation situation) {
+                       Timestamp expectedWithdrawalDate, RequestSituation situation) {
         this.id = id;
         this.request = request;
         this.toolItem = toolItem;
         this.expectedReturnDate = expectedReturnDate;
-        this.expectedWithdrawDate = expectedWithdrawDate;
+        this.expectedWithdrawalDate = expectedWithdrawalDate;
         this.situation = situation;
     }
 
-    public LineRequest(UUID id,Request request, ToolItem toolItem, Timestamp expectedReturnDate, Timestamp realReturnDate, Timestamp expectedWithdrawDate, Timestamp realWithdrawDate, RequestSituation situation) {
+    public LineRequest(UUID id, Request request, ToolItem toolItem, Timestamp expectedReturnDate, Timestamp realReturnDate, Timestamp expectedWithdrawalDate, Timestamp realWithdrawalDate, RequestSituation situation) {
         this.id = id;
         this.request = request;
         this.toolItem = toolItem;
         this.expectedReturnDate = expectedReturnDate;
         this.realReturnDate = realReturnDate;
-        this.expectedWithdrawDate = expectedWithdrawDate;
-        this.realWithdrawDate = realWithdrawDate;
+        this.expectedWithdrawalDate = expectedWithdrawalDate;
+        this.realWithdrawalDate = realWithdrawalDate;
         this.situation = situation;
     }
 
@@ -67,20 +67,20 @@ public class LineRequest{
         this.realReturnDate = realReturnDate;
     }
 
-    public Timestamp getExpectedWithdrawDate() {
-        return expectedWithdrawDate;
+    public Timestamp getExpectedWithdrawalDate() {
+        return expectedWithdrawalDate;
     }
 
-    public void setExpectedWithdrawDate(Timestamp expectedWithdrawDate) {
-        this.expectedWithdrawDate = expectedWithdrawDate;
+    public void setExpectedWithdrawalDate(Timestamp expectedWithdrawalDate) {
+        this.expectedWithdrawalDate = expectedWithdrawalDate;
     }
 
-    public Timestamp getRealWithdrawDate() {
-        return realWithdrawDate;
+    public Timestamp getRealWithdrawalDate() {
+        return realWithdrawalDate;
     }
 
-    public void setRealWithdrawDate(Timestamp realWithdrawDate) {
-        this.realWithdrawDate = realWithdrawDate;
+    public void setRealWithdrawalDate(Timestamp realWithdrawalDate) {
+        this.realWithdrawalDate = realWithdrawalDate;
     }
 
     public RequestSituation getSituation() {
@@ -96,8 +96,8 @@ public class LineRequest{
         return "LineRequest{" +
                 "expectedReturnDate=" + expectedReturnDate +
                 ", realReturnDate=" + realReturnDate +
-                ", expectedWithdrawDate=" + expectedWithdrawDate +
-                ", realWithdrawDate=" + realWithdrawDate +
+                ", expectedWithdrawDate=" + expectedWithdrawalDate +
+                ", realWithdrawDate=" + realWithdrawalDate +
                 ", situation=" + situation +
                 '}';
     }

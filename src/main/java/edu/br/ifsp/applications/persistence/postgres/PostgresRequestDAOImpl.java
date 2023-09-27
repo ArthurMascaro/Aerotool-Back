@@ -7,6 +7,7 @@ import edu.br.ifsp.domain.usecases.transactions.RequestDAO;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+@Repository
 public class PostgresRequestDAOImpl implements RequestDAO {
 
     @Value("${queries.sql.request-dao.insert.request}")

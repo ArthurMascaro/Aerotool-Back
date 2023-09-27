@@ -8,6 +8,7 @@ import edu.br.ifsp.domain.entities.user.User;
 import edu.br.ifsp.domain.usecases.events.EventDAO;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+@Repository
 public class PostgresEventDAOImpl implements EventDAO {
 
     private JdbcTemplate jdbcTemplate;
@@ -32,16 +34,16 @@ public class PostgresEventDAOImpl implements EventDAO {
     @Value("${queries.sql.event-dao.select.event-by-id}")
     private String findEventByUUIDQuery;
 
-    @Value("${queries.sql.event-dao.select.event-by-user-responsible-id}")
+    @Value("${queries.sql.event-dao.select.event-by-responsible-id}")
     private String findEventByUserResponsibleIdQuery;
 
-    @Value("${queries.sql.event-dao.select.event-by-user-subject-id}")
+    @Value("${queries.sql.event-dao.select.event-by-subject-id}")
     private String findEventByUserSubjectIdQuery;
 
     @Value("${queries.sql.event-dao.select.event-all}")
     private String findAllEventsQuery;
 
-    @Value("${queries.sql.event-dao.event-situation}")
+    @Value("${queries.sql.event-dao.update.event-situation}")
     private String updateEventSituationQuery;
 
     @Value("${queries.sql.event-dao.delete.event-by-id}")

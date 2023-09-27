@@ -1,7 +1,6 @@
 package edu.br.ifsp.domain.usecases.transactions;
 
 import edu.br.ifsp.domain.entities.transaction.LineRequest;
-import edu.br.ifsp.domain.entities.transaction.Request;
 import edu.br.ifsp.domain.usecases.utils.Notification;
 import edu.br.ifsp.domain.usecases.utils.Validator;
 
@@ -34,11 +33,11 @@ public class LineRequestInputRequestValidator extends Validator<LineRequest>{
             notification.addError("Real return date is null!");
         }
 
-        if (nullOrEmpty(lineRequest.getExpectedWithdrawDate().toString())){
+        if (nullOrEmpty(lineRequest.getExpectedWithdrawalDate().toString())){
             notification.addError("Expected withdraw date is null!");
         }
 
-        if (nullOrEmpty(lineRequest.getRealWithdrawDate().toString())){
+        if (nullOrEmpty(lineRequest.getRealWithdrawalDate().toString())){
             notification.addError("Real withdraw date is null!");
         }
 

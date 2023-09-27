@@ -47,6 +47,23 @@ queries:
       delete:
         request-by-id: >
             DELETE FROM aerotool_platform.request WHERE id=?
+    line-request-dao:
+      insert:
+        line-request: >
+            INSERT INTO aerotool_platform.line_request(id, expected_return_date, real_return_date, expected_withdrawal_date, real_withdrawal_date, request_situation, tool_item_id, request_id) VALUES (?, ?, ?, ?, ?, ?::aerotool_platform.request_situation, ?, ?)
+      select:
+        line-request-by-id:
+            SELECT * FROM aerotool_platform.line_request WHERE id=?
+        line-request-all:
+            SELECT * FROM aerotool_platform.line_request
+        line-request-by-request-id:
+            SELECT * FROM aerotool_platform.line_request WHERE request_id=?
+      update:
+        line-request-situation:
+            UPDATE aerotool_platform.line_request SET request_situation=?::aerotool_platform.request_situation WHERE id=?
+      delete:
+        line-request:
+            DELETE FROM aerotool_platform.line_request WHERE id=?
     locate-dao:
       insert:
         locate: >
@@ -95,9 +112,9 @@ queries:
                 SELECT * FROM aerotool_platform.event WHERE id=?
             event-all: >
                 SELECT * FROM aerotool_platform.event
-            event-all-by-user-responsible: >
+            event-by-responsible-id: >
                 SELECT * FROM aerotool_platform.event WHERE user_responsible_id=?
-            event-all-by-user-subject: >
+            event-by-subject-id: >
                 SELECT * FROM aerotool_platform.event WHERE user_subject_id=?
         update:
           event-situation: >
