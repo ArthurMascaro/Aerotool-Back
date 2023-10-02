@@ -31,7 +31,10 @@ public class CreateLineRequestUseCase {
         this.findRequestUseCase = findRequestUseCase;
     }
 
-    public LineRequest createLineRequest(UUID requestID, UUID toolItemID) throws LineRequestNotAllowedException {
+    public LineRequest createLineRequest(LineRequest lineRequest) throws LineRequestNotAllowedException {
+        UUID requestID = lineRequest.getRequest().getId();
+        UUID toolItemID = lineRequest.getToolItem().getId();
+
         if (toolItemID == null)
             throw new IllegalArgumentException("Tool Item ID is null.");
 
@@ -40,13 +43,12 @@ public class CreateLineRequestUseCase {
 
         ToolItem toolItem = findToolItemUseCaseUseCase.findOne(toolItemID);
 
-        Request request = findRequestUseCase.findOne(requestID).orElseThrow(() ->
+        findRequestUseCase.findOne(requestID).orElseThrow(() ->
                 new EntityNotFoundException("Can not find a Request with ID" + requestID));
 
         if(toolItem.getSituation() == ToolSituation.BUSY)
             throw new LineRequestNotAllowedException("The Tool Item with ID" + toolItemID + "is unavailable.");
 
-        LineRequest lineRequest = new LineRequest();
         return lineRequestDAO.create(lineRequest);
     }
 

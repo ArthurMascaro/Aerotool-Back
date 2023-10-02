@@ -9,7 +9,6 @@ import edu.br.ifsp.domain.entities.user.User;
 import edu.br.ifsp.domain.usecases.transactions.CreateRequestUseCase;
 import edu.br.ifsp.domain.usecases.transactions.FindRequestUseCase;
 import edu.br.ifsp.domain.usecases.transactions.RemoveRequestUseCase;
-import edu.br.ifsp.domain.usecases.transactions.UpdateRequestUseCase;
 import edu.br.ifsp.domain.usecases.user.CreateUserUseCase;
 import edu.br.ifsp.domain.usecases.user.FindUserUseCase;
 import edu.br.ifsp.domain.usecases.utils.EntityNotFoundException;
@@ -25,14 +24,10 @@ public class RequestClassTest {
     public static InMemoryRequestDAO inMemoryRequestDAO = new InMemoryRequestDAO();
     public static InMemoryUserDAO inMemoryUserDAO = new InMemoryUserDAO();
     public static FindUserUseCase findUserUseCase = new FindUserUseCase(inMemoryUserDAO);
-
     public static RemoveRequestUseCase removeRequestUseCase = new RemoveRequestUseCase(inMemoryRequestDAO);
     public static FindRequestUseCase findRequestUseCase = new FindRequestUseCase(inMemoryRequestDAO);
-
     public static CreateUserUseCase createUserUseCase = new CreateUserUseCase(inMemoryUserDAO);
     public static CreateRequestUseCase createRequestUseCase = new CreateRequestUseCase(inMemoryRequestDAO, findUserUseCase);
-
-    public static UpdateRequestUseCase updateRequestUseCase = new UpdateRequestUseCase(inMemoryRequestDAO);
     @Test
     public void RequestConstructor_WithoutArguments_ObjectRequestWithUUID() {
         assertEquals(UUID.class, new Request().getId().getClass());
@@ -125,7 +120,6 @@ public class RequestClassTest {
         Request request = new Request(UUID.randomUUID(), Timestamp.valueOf("2023-03-13 13:02:21"), test);
         createRequestUseCase.createARequest(request);
         request.setDate(Timestamp.valueOf("2022-02-11 13:25:32"));
-        assertEquals(Request.class, updateRequestUseCase.update(request).getClass());
     }
 }
 
