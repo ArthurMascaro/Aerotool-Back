@@ -1,3 +1,10 @@
+application:
+  jwt:
+    secretKey: 'adonaaranhasubiupelaparedeveioachuvaforteeaderrubouadonaaranhasubiupelaparedeveioachuvaforteeaderrubouadonaaranhasubiupelaparedeveioachuvaforteeaderrubou'
+    tokenPrefix: 'Bearer '
+    tokenExpirationAfterMinutes: 5
+    refreshTokenExpirationAfterDays: 14
+
 spring:
   application:
     name: aerotool-application
