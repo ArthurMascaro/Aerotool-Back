@@ -47,26 +47,41 @@ public class PostgresUserDAOImpl implements UserDAO {
 
     @Override
     public User create(User type) {
-        jdbcTemplate.update(insertUserQuery, type.getId(), type.getNome(), type.getRole(), type.getPromptuary());
+        jdbcTemplate.update(insertUserQuery, type.getId(), type.getNome(), type.getRole().name(),
+                type.getPromptuary().getLogin());
         return type;
     }
 
     @Override
     public Optional<User> findByPromptuary(Promptuary promptuary) {
-        User user = jdbcTemplate.queryForObject(findUserByPromptuaryQuery, this::mapperUserFromRs, promptuary);
-        return Optional.of(user);
+        try {
+            User user = jdbcTemplate.queryForObject(findUserByPromptuaryQuery,
+                    this::mapperUserFromRs, promptuary.getLogin());
+            return Optional.of(user);
+        } catch (EmptyResultDataAccessException e) {
+            return Optional.empty();
+        }
     }
 
     @Override
     public Optional<User> findByUUID(UUID id) {
-        User user = jdbcTemplate.queryForObject(findUserByIdQuery, this::mapperUserFromRs, id);
-        return Optional.of(user);
+        try {
+            User user = jdbcTemplate.queryForObject(findUserByIdQuery, this::mapperUserFromRs, id);
+            return Optional.of(user);
+        } catch (EmptyResultDataAccessException e) {
+            return Optional.empty();
+        }
     }
 
     @Override
     public Optional<User> findByName(String name) {
-        User user = jdbcTemplate.queryForObject(findUserByNameQuery, this::mapperUserFromRs, name);
-        return Optional.of(user);
+        try {
+            User user = jdbcTemplate.queryForObject(findUserByNameQuery,
+                    this::mapperUserFromRs, name);
+            return Optional.of(user);
+        } catch (EmptyResultDataAccessException e) {
+            return Optional.empty();
+        }
     }
 
     @Override

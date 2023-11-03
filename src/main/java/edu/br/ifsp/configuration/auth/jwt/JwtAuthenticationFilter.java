@@ -69,6 +69,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         final Map<String, String> body = new HashMap<>();
         body.put("uuid", user.getId().toString());
+        body.put("name", user.getUsername());
+        body.put("promptuary", user.getPromptuary().getLogin());
         response.setContentType(APPLICATION_JSON_VALUE);
         new ObjectMapper().writeValue(response.getOutputStream(), body);
     }

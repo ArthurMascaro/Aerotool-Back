@@ -11,9 +11,9 @@ public class UserResponse {
     UUID id;
     String name;
     Role role;
-    Promptuary promptuary;
+    String promptuary;
 
-    public UserResponse(UUID id, String name, Role role, Promptuary promptuary) {
+    public UserResponse(UUID id, String name, Role role, String promptuary) {
         this.id = id;
         this.name = name;
         this.role = role;
@@ -21,7 +21,7 @@ public class UserResponse {
     }
 
     public static UserResponse fromUser(User user){
-        return new UserResponse(user.getId(), user.getNome(), user.getRole(), user.getPromptuary());
+        return new UserResponse(user.getId(), user.getNome(), user.getRole(), user.getPromptuary().getLogin());
     }
 
     public UUID getId() {
@@ -48,11 +48,11 @@ public class UserResponse {
         this.role = role;
     }
 
-    public Promptuary getPromptuary() {
+    public String getPromptuary() {
         return promptuary;
     }
 
-    public void setPromptuary(Promptuary promptuary) {
+    public void setPromptuary(String promptuary) {
         this.promptuary = promptuary;
     }
 }

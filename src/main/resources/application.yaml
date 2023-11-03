@@ -26,14 +26,14 @@ queries:
     user-dao:
       insert:
         user: >
-            INSERT INTO aerotool_platform.user(id, name, role, promptuary_login) VALUES (?, ?, ?::aerotool_platform.user_role, ?)
+            INSERT INTO aerotool_platform.user(id, name, role, promptuary_login) VALUES (?, ?, ?::aerotool_platform.role, ?)
       select:
         user-and-login-and-password-from-promptuary-by-promptuary-login: >
           SELECT u.id, u.name, u.role, p.login, p.password FROM aerotool_platform.user u INNER JOIN aerotool_platform.promptuary p ON u.promptuary_login = p.login WHERE u.promptuary_login= ?
         user-by-id:
             SELECT * FROM aerotool_platform.user WHERE id=?
         user-by-name:
-            SELECT * FROM aerotool_platform.user WHERE LIKE '%' || ? || '%' OR name LIKE '%' || ? || '%';
+            SELECT * FROM aerotool_platform.user WHERE name LIKE '%' || ? || '%';
         user-all: >
           SELECT * FROM aerotool_platform.user
       update:
