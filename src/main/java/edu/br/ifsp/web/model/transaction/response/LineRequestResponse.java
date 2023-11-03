@@ -37,8 +37,8 @@ public class LineRequestResponse {
                 lineRequest.getToolItem(),
                 lineRequest.getExpectedReturnDate(),
                 lineRequest.getRealReturnDate(),
-                lineRequest.getExpectedWithdrawDate(),
-                lineRequest.getRealWithdrawDate(),
+                lineRequest.getExpectedWithdrawalDate(),
+                lineRequest.getRealWithdrawalDate(),
                 lineRequest.getSituation()
         );
     }

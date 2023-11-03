@@ -1,7 +1,6 @@
 package edu.br.ifsp.applications.persistence.postgres;
 
 import edu.br.ifsp.domain.entities.tools.Locate;
-import edu.br.ifsp.domain.entities.tools.Tool;
 import edu.br.ifsp.domain.entities.tools.ToolItem;
 import edu.br.ifsp.domain.entities.tools.ToolSituation;
 import edu.br.ifsp.domain.usecases.tools.ToolDAO;
@@ -18,7 +17,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public class PostgresToolItemDaoImpl implements ToolItemDAO {
+public class PostgresToolItemDAOImpl implements ToolItemDAO {
 
     @Value("${queries.sql.locate-dao.insert.locate}")
     private String insertLocateQuery;
@@ -44,7 +43,7 @@ public class PostgresToolItemDaoImpl implements ToolItemDAO {
 
     private ToolDAO toolDAO;
 
-    public PostgresToolItemDaoImpl(JdbcTemplate jdbcTemplate, ToolDAO toolDAO) {
+    public PostgresToolItemDAOImpl(JdbcTemplate jdbcTemplate, ToolDAO toolDAO) {
         this.jdbcTemplate = jdbcTemplate;
         this.toolDAO = toolDAO;
     }

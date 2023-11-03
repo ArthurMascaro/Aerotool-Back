@@ -17,15 +17,15 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public class PostgresLineRequest implements LineRequestDAO {
+public class PostgresLineRequestDAOImpl implements LineRequestDAO {
 
     private JdbcTemplate jdbcTemplate;
     private PostgresRequestDAOImpl postgresRequestDAO;
-    private PostgresToolItemDaoImpl postgresToolItemDAO;
+    private PostgresToolItemDAOImpl postgresToolItemDAO;
 
-    public PostgresLineRequest(JdbcTemplate jdbcTemplate,
-                               PostgresRequestDAOImpl postgresRequestDAO,
-                               PostgresToolItemDaoImpl postgresToolItemDAO) {
+    public PostgresLineRequestDAOImpl(JdbcTemplate jdbcTemplate,
+                                      PostgresRequestDAOImpl postgresRequestDAO,
+                                      PostgresToolItemDAOImpl postgresToolItemDAO) {
         this.jdbcTemplate = jdbcTemplate;
         this.postgresRequestDAO = postgresRequestDAO;
         this.postgresToolItemDAO = postgresToolItemDAO;
@@ -44,8 +44,20 @@ public class PostgresLineRequest implements LineRequestDAO {
     @Value("${queries.sql.line-request-dao.select.line-request-all}")
     private String findAllLineRequestsQuery;
 
-    @Value("${queries.sql.line-request-dao.update.line-request-situation}")
+    @Value("${queries.sql.line-request-dao.update.all}")
+    private String updateLineRequestQuery;
+
+    @Value("${queries.sql.line-request-dao.update.situation}")
     private String updateLineRequestSituationQuery;
+
+    @Value("${queries.sql.line-request-dao.update.expected-dates}")
+    private String updateLineRequestExpectedDatesQuery;
+
+    @Value("${queries.sql.line-request-dao.update.real-withdrawal-date}")
+    private String updateLineRequestRealWithdrawalDateQuery;
+
+    @Value("${queries.sql.line-request-dao.update.real-return-date}")
+    private String updateLineRequestRealReturnDateQuery;
 
     @Value("${queries.sql.line-request-dao.delete.line-request}")
     private String deleteLineRequestQuery;
@@ -86,8 +98,33 @@ public class PostgresLineRequest implements LineRequestDAO {
 
     @Override
     public LineRequest update(LineRequest type) {
-        jdbcTemplate.update(updateLineRequestSituationQuery, type.getSituation().name(), type.getId());
-        return type;
+        jdbcTemplate.update(updateLineRequestQuery, type.getSituation().name(), type.getExpectedWithdrawalDate(),
+                type.getExpectedReturnDate(), type.getRealWithdrawalDate(), type.getRealReturnDate(), type.getId());
+        return findByUUID(type.getId()).get();
+    }
+
+    @Override
+    public LineRequest updateSituation(RequestSituation situation, UUID requestId) {
+        jdbcTemplate.update(updateLineRequestSituationQuery, situation.name(), requestId);
+        return findByUUID(requestId).get();
+    }
+
+    @Override
+    public LineRequest updateExpectedDates(Timestamp expectedReturnDate, Timestamp expectedWithdrawalDate, UUID requestId) {
+        jdbcTemplate.update(updateLineRequestExpectedDatesQuery, expectedReturnDate, expectedWithdrawalDate, requestId);
+        return findByUUID(requestId).get();
+    }
+
+    @Override
+    public LineRequest updateRealReturnDate(Timestamp realReturnDate, UUID requestId) {
+        jdbcTemplate.update(updateLineRequestRealReturnDateQuery, realReturnDate, requestId);
+        return findByUUID(requestId).get();
+    }
+
+    @Override
+    public LineRequest updateRealWithdrawalDate(Timestamp realWithdrawalDate, UUID requestId) {
+        jdbcTemplate.update(updateLineRequestRealWithdrawalDateQuery, realWithdrawalDate, requestId);
+        return findByUUID(requestId).get();
     }
 
     @Override
