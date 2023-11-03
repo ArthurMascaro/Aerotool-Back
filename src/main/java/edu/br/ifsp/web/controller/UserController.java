@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/v1/users")
 public class UserController {
 
     CreateUserUseCase createUserUseCase;
@@ -28,19 +27,19 @@ public class UserController {
         this.updateUserUseCase = updateUserUseCase;
     }
 
-    @PostMapping("/save")
+    @PostMapping("/register")
     public ResponseEntity<UserResponse> saveUser(@RequestBody UserRequest userRequest){
         User user = createUserUseCase.insert(userRequest.toUser());
         return ResponseEntity.ok(UserResponse.fromUser(user));
     }
 
-    @PatchMapping("/update")
+    @PatchMapping("api/v1/users/update")
     public ResponseEntity<UserResponse> updateUser(@RequestBody UserRequest userRequest){
         User user = updateUserUseCase.update(userRequest.toUser());
         return ResponseEntity.ok(UserResponse.fromUser(user));
     }
 
-    @GetMapping("/{promptuary}")
+    @GetMapping("api/v1/users/{promptuary}")
     public ResponseEntity<UserResponse> findUserByPromptuary(@PathVariable("promptuary") String promptuary){
         User user = userUseCase.findByPromptuary(Promptuary.valueOf(promptuary)).orElseThrow(
                 () -> new GenericResourceException("User not found!", "User")

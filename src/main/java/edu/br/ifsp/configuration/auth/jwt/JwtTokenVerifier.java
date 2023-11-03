@@ -23,6 +23,7 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
         this.jwtTokenHelper = jwtTokenHelper;
     }
 
+    @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
         if(isFromPermittedPath(request)) {
@@ -58,12 +59,4 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
                 || request.getServletPath().equals("/refresh-token");
     }
 
-    @Override
-    protected void doFilterInternal(jakarta.servlet.http.HttpServletRequest request, jakarta.servlet.http.HttpServletResponse response, jakarta.servlet.FilterChain filterChain) throws jakarta.servlet.ServletException, IOException {
-        try {
-            doFilterInternal((HttpServletRequest) request, (HttpServletResponse) response, (FilterChain) filterChain);
-        } catch (ServletException e) {
-            throw new RuntimeException(e);
-        }
-    }
 }
