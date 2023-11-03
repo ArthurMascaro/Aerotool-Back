@@ -2,9 +2,11 @@ package edu.br.ifsp.applications.persistence.inmemory;
 
 import edu.br.ifsp.domain.entities.transaction.LineRequest;
 import edu.br.ifsp.domain.entities.transaction.Request;
+import edu.br.ifsp.domain.entities.transaction.RequestSituation;
 import edu.br.ifsp.domain.usecases.transactions.LineRequestDAO;
 import edu.br.ifsp.domain.usecases.utils.EntityAlreadyExistsException;
 
+import java.sql.Timestamp;
 import java.util.*;
 
 public class InMemoryLineRequestDAO implements LineRequestDAO {
@@ -49,6 +51,26 @@ public class InMemoryLineRequestDAO implements LineRequestDAO {
             throw new NoSuchElementException("This Line Request dont exists");
         db.replace(type.getId(), type);
         return db.get(type.getId());
+    }
+
+    @Override
+    public LineRequest updateSituation(RequestSituation situation, UUID requestId) {
+        return null;
+    }
+
+    @Override
+    public LineRequest updateExpectedDates(Timestamp expectedReturnDate, Timestamp expectedWithdrawalDate, UUID requestId) {
+        return null;
+    }
+
+    @Override
+    public LineRequest updateRealReturnDate(Timestamp realReturnDate, UUID requestId) {
+        return null;
+    }
+
+    @Override
+    public LineRequest updateRealWithdrawalDate(Timestamp realWithdrawalDate, UUID requestId) {
+        return null;
     }
 
     @Override

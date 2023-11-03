@@ -17,15 +17,15 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public class PostgresLineRequest implements LineRequestDAO {
+public class PostgresLineRequestDAOImpl implements LineRequestDAO {
 
     private JdbcTemplate jdbcTemplate;
     private PostgresRequestDAOImpl postgresRequestDAO;
-    private PostgresToolItemDaoImpl postgresToolItemDAO;
+    private PostgresToolItemDAOImpl postgresToolItemDAO;
 
-    public PostgresLineRequest(JdbcTemplate jdbcTemplate,
-                               PostgresRequestDAOImpl postgresRequestDAO,
-                               PostgresToolItemDaoImpl postgresToolItemDAO) {
+    public PostgresLineRequestDAOImpl(JdbcTemplate jdbcTemplate,
+                                      PostgresRequestDAOImpl postgresRequestDAO,
+                                      PostgresToolItemDAOImpl postgresToolItemDAO) {
         this.jdbcTemplate = jdbcTemplate;
         this.postgresRequestDAO = postgresRequestDAO;
         this.postgresToolItemDAO = postgresToolItemDAO;

@@ -8,7 +8,7 @@
       <jdbc-url>jdbc:postgresql://localhost:5432/postgres</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="aerotool@localhost" uuid="da8675a1-3436-4c4d-af83-6834c70dfc97">
+    <data-source source="LOCAL" name="aerotool@localhost" uuid="1520cbea-51f7-46a4-b9a6-d5eb5dccb77c">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>

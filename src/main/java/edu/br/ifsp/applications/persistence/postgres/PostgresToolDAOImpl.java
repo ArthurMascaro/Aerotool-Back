@@ -16,7 +16,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public class PostgresToolDaoImpl implements ToolDAO {
+public class PostgresToolDAOImpl implements ToolDAO {
 
     private JdbcTemplate jdbcTemplate;
 
@@ -36,7 +36,7 @@ public class PostgresToolDaoImpl implements ToolDAO {
     private String findAllToolQuery;
 
 
-    public PostgresToolDaoImpl(JdbcTemplate jdbcTemplate) {
+    public PostgresToolDAOImpl(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 

@@ -66,8 +66,17 @@ queries:
         line-request-by-request-id:
             SELECT * FROM aerotool_platform.line_request WHERE request_id=?
       update:
-        line-request-situation:
-            UPDATE aerotool_platform.line_request SET request_situation=?::aerotool_platform.request_situation WHERE id=?
+        all: >
+          UPDATE aerotool_platform.line_request SET request_situation=?::aerotool_platform.request_situation, 
+          expected_withdrawal_date=?, expected_return_date=?, real_withdrawal_date=?, real_return_date=?, WHERE id=?
+        situation:
+          UPDATE aerotool_platform.line_request SET request_situation=?::aerotool_platform.request_situation WHERE id=?
+        expected-dates: >
+          UPDATE aerotool_platform.line_request SET expected_withdrawal_date=?, expected_return_date=? WHERE id=?
+        real-withdrawal-date: >
+          UPDATE aerotool_platform.line_request SET real_withdrawal_date=? WHERE id=?
+        real-return-date: >
+          UPDATE aerotool_platform.line_request SET real_return_date=? WHERE id=?
       delete:
         line-request:
             DELETE FROM aerotool_platform.line_request WHERE id=?
