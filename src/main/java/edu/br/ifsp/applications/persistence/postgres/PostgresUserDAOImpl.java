@@ -7,6 +7,7 @@ import edu.br.ifsp.domain.usecases.user.UserDAO;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
@@ -21,7 +22,7 @@ public class PostgresUserDAOImpl implements UserDAO {
     @Value("${queries.sql.user-dao.insert.user}")
     private String insertUserQuery;
 
-    @Value("${queries.sql.user-dao.select.user-and-login-and-password-from-promptuary-by-promptuary-login}")
+    @Value("${queries.sql.user-dao.select.user-by-promptuary}")
     private String findUserByPromptuaryQuery;
 
     @Value("${queries.sql.user-dao.select.user-by-id}")
@@ -40,23 +41,37 @@ public class PostgresUserDAOImpl implements UserDAO {
     private String deleteUserByPromptuary;
 
     private JdbcTemplate jdbcTemplate;
+    private final PasswordEncoder passwordEncoder;
 
-    public PostgresUserDAOImpl(JdbcTemplate jdbcTemplate) {
+    public PostgresUserDAOImpl(JdbcTemplate jdbcTemplate, PasswordEncoder passwordEncoder) {
         this.jdbcTemplate = jdbcTemplate;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
-    public User create(User type) {
-        jdbcTemplate.update(insertUserQuery, type.getId(), type.getNome(), type.getRole().name(),
-                type.getPromptuary().getLogin());
-        return type;
+    public User create(User user) {
+        UUID userId = UUID.randomUUID();
+
+        jdbcTemplate.update(insertUserQuery, rs -> {
+            rs.setObject(1, userId);
+            rs.setString(2, user.getName());
+            rs.setString(3, user.getRole().toString());
+            rs.setString(4, user.getPromptuary());
+            rs.setString(5, passwordEncoder.encode(user.getPassword()));
+            rs.setBoolean(6, true);
+            rs.setBoolean(7, true);
+            rs.setBoolean(8, true);
+            rs.setBoolean(9, true);
+        });
+
+        return user.createWithId(userId);
     }
 
     @Override
-    public Optional<User> findByPromptuary(Promptuary promptuary) {
+    public Optional<User> findByPromptuary(String promptuary) {
         try {
             User user = jdbcTemplate.queryForObject(findUserByPromptuaryQuery,
-                    this::mapperUserFromRs, promptuary.getLogin());
+                    this::mapperUserFromRs, promptuary);
             return Optional.of(user);
         } catch (EmptyResultDataAccessException e) {
             return Optional.empty();
@@ -85,7 +100,7 @@ public class PostgresUserDAOImpl implements UserDAO {
     }
 
     @Override
-    public Optional<User> findOne(Promptuary key) {
+    public Optional<User> findOne(String key) {
         try {
             return findByPromptuary(key);
         } catch (EmptyResultDataAccessException e) {
@@ -102,12 +117,15 @@ public class PostgresUserDAOImpl implements UserDAO {
 
     @Override
     public User update(User type) {
-        jdbcTemplate.update(updateUserNameQuery, type.getNome(), type.getId());
+        type.setId(findByPromptuary(type.getPromptuary()).get().getId());
+
+        jdbcTemplate.update(updateUserNameQuery, type.getName(),
+                passwordEncoder.encode(type.getPassword()), type.getId());
         return type;
     }
 
     @Override
-    public User deleteByKey(Promptuary key) {
+    public User deleteByKey(String key) {
         jdbcTemplate.update(deleteUserByPromptuary, key);
         return new User(key);
     }
@@ -119,14 +137,16 @@ public class PostgresUserDAOImpl implements UserDAO {
 
     private User mapperUserFromRs(ResultSet rs, int rowNum) throws SQLException {
         UUID id = UUID.fromString(rs.getString("id"));
-        String nome = rs.getString("name");
+        String name = rs.getString("name");
         Role role = Role.valueOf(rs.getString("role"));
-        String login = rs.getString("login");
+        String promptuary = rs.getString("promptuary");
         String password = rs.getString("password");
+        boolean isAccountNonExpired = rs.getBoolean("is_account_non_expired");
+        boolean isAccountNonLocked = rs.getBoolean("is_account_non_locked");
+        boolean isCredentialsNonExpired = rs.getBoolean("is_credentials_non_expired");
+        boolean isEnabled = rs.getBoolean("is_enabled");
 
-        Promptuary promptuary = new Promptuary(login, password);
-
-        return new User(id, nome, role, promptuary);
+        return new User(id, name, role, promptuary, password, isAccountNonExpired, isAccountNonLocked, isCredentialsNonExpired, isEnabled);
     }
 
     private Promptuary mapperPromptuaryFromRs(ResultSet rs, int rowNum) throws SQLException {

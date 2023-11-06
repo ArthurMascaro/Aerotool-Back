@@ -1,6 +1,5 @@
 package edu.br.ifsp.web.model.user.response;
 
-import edu.br.ifsp.domain.entities.user.Promptuary;
 import edu.br.ifsp.domain.entities.user.Role;
 import edu.br.ifsp.domain.entities.user.User;
 
@@ -21,7 +20,7 @@ public class UserResponse {
     }
 
     public static UserResponse fromUser(User user){
-        return new UserResponse(user.getId(), user.getNome(), user.getRole(), user.getPromptuary().getLogin());
+        return new UserResponse(user.getId(), user.getName(), user.getRole(), user.getPromptuary());
     }
 
     public UUID getId() {

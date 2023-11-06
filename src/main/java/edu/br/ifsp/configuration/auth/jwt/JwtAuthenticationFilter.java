@@ -43,7 +43,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                     .readValue(request.getInputStream(), AuthenticationRequest.class);
 
             final var authentication = new UsernamePasswordAuthenticationToken(
-                    authenticationRequest.getUsername(),
+                    authenticationRequest.getName(),
                     authenticationRequest.getPassword()
             );
             return authenticationManager.authenticate(authentication);
@@ -70,7 +70,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         final Map<String, String> body = new HashMap<>();
         body.put("uuid", user.getId().toString());
         body.put("name", user.getUsername());
-        body.put("promptuary", user.getPromptuary().getLogin());
+        body.put("promptuary", user.getPromptuary());
         response.setContentType(APPLICATION_JSON_VALUE);
         new ObjectMapper().writeValue(response.getOutputStream(), body);
     }

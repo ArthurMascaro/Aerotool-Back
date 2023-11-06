@@ -18,7 +18,7 @@ public class RemoveUserUseCase {
         this.userDAO = userDAO;
     }
 
-    public User remove(Promptuary promptuary) {
+    public User remove(String promptuary) {
         if (promptuary == null || userDAO.findOne(promptuary).isEmpty()) {
             throw new EntityNotFoundException("User not found!");
         }

@@ -10,15 +10,10 @@ import edu.br.ifsp.domain.usecases.user.RemoveUserUseCase;
 import edu.br.ifsp.domain.usecases.user.UpdateUserUseCase;
 import edu.br.ifsp.domain.usecases.utils.EntityAlreadyExistsException;
 import edu.br.ifsp.domain.usecases.utils.EntityNotFoundException;
-import org.junit.Before;
 import org.junit.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import org.junit.runner.notification.RunListener;
 
-import java.awt.*;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Optional;
 import java.util.UUID;
 
 public class UserClassTests {
@@ -81,9 +76,9 @@ public class UserClassTests {
 
     @Test
     public void findByPromptuaryUser_withCorrectPromptuary_OptionalUser(){
-        User test = new User(UUID.randomUUID(), "Teste 2", Role.TEACHER, Promptuary.valueOf("SC999998"));
+        User test = new User(UUID.randomUUID(), "Teste 2", Role.TEACHER, "SC999998");
         createUserUseCase.insert(test);
-        assertEquals(User.class, findUserUseCase.findByPromptuary(Promptuary.valueOf("SC999998")).get().getClass());
+        assertEquals(User.class, findUserUseCase.findByPromptuary("SC999998").get().getClass());
     }
 
     @Test
@@ -130,7 +125,7 @@ public class UserClassTests {
     public void updateUser_UserExists_NewUser(){
         User test = new User(UUID.randomUUID(), "Teste 2", Role.TEACHER, Promptuary.valueOf("SC987611"));
         createUserUseCase.insert(test);
-        test.setNome("TESTE 1");
+        test.setName("TESTE 1");
         test.setRole(Role.ADMIN);
         assertEquals(User.class, updateUserUseCase.update(test).getClass());
     }

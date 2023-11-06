@@ -10,11 +10,10 @@ import java.util.UUID;
 public class User implements UserDetails {
 
     private UUID id;
-    private String nome;
-
-    private String password;
+    private String name;
     private Role role;
-    private Promptuary promptuary;
+    private String promptuary;
+    private String password;
 
     private Collection<? extends GrantedAuthority> authorities = Collections.emptyList();
 
@@ -30,11 +29,54 @@ public class User implements UserDetails {
         this.id = UUID.randomUUID();
     }
 
-    public User(UUID id, String nome, Role role, Promptuary promptuary) {
+    public User(UUID id, String name, Role role, String promptuary) {
         this.id = id;
-        this.nome = nome;
+        this.name = name;
         this.role = role;
         this.promptuary = promptuary;
+    }
+
+    public User(UUID id, String name, Role role, String promptuary, String password, Collection<? extends GrantedAuthority> authorities, boolean isAccountNonExpired, boolean isAccountNonLocked, boolean isCredentialsNonExpired, boolean isEnabled) {
+        this.id = id;
+        this.name = name;
+        this.role = role;
+        this.promptuary = promptuary;
+        this.password = password;
+        this.authorities = authorities;
+        this.isAccountNonExpired = isAccountNonExpired;
+        this.isAccountNonLocked = isAccountNonLocked;
+        this.isCredentialsNonExpired = isCredentialsNonExpired;
+        this.isEnabled = isEnabled;
+    }
+
+    public User(UUID id, String name, Role role, String promptuary, String password, boolean isAccountNonExpired, boolean isAccountNonLocked, boolean isCredentialsNonExpired, boolean isEnabled) {
+        this.id = id;
+        this.name = name;
+        this.role = role;
+        this.promptuary = promptuary;
+        this.password = password;
+        this.isAccountNonExpired = isAccountNonExpired;
+        this.isAccountNonLocked = isAccountNonLocked;
+        this.isCredentialsNonExpired = isCredentialsNonExpired;
+        this.isEnabled = isEnabled;
+    }
+
+    public User(UUID id, String name, Role role, String promptuary, String password) {
+        this.id = id;
+        this.name = name;
+        this.role = role;
+        this.promptuary = promptuary;
+        this.password = password;
+    }
+
+    public User(String name, String promptuary, String password) {
+        this.name = name;
+        this.promptuary = promptuary;
+        this.password = password;
+    }
+
+    public User createWithId(UUID id) {
+        return new User(id, name, role, promptuary, password, authorities, isAccountNonExpired, isAccountNonLocked, isCredentialsNonExpired, isEnabled);
     }
 
     public User(UUID id) {
@@ -43,7 +85,7 @@ public class User implements UserDetails {
         this.id = id;
     }
 
-    public User(Promptuary promptuary) {
+    public User(String promptuary) {
         this.promptuary = promptuary;
     }
 
@@ -55,12 +97,12 @@ public class User implements UserDetails {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Role getRole() {
@@ -71,22 +113,12 @@ public class User implements UserDetails {
         this.role = role;
     }
 
-    public Promptuary getPromptuary() {
+    public String getPromptuary() {
         return promptuary;
     }
 
-    public void setPromptuary(Promptuary promptuary) {
+    public void setPromptuary(String promptuary) {
         this.promptuary = promptuary;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", role=" + role +
-                ", promptuary=" + promptuary +
-                '}';
     }
 
     @Override
@@ -101,7 +133,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.nome;
+        return name;
     }
 
     public boolean isAccountNonExpired() {

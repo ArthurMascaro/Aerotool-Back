@@ -6,9 +6,9 @@ import edu.br.ifsp.domain.entities.user.User;
 
 import java.util.UUID;
 
-public record UserRequestEvent(UUID id, String name, Promptuary promptuary, Role role) {
+public record UserRequestEvent(UUID id, String name, String promptuary, Role role) {
 
-    public UserRequestEvent(UUID id, String name, Promptuary promptuary, Role role) {
+    public UserRequestEvent(UUID id, String name, String promptuary, Role role) {
         this.id = id;
         this.name = name;
         this.promptuary = promptuary;

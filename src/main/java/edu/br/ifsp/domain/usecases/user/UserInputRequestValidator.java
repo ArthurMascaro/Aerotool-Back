@@ -12,7 +12,7 @@ public class UserInputRequestValidator extends Validator<User> {
              notification.addError("User is null", new IllegalArgumentException("User is Null"));
              return notification;
          }
-         if (nullOrEmpty(user.getNome()))
+         if (nullOrEmpty(user.getName()))
              notification.addError("Name is null or empty", new IllegalArgumentException());
         if (user.getRole() == null)
             notification.addError("Role is null", new IllegalArgumentException());

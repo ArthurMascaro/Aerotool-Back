@@ -2,17 +2,17 @@ CREATE SCHEMA aerotool_platform;
 
 ALTER SCHEMA aerotool_platform OWNER TO "aerotool";
 
-DROP TABLE IF EXISTS aerotool_platform.promptuary CASCADE;
-
-CREATE TABLE aerotool_platform.promptuary (
-    login varchar(255) NOT NULL,
-    password varchar(255) NOT NULL
-);
-
-ALTER TABLE aerotool_platform.promptuary OWNER TO "aerotool";
-
-ALTER TABLE aerotool_platform.promptuary
-    ADD CONSTRAINT promptuary_pk PRIMARY KEY (login);
+-- DROP TABLE IF EXISTS aerotool_platform.promptuary CASCADE;
+--
+-- CREATE TABLE aerotool_platform.promptuary (
+--     login varchar(255) NOT NULL,
+--     password varchar(255) NOT NULL
+-- );
+--
+-- ALTER TABLE aerotool_platform.promptuary OWNER TO "aerotool";
+--
+-- ALTER TABLE aerotool_platform.promptuary
+--     ADD CONSTRAINT promptuary_pk PRIMARY KEY (login);
 
 DROP TYPE IF EXISTS aerotool_platform.role CASCADE;
 
@@ -30,17 +30,18 @@ CREATE TABLE aerotool_platform.user (
     id uuid NOT NULL,
     name varchar(255) NOT NULL,
     role aerotool_platform.role NOT NULL,
-    promptuary_login varchar(255) NOT NULL
+    promptuary varchar(255) NOT NULL,
+    password VARCHAR NOT NULL,
+    is_account_non_expired boolean default false,
+    is_account_non_locked boolean default false,
+    is_credentials_non_expired boolean default false,
+    is_enabled boolean default false
 );
 
 ALTER TABLE aerotool_platform.user OWNER TO "aerotool";
 
 ALTER TABLE aerotool_platform.user
     ADD CONSTRAINT user_pk PRIMARY KEY (id);
-
-ALTER TABLE aerotool_platform.user
-    ADD CONSTRAINT user_promptuary_login_fkey FOREIGN KEY (promptuary_login)
-        REFERENCES aerotool_platform.promptuary(login) ON DELETE CASCADE;
 
 DROP TYPE IF EXISTS aerotool_platform.tool_type CASCADE;
 

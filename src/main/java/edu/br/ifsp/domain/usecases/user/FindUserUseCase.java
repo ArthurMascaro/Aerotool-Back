@@ -1,14 +1,10 @@
 package edu.br.ifsp.domain.usecases.user;
 
-import edu.br.ifsp.domain.entities.user.Promptuary;
 import edu.br.ifsp.domain.entities.user.User;
 import edu.br.ifsp.domain.usecases.utils.Validator;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class FindUserUseCase {
@@ -26,7 +22,7 @@ public class FindUserUseCase {
         return userDAO.findOne(user.getPromptuary());
     }
 
-    public Optional<User> findByPromptuary(Promptuary promptuary) {
+    public Optional<User> findByPromptuary(String promptuary) {
         if (promptuary == null) {
             throw new IllegalArgumentException("Promptuary cannot be null");
         }

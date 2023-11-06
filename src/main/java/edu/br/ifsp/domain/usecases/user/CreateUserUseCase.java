@@ -1,6 +1,5 @@
 package edu.br.ifsp.domain.usecases.user;
 
-import edu.br.ifsp.domain.entities.user.Promptuary;
 import edu.br.ifsp.domain.entities.user.User;
 import edu.br.ifsp.domain.usecases.utils.EntityAlreadyExistsException;
 import edu.br.ifsp.domain.usecases.utils.Notification;
@@ -20,7 +19,7 @@ public class CreateUserUseCase {
         Validator<User> validator = new UserInputRequestValidator();
         Notification notification = validator.validate(user);
 
-        Promptuary promptuary = user.getPromptuary();
+        String promptuary = user.getPromptuary();
         if (userDAO.findByPromptuary(promptuary).isPresent())
             throw new EntityAlreadyExistsException("This promptuary is already in use");
 

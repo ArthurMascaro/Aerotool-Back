@@ -16,6 +16,9 @@ public class UpdateUserUseCase {
     }
 
     public User update(User user) {
+        User userDB = userDAO.findOne(user.getPromptuary()).get();
+        user.setRole(userDB.getRole());
+
         Validator<User> validator = new UserInputRequestValidator();
         Notification notification = validator.validate(user);
 
