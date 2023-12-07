@@ -7,13 +7,13 @@ import edu.br.ifsp.domain.entities.transaction.Request;
 import java.sql.Timestamp;
 import java.util.UUID;
 
-public record LineRequestDto(UUID requestId, UUID toolItemId, Timestamp expectedReturnDate, Timestamp expectedWithdrawDate) {
+public record LineRequestDto(UUID requestId, UUID toolItemId, Timestamp expectedReturnDate, Timestamp expectedWithdrawalDate) {
 
-    public LineRequestDto(UUID requestId, UUID toolItemId, Timestamp expectedReturnDate, Timestamp expectedWithdrawDate) {
+    public LineRequestDto(UUID requestId, UUID toolItemId, Timestamp expectedReturnDate, Timestamp expectedWithdrawalDate) {
         this.requestId = requestId;
         this.toolItemId = toolItemId;
         this.expectedReturnDate = expectedReturnDate;
-        this.expectedWithdrawDate = expectedWithdrawDate;
+        this.expectedWithdrawalDate = expectedWithdrawalDate;
     }
 
     public LineRequest toLineRequest() {
@@ -23,7 +23,7 @@ public record LineRequestDto(UUID requestId, UUID toolItemId, Timestamp expected
                 new ToolItem(toolItemId),
                 expectedReturnDate,
                 null,
-                expectedWithdrawDate,
+                expectedWithdrawalDate,
                 null,
                 null
         );

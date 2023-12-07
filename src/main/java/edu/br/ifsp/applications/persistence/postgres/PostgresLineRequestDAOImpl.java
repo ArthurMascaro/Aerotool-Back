@@ -64,8 +64,9 @@ public class PostgresLineRequestDAOImpl implements LineRequestDAO {
 
     @Override
     public LineRequest create(LineRequest type) {
-        LineRequest lineRequest = jdbcTemplate.queryForObject(insertLineRequestQuery, this::mapperLineRequestFromRs, type.getId(), type.getExpectedReturnDate(), type.getRealReturnDate(), type.getExpectedWithdrawalDate(), type.getRealWithdrawalDate(), type.getSituation().name(), type.getToolItem().getId(), type.getRequest().getId());
-        return null;
+        UUID lineRequestId = UUID.randomUUID();
+        jdbcTemplate.update(insertLineRequestQuery, lineRequestId, type.getExpectedReturnDate(), null, type.getExpectedWithdrawalDate(), null, RequestSituation.WAITING.name(), type.getToolItem().getId(), type.getRequest().getId());
+        return findOne(lineRequestId).get();
     }
 
     @Override
