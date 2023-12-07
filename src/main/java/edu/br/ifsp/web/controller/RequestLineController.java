@@ -60,9 +60,9 @@ public class RequestLineController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<LineRequestResponse> deleteLineRequest(@PathVariable UUID id) {
+    public ResponseEntity<UUID> deleteLineRequest(@PathVariable UUID id) {
         LineRequest lineRequest = removeLineRequestUseCase.remove(id);
-        return ResponseEntity.ok(LineRequestResponse.fromLineRequest(lineRequest));
+        return ResponseEntity.ok(lineRequest.getId());
     }
 
 }

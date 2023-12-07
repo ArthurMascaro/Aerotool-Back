@@ -70,7 +70,7 @@ queries:
       update:
         all: >
           UPDATE aerotool_platform.line_request SET request_situation=?::aerotool_platform.request_situation, 
-          expected_withdrawal_date=?, expected_return_date=?, real_withdrawal_date=?, real_return_date=?, WHERE id=?
+          expected_withdrawal_date=?, expected_return_date=?, real_withdrawal_date=?, real_return_date=? WHERE id=?
         situation:
           UPDATE aerotool_platform.line_request SET request_situation=?::aerotool_platform.request_situation WHERE id=?
         expected-dates: >
