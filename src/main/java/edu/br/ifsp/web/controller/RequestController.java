@@ -41,8 +41,8 @@ public class RequestController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<RequestResponse> removeRequest(@PathVariable UUID id) {
+    public ResponseEntity<UUID> removeRequest(@PathVariable UUID id) {
         Request request = removeRequestUseCase.remove(id);
-        return ResponseEntity.ok(RequestResponse.fromRequest(request));
+        return ResponseEntity.ok(request.getId());
     }
 }
