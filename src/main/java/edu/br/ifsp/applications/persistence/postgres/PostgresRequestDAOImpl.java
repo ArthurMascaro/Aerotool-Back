@@ -1,9 +1,9 @@
 package edu.br.ifsp.applications.persistence.postgres;
 
-import edu.br.ifsp.domain.entities.event.Event;
 import edu.br.ifsp.domain.entities.transaction.Request;
 import edu.br.ifsp.domain.entities.user.User;
 import edu.br.ifsp.domain.usecases.transactions.RequestDAO;
+import edu.br.ifsp.domain.usecases.utils.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -47,8 +47,12 @@ public class PostgresRequestDAOImpl implements RequestDAO {
 
     @Override
     public Request create(Request type) {
-        jdbcTemplate.update(insertRequestQuery, type.getId(), type.getDate(), type.getUser());
-        return type;
+        User user = postgresUserDAO.findByUUID(type.getUser().getId()).orElseThrow(() ->
+                new EntityNotFoundException("Couldn't find an user with id" + type.getUser().getId()));
+
+        jdbcTemplate.update(insertRequestQuery, type.getId(), type.getDate(), user.getId());
+
+        return findOne(type.getId()).get();
     }
 
     @Override

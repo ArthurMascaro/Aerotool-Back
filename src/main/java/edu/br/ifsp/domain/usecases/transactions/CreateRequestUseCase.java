@@ -30,18 +30,15 @@ public class CreateRequestUseCase {
 
         Validator<Request> validator = new RequestInputRequestValidator();
 
-        //TODO: VALIDATE USER AFTER MAKE JWT TOKEN
-        request = new Request(new User(UUID.randomUUID()));
-
         validator.validate(request);
 
         if (request.getId() == null){
             throw new IllegalArgumentException("Request ID is null.");
         }
 
-        if (request.getUser().getPromptuary() == null){
-            throw new IllegalArgumentException("User's promptuary is null.");
-        }
+//        if (request.getUser().getPromptuary() == null){
+//            throw new IllegalArgumentException("User's promptuary is null.");
+//        }
 
 //        User user = findUserUseCase.findByPromptuary(request.getUser().getPromptuary()).orElseThrow(() ->
 //                new EntityNotFoundException("Can not find a User with promptuary" + request.getUser().getPromptuary()));

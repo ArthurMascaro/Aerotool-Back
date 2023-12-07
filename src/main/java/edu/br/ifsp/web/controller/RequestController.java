@@ -1,6 +1,7 @@
 package edu.br.ifsp.web.controller;
 
 import edu.br.ifsp.domain.entities.transaction.Request;
+import edu.br.ifsp.domain.entities.user.User;
 import edu.br.ifsp.domain.usecases.transactions.CreateRequestUseCase;
 import edu.br.ifsp.domain.usecases.transactions.FindRequestUseCase;
 import edu.br.ifsp.domain.usecases.transactions.RemoveRequestUseCase;
@@ -24,9 +25,10 @@ public class RequestController {
         this.removeRequestUseCase = removeRequestUseCase;
     }
 
-    @PostMapping
-    public ResponseEntity<RequestResponse> createRequest() {
-        Request request = createRequestUseCase.createARequest(new Request());
+    @PostMapping("/users/{userId}")
+    public ResponseEntity<RequestResponse> createRequest(@PathVariable UUID userId) {
+        User user = new User().createWithId(userId);
+        Request request = createRequestUseCase.createARequest(new Request(user));
         return ResponseEntity.ok(RequestResponse.fromRequest(request));
     }
 

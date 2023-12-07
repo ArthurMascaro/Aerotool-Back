@@ -1,7 +1,5 @@
 package edu.br.ifsp.web.controller;
 
-
-import edu.br.ifsp.domain.entities.user.Promptuary;
 import edu.br.ifsp.domain.entities.user.User;
 import edu.br.ifsp.domain.usecases.user.CreateUserUseCase;
 import edu.br.ifsp.domain.usecases.user.FindUserUseCase;
@@ -12,8 +10,6 @@ import edu.br.ifsp.web.model.user.request.UserUpdateRequest;
 import edu.br.ifsp.web.model.user.response.UserResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.UUID;
 
 @RestController
 public class UserController {
