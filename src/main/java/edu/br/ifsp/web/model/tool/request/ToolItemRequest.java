@@ -6,9 +6,9 @@ import edu.br.ifsp.domain.entities.tools.ToolSituation;
 
 import java.util.UUID;
 
-public record ToolItemRequest(String patrimony, UUID locateId, UUID toolId, ToolSituation toolSituation) {
+public record ToolItemRequest(String patrimony, UUID locateId, UUID toolId, String toolSituation) {
 
-    public ToolItemRequest(String patrimony, UUID locateId, UUID toolId, ToolSituation toolSituation) {
+    public ToolItemRequest(String patrimony, UUID locateId, UUID toolId, String toolSituation) {
         this.patrimony = patrimony;
         this.locateId = locateId;
         this.toolId = toolId;
@@ -16,6 +16,6 @@ public record ToolItemRequest(String patrimony, UUID locateId, UUID toolId, Tool
     }
 
     public ToolItem toToolItem() {
-        return new ToolItem(patrimony, locateId, toolId, toolSituation);
+        return new ToolItem(patrimony, locateId, toolId, ToolSituation.valueOf(toolSituation));
     }
 }

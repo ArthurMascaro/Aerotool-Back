@@ -6,9 +6,9 @@ import edu.br.ifsp.domain.entities.user.User;
 
 import java.util.UUID;
 
-public record UserRequest(String name, String promptuary, String password, Role role) {
+public record UserRequest(String name, String promptuary, String password, String role) {
 
-    public UserRequest(String name, String promptuary, String password, Role role) {
+    public UserRequest(String name, String promptuary, String password, String role) {
         this.name = name;
         this.promptuary = promptuary;
         this.password = password;
@@ -16,6 +16,6 @@ public record UserRequest(String name, String promptuary, String password, Role 
     }
 
     public User toUser(){
-        return new User(UUID.randomUUID(), name, role, promptuary, password);
+        return new User(UUID.randomUUID(), name, Role.valueOf(role), promptuary, password);
     }
 }

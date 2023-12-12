@@ -5,9 +5,9 @@ import edu.br.ifsp.domain.entities.tools.ToolType;
 
 import java.util.Objects;
 
-public record ToolRequest(String name, String description, ToolType type) {
+public record ToolRequest(String name, String description, String type) {
 
-    public ToolRequest(String name, String description, ToolType type) {
+    public ToolRequest(String name, String description, String type) {
         this.name = Objects.requireNonNull(name, "Name must not be null!");
         if (name.isEmpty()) throw new IllegalArgumentException("Name must not be empty!");
 
@@ -18,6 +18,6 @@ public record ToolRequest(String name, String description, ToolType type) {
     }
 
     public Tool toTool(){
-        return new Tool(name, description, type);
+        return new Tool(name, description, ToolType.valueOf(type));
     }
 }

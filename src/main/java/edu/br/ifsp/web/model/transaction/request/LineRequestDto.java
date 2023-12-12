@@ -10,11 +10,11 @@ import java.util.UUID;
 
 public record LineRequestDto(UUID requestId, UUID toolItemId, Timestamp expectedReturnDate,
                              Timestamp realReturnDate, Timestamp expectedWithdrawalDate,
-                             Timestamp realWithdrawalDate, RequestSituation requestSituation) {
+                             Timestamp realWithdrawalDate, String requestSituation) {
 
     public LineRequestDto(UUID requestId, UUID toolItemId, Timestamp expectedReturnDate,
                           Timestamp realReturnDate, Timestamp expectedWithdrawalDate,
-                          Timestamp realWithdrawalDate, RequestSituation requestSituation) {
+                          Timestamp realWithdrawalDate, String requestSituation) {
         this.requestId = requestId;
         this.toolItemId = toolItemId;
         this.expectedReturnDate = expectedReturnDate;
@@ -33,7 +33,7 @@ public record LineRequestDto(UUID requestId, UUID toolItemId, Timestamp expected
                 realReturnDate,
                 expectedWithdrawalDate,
                 realWithdrawalDate,
-                requestSituation
+                RequestSituation.valueOf(requestSituation)
         );
     }
 }
