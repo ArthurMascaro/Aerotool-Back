@@ -124,7 +124,8 @@ queries:
     event-dao:
         insert:
             event: >
-                INSERT INTO aerotool_platform.event(id, description, event_date, event_type, event_situation, user_responsible_id, user_subject_id) VALUES (?, ?, ?, ?, ?, ?, ?)
+                INSERT INTO aerotool_platform.event(id, description, event_date, event_type, event_situation, user_responsible_id, user_subject_id) 
+                VALUES (?, ?, ?, ?::aerotool_platform.event_type, ?::aerotool_platform.event_situation, ?, ?)
         select:
             event-by-id: >
                 SELECT * FROM aerotool_platform.event WHERE id=?

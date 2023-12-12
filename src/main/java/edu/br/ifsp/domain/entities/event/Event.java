@@ -33,6 +33,15 @@ public class Event {
         this.description = description;
     }
 
+    public Event(UUID id, EventSituation situation) {
+        this.id = id;
+        this.situation = situation;
+    }
+
+    public static Event createWithIdAndSituation(UUID id, EventSituation situation){
+        return new Event(id, situation);
+    }
+
     public UUID getId() {
         return id;
     }

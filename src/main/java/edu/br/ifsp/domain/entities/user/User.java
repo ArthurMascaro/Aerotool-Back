@@ -89,6 +89,10 @@ public class User implements UserDetails {
         this.promptuary = promptuary;
     }
 
+    public static User createUserWithId(UUID id) {
+        return new User(id);
+    }
+
     public UUID getId() {
         return id;
     }

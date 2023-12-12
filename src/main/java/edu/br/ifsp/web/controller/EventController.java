@@ -7,6 +7,7 @@ import edu.br.ifsp.domain.usecases.events.RemoveEventUseCase;
 import edu.br.ifsp.domain.usecases.events.UpdateEventUseCase;
 import edu.br.ifsp.web.exception.GenericResourceException;
 import edu.br.ifsp.web.model.event.request.EventRequest;
+import edu.br.ifsp.web.model.event.request.UpdateSituationRequest;
 import edu.br.ifsp.web.model.event.response.EventResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -54,9 +55,8 @@ public class EventController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<EventResponse> updateEventById(@PathVariable("id") UUID id, @RequestBody EventRequest eventRequest){
-        Event eventUpdate = eventRequest.toEvent();
-        eventUpdate.setId(id);
+    public ResponseEntity<EventResponse> updateEventById(@PathVariable("id") UUID id, @RequestBody UpdateSituationRequest updateSituationRequest){
+        Event eventUpdate = updateSituationRequest.toEvent(id);
         Event event = updateEventUseCase.update(eventUpdate);
         return ResponseEntity.ok(EventResponse.fromEvent(event));
     }

@@ -51,8 +51,10 @@ public class PostgresEventDAOImpl implements EventDAO {
 
     @Override
     public Event create(Event type) {
-        jdbcTemplate.update(insertEventQuery, type.getId(), type.getDescription(), type.getDate(), type.getType().name(), type.getSituation().name(), type.getResponsible(), type.getSubject());
-        return Optional.of(type).get();
+        jdbcTemplate.update(insertEventQuery, type.getId(), type.getDescription(), type.getDate(),
+                type.getType().name(), type.getSituation().name(), type.getResponsible().getId(),
+                type.getSubject().getId());
+        return findByUUID(type.getId()).get();
     }
 
     @Override
@@ -87,7 +89,7 @@ public class PostgresEventDAOImpl implements EventDAO {
     @Override
     public Event update(Event type) {
         jdbcTemplate.update(updateEventSituationQuery, type.getSituation().name(), type.getId());
-        return type;
+        return findByUUID(type.getId()).get();
     }
 
     @Override

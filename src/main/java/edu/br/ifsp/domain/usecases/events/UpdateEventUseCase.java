@@ -13,7 +13,7 @@ public class UpdateEventUseCase {
     public UpdateEventUseCase(EventDAO eventDAO){ this.eventDAO = eventDAO; }
 
     public Event update(Event event) {
-        Validator<Event> validator = new EventRequestValidator();
+        Validator<Event> validator = new UpdateEventRequestValidator();
         Notification notification = validator.validate(event);
 
         if (notification.hasErros()) {

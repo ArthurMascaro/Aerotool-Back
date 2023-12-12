@@ -12,7 +12,7 @@ insert into aerotool_platform.user (id, name, role, promptuary_login)
 
 insert into aerotool_platform.promptuary (login, password) values
     ('SC3076236', 'senha_forte');
-insert into aerotool_platform.user (id, name, role, promptuary_login)
+insert into aerotool_platform.user (id, name, role, promptuary, password)
     values (gen_random_uuid(), 'Votuporanguinho', 'TEACHER', 'SC3076236');
 
 --! Tool Queries !--
