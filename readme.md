@@ -20,7 +20,7 @@ Front-end  | Back-end
 ------------- | -------------
 React (JavaScript)  | Spring Boot (Java)
 Next.js  | PostgreSQL
-Global State Management (Redux, COntext, etc.) |
+Redux and React-Query (Global Management) |
 Figma |
 Tailwind |
 
