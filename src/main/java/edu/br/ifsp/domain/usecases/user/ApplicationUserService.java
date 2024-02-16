@@ -17,9 +17,9 @@ public class ApplicationUserService implements UserDetailsService {
         this.applicationUserDAO = applicationUserDAO;
     }
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return applicationUserDAO.findByName(username)
-                .orElseThrow(() -> new UsernameNotFoundException(String.format("User with username %s not found", username)));
+    public UserDetails loadUserByUsername(String promptuary) throws UsernameNotFoundException {
+        return applicationUserDAO.findByPromptuary(promptuary)
+                .orElseThrow(() -> new UsernameNotFoundException(String.format("User with promptuary %s not found", promptuary)));
     }
 
     public User findUserById(UUID userId) {

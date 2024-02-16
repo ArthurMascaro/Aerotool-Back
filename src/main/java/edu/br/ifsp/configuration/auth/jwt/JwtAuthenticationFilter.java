@@ -43,13 +43,13 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                     .readValue(request.getInputStream(), AuthenticationRequest.class);
 
             final var authentication = new UsernamePasswordAuthenticationToken(
-                    authenticationRequest.getName(),
+                    authenticationRequest.getPromptuary(),
                     authenticationRequest.getPassword()
             );
             return authenticationManager.authenticate(authentication);
 
         } catch (IOException e) {
-            response.addHeader(jwtProperties.getAuthorizationHeader(), "Invalid username or password");
+            response.addHeader(jwtProperties.getAuthorizationHeader(), "Invalid promptuary or password");
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
             return null;
         }

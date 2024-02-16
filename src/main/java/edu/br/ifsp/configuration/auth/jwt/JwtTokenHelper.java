@@ -38,7 +38,7 @@ public class JwtTokenHelper {
         return Jwts.builder()
                 .setSubject(user.getId().toString())
                 .claim("userId", user.getId())
-                .claim("username", user.getName())
+                .claim("promptuary", user.getPromptuary())
                 .setIssuedAt(new Date())
                 .setIssuer(issuer)
                 .setExpiration(getAccessTokenExpiration())
