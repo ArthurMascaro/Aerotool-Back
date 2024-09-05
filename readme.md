@@ -8,7 +8,7 @@ The Aerotool project emerged from the interest of students currently in the fina
 An educational institution that hosts the educational project for the development of the software, which is used by teachers and education professionals to assist graduating students in aircraft maintenance and processes.
 
 ### Applied Aircraft Management Services
-The system is used on an enterprise scale for the management of aircraft and their processes, including tools, consumable materials, and project management.
+The system is also fit for an enterprise scale, excelling on the management of aircraft and their processes, including tools, consumable materials, and project management.
 
 ## Objectives
 * Increase tool traceability;
