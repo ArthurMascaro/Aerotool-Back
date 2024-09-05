@@ -10,6 +10,7 @@ import edu.br.ifsp.domain.entities.user.Role;
 import edu.br.ifsp.domain.entities.user.User;
 import edu.br.ifsp.domain.usecases.tools.CreateToolItemUseCase;
 import edu.br.ifsp.domain.usecases.tools.CreateToolUseCase;
+import edu.br.ifsp.domain.usecases.tools.FindToolItemUseCase;
 import edu.br.ifsp.domain.usecases.transactions.*;
 import edu.br.ifsp.domain.usecases.user.CreateUserUseCase;
 import edu.br.ifsp.domain.usecases.user.FindUserUseCase;
@@ -28,7 +29,7 @@ public class LineRequestClassTest {
     public static InMemoryToolDAO inMemoryToolDAO = new InMemoryToolDAO();
     public static InMemoryToolItemDAO inMemoryToolItemDAO = new InMemoryToolItemDAO();
 
-    public static CreateLineRequestUseCase createLineRequestUseCase = new CreateLineRequestUseCase(inMemoryLineRequestDAO);
+    public static CreateLineRequestUseCase createLineRequestUseCase = new CreateLineRequestUseCase(inMemoryLineRequestDAO, new FindToolItemUseCase(inMemoryToolItemDAO), new FindRequestUseCase(inMemoryRequestDAO));
     public static CreateUserUseCase createUserUseCase = new CreateUserUseCase(inMemoryUserDAO);
     public static FindUserUseCase findUserUseCase = new FindUserUseCase(inMemoryUserDAO);
     public static CreateRequestUseCase createRequestUseCase = new CreateRequestUseCase(inMemoryRequestDAO, findUserUseCase);

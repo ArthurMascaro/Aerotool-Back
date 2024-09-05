@@ -21,19 +21,14 @@ import java.util.UUID;
 @Service
 public class CreateLineRequestUseCase {
 
-    private LineRequestDAO lineRequestDAO;
-    private FindToolItemUseCase findToolItemUseCaseUseCase;
-    private FindRequestUseCase findRequestUseCase;
-
     public CreateLineRequestUseCase(LineRequestDAO lineRequestDAO, FindToolItemUseCase findToolItemUseCaseUseCase, FindRequestUseCase findRequestUseCase) {
         this.lineRequestDAO = lineRequestDAO;
         this.findToolItemUseCaseUseCase = findToolItemUseCaseUseCase;
         this.findRequestUseCase = findRequestUseCase;
     }
-
-    public CreateLineRequestUseCase(LineRequestDAO lineRequestDAO) {
-        this.lineRequestDAO = lineRequestDAO;
-    }
+    private LineRequestDAO lineRequestDAO;
+    private FindToolItemUseCase findToolItemUseCaseUseCase;
+    private FindRequestUseCase findRequestUseCase;
 
     public LineRequest createLineRequest(LineRequest lineRequest) throws LineRequestNotAllowedException {
         UUID requestID = lineRequest.getRequest().getId();
@@ -48,7 +43,7 @@ public class CreateLineRequestUseCase {
         ToolItem toolItem = findToolItemUseCaseUseCase.findOne(toolItemID);
 
         findRequestUseCase.findOne(requestID).orElseThrow(() ->
-                new EntityNotFoundException("Can not find a Request with ID" + requestID));
+                new EntityNotFoundException("Cannot find a Request with ID" + requestID));
 
         if(toolItem.getSituation() == ToolSituation.BUSY)
             throw new LineRequestNotAllowedException("The Tool Item with ID" + toolItemID + "is unavailable.");
