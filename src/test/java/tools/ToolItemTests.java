@@ -50,15 +50,15 @@ public class ToolItemTests {
 
     @Test
     public void insert_CreateToolWithCorrectArgs_ToolItemClass() {
-        ToolItem toolItem = new ToolItem(UUID.randomUUID(), "SCL1", new Locate(UUID.randomUUID(), "Hangar", "Busy"), new Tool(UUID.randomUUID()), ToolSituation.BUSY);
+        ToolItem toolItem = new ToolItem(UUID.randomUUID(), "SCL1", new Locate(UUID.randomUUID(), "Hangar", "Busy").getId(), new Tool(UUID.randomUUID()).getId(), ToolSituation.BUSY);
         assertEquals(ToolItem.class, createToolItemUseCase.insert(toolItem).getClass());
     }
 
     @Test
     public void findOne_FindToolItemWithCorrectArgs_ToolItemClass() {
-        ToolItem toolItem = new ToolItem(UUID.randomUUID(), "SCL123", new Locate(UUID.randomUUID(), "Hangar", "Busy"), new Tool(UUID.randomUUID()), ToolSituation.BUSY);
+        ToolItem toolItem = new ToolItem(UUID.randomUUID(), "SCL123", new Locate(UUID.randomUUID(), "Hangar", "Busy").getId(), new Tool(UUID.randomUUID()).getId(), ToolSituation.BUSY);
         createToolItemUseCase.insert(toolItem);
-        assertEquals(ToolItem.class, findToolItemUseCase.findOne(toolItem.getId()).get().getClass());
+        assertEquals(ToolItem.class, findToolItemUseCase.findOne(toolItem.getId()).getClass());
     }
 
     @Test
@@ -68,35 +68,35 @@ public class ToolItemTests {
 
     @Test
     public void remove_RemoveToolItemByUUID_ToolItemClass() {
-        ToolItem toolItem = new ToolItem(UUID.randomUUID(), "SCL12345", new Locate(UUID.randomUUID(), "Hangar", "Busy"), new Tool(UUID.randomUUID()), ToolSituation.BUSY);
+        ToolItem toolItem = new ToolItem(UUID.randomUUID(), "SCL12345", new Locate(UUID.randomUUID(), "Hangar", "Busy").getId(), new Tool(UUID.randomUUID()).getId(), ToolSituation.BUSY);
         createToolItemUseCase.insert(toolItem);
         assertEquals(ToolItem.class, removeToolItemUseCase.remove(toolItem.getId()).getClass());
     }
 
     @Test
     public void remove_RemoveToolItemByToolItem_ToolItemClass() {
-        ToolItem toolItem = new ToolItem(UUID.randomUUID(), "SCL12345678", new Locate(UUID.randomUUID(), "Hangar", "Busy"), new Tool(UUID.randomUUID()), ToolSituation.BUSY);
+        ToolItem toolItem = new ToolItem(UUID.randomUUID(), "SCL12345678", new Locate(UUID.randomUUID(), "Hangar", "Busy").getId(), new Tool(UUID.randomUUID()).getId(), ToolSituation.BUSY);
         createToolItemUseCase.insert(toolItem);
         assertEquals(ToolItem.class, removeToolItemUseCase.remove(toolItem).getClass());
     }
 
     @Test
     public void udpate_UpdateWithInvalidArguments_ToolItemClass(){
-        ToolItem toolItem = new ToolItem(UUID.randomUUID(), "SCL1223345", new Locate(UUID.randomUUID(), "Hangar", "Busy"), new Tool(UUID.randomUUID()), ToolSituation.BUSY);
+        ToolItem toolItem = new ToolItem(UUID.randomUUID(), "SCL1223345", new Locate(UUID.randomUUID(), "Hangar", "Busy").getId(), new Tool(UUID.randomUUID()).getId(), ToolSituation.BUSY);
         createToolItemUseCase.insert(toolItem);
-        assertThrows(new IllegalArgumentException().getClass(), () -> updateToolItemUseCase.update(new ToolItem(UUID.randomUUID(), "SCL1223345", new Locate(UUID.randomUUID(), "Hangar", "Busy"), new Tool(UUID.randomUUID()), null)));
+        assertThrows(IllegalArgumentException.class, () -> updateToolItemUseCase.update(new ToolItem(UUID.randomUUID(), "SCL1223345", new Locate(UUID.randomUUID(), "Hangar", "Busy").getId(), new Tool(UUID.randomUUID()).getId(), null)));
     }
 
     @Test
     public void udpate_EntityNotExists_ToolItemClass(){
-        assertThrows(EntityNotFoundException.class, () -> updateToolItemUseCase.update(new ToolItem(UUID.randomUUID(), "SCL1223345", new Locate(UUID.randomUUID(), "Hangar", "Busy"), new Tool(UUID.randomUUID()), ToolSituation.BUSY)));
+        assertThrows(EntityNotFoundException.class, () -> updateToolItemUseCase.update(new ToolItem(UUID.randomUUID(), "SCL1223345", new Locate(UUID.randomUUID(), "Hangar", "Busy").getId(), new Tool(UUID.randomUUID()).getId(), ToolSituation.BUSY)));
     }
 
     @Test
     public void udpate_WithCorrectArguments_ToolItemClass(){
         UUID id = UUID.randomUUID();
-        ToolItem toolItem = new ToolItem(id, "SCL1233456", new Locate(UUID.randomUUID(), "Armário 123", "Busy"), new Tool(UUID.randomUUID()), ToolSituation.BUSY);
+        ToolItem toolItem = new ToolItem(id, "SCL1233456", new Locate(UUID.randomUUID(), "Armário 123", "Busy").getId(), new Tool(UUID.randomUUID()).getId(), ToolSituation.BUSY);
         createToolItemUseCase.insert(toolItem);
-        assertEquals(ToolItem.class, updateToolItemUseCase.update(new ToolItem(id, "SC123456", new Locate(UUID.randomUUID(), "Hangar", "Busy"), new Tool(UUID.randomUUID()), ToolSituation.FREE)).getClass());
+        assertEquals(ToolItem.class, updateToolItemUseCase.update(new ToolItem(id, "SC123456", new Locate(UUID.randomUUID(), "Hangar", "Busy").getId(), new Tool(UUID.randomUUID()).getId(), ToolSituation.FREE)).getClass());
     }
 }

@@ -19,6 +19,9 @@ public class CreateUserUseCase {
         Validator<User> validator = new UserInputRequestValidator();
         Notification notification = validator.validate(user);
 
+        if (user.getPromptuary() == null || user.getPromptuary().isEmpty())
+            throw new IllegalArgumentException("Promptuary is required");
+
         String promptuary = user.getPromptuary();
         if (userDAO.findByPromptuary(promptuary).isPresent())
             throw new EntityAlreadyExistsException("This promptuary is already in use");

@@ -36,12 +36,9 @@ public class CreateRequestUseCase {
             throw new IllegalArgumentException("Request ID is null.");
         }
 
-//        if (request.getUser().getPromptuary() == null){
-//            throw new IllegalArgumentException("User's promptuary is null.");
-//        }
-
-//        User user = findUserUseCase.findByPromptuary(request.getUser().getPromptuary()).orElseThrow(() ->
-//                new EntityNotFoundException("Can not find a User with promptuary" + request.getUser().getPromptuary()));
+        if (request.getDate() == null){
+            throw new IllegalArgumentException("Request date is null.");
+        }
 
         return requestDAO.create(request);
 

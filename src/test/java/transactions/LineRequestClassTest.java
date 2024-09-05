@@ -62,10 +62,10 @@ public class LineRequestClassTest {
         createToolUseCase.insert(tool);
 
         Locate locate = new Locate(UUID.randomUUID(), "Armário 1", "Armário da oficina");
-        ToolItem toolItem = new ToolItem(UUID.randomUUID(), "SCL1234", locate, tool, ToolSituation.FREE);
+        ToolItem toolItem = new ToolItem(UUID.randomUUID(), "SCL1234", locate.getId(), tool.getId(), ToolSituation.FREE);
         createToolItemUseCase.insert(toolItem);
 
-        User user = new User(UUID.randomUUID(), "Miguel", Role.ADMIN, Promptuary.valueOf("SC1231231"));
+        User user = new User(UUID.randomUUID(), "Miguel", Role.ADMIN, "SC1231231");
         createUserUseCase.insert(user);
 
         Timestamp value = Timestamp.valueOf("2018-11-12 01:02:03");
@@ -82,10 +82,10 @@ public class LineRequestClassTest {
         createToolUseCase.insert(tool);
 
         Locate locate = new Locate(UUID.randomUUID(), "Armário 2", "Armário da oficina");
-        ToolItem toolItem = new ToolItem(UUID.randomUUID(), "SCL1234", locate, tool, ToolSituation.FREE);
+        ToolItem toolItem = new ToolItem(UUID.randomUUID(), "SCL1234", locate.getId(), tool.getId(), ToolSituation.FREE);
         createToolItemUseCase.insert(toolItem);
 
-        User user = new User(UUID.randomUUID(), "Renan", Role.ADMIN, Promptuary.valueOf("SC5645667"));
+        User user = new User(UUID.randomUUID(), "Renan", Role.ADMIN, "SC5645667");
         createUserUseCase.insert(user);
 
         Timestamp value = Timestamp.valueOf("2018-11-12 01:02:03");
@@ -109,10 +109,10 @@ public class LineRequestClassTest {
         createToolUseCase.insert(tool);
 
         Locate locate = new Locate(UUID.randomUUID(), "Armário 3", "Armário da oficina");
-        ToolItem toolItem = new ToolItem(UUID.randomUUID(), "SCL1234", locate, tool, ToolSituation.FREE);
+        ToolItem toolItem = new ToolItem(UUID.randomUUID(), "SCL1234", locate.getId(), tool.getId(), ToolSituation.FREE);
         createToolItemUseCase.insert(toolItem);
 
-        User user = new User(UUID.randomUUID(), "Arthur", Role.ADMIN, Promptuary.valueOf("SC8901234"));
+        User user = new User(UUID.randomUUID(), "Arthur", Role.ADMIN, "SC8901234");
         createUserUseCase.insert(user);
 
         Timestamp value = Timestamp.valueOf("2018-11-12 01:02:03");
@@ -131,10 +131,10 @@ public class LineRequestClassTest {
         createToolUseCase.insert(tool);
 
         Locate locate = new Locate(UUID.randomUUID(), "Armário 4", "Armário do laboratório");
-        ToolItem toolItem = new ToolItem(UUID.randomUUID(), "SCL1234", locate, tool, ToolSituation.FREE);
+        ToolItem toolItem = new ToolItem(UUID.randomUUID(), "SCL1234", locate.getId(), tool.getId(), ToolSituation.FREE);
         createToolItemUseCase.insert(toolItem);
 
-        User user = new User(UUID.randomUUID(), "Heitor", Role.ADMIN, Promptuary.valueOf("SC6275123"));
+        User user = new User(UUID.randomUUID(), "Heitor", Role.ADMIN, "SC6275123");
         createUserUseCase.insert(user);
 
         Timestamp value = Timestamp.valueOf("2018-11-12 01:02:03");
@@ -145,7 +145,7 @@ public class LineRequestClassTest {
         UUID id = createLineRequestUseCase.insert(lineRequest).getId();
 
         //New user and new lineRequest
-        User user2 = new User(UUID.randomUUID(), "Gustavo", Role.ADMIN, Promptuary.valueOf("SC0000000"));
+        User user2 = new User(UUID.randomUUID(), "Gustavo", Role.ADMIN, "SC0000000");
         createUserUseCase.insert(user2);
 
         Request request2 = new Request(UUID.randomUUID(), value, user2);
@@ -161,10 +161,10 @@ public class LineRequestClassTest {
         createToolUseCase.insert(tool);
 
         Locate locate = new Locate(UUID.randomUUID(), "Armário 5", "Armário do laboratório");
-        ToolItem toolItem = new ToolItem(UUID.randomUUID(), "SCL1234", locate, tool, ToolSituation.FREE);
+        ToolItem toolItem = new ToolItem(UUID.randomUUID(), "SCL1234", locate.getId(), tool.getId(), ToolSituation.FREE);
         createToolItemUseCase.insert(toolItem);
 
-        User user = new User(UUID.randomUUID(), "Jorge", Role.ADMIN, Promptuary.valueOf("SC5374612"));
+        User user = new User(UUID.randomUUID(), "Jorge", Role.ADMIN, "SC5374612");
         createUserUseCase.insert(user);
 
         Timestamp value = Timestamp.valueOf("2018-11-12 01:02:03");

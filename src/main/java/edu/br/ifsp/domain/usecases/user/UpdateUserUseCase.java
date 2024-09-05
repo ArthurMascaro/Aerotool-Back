@@ -16,7 +16,8 @@ public class UpdateUserUseCase {
     }
 
     public User update(User user) {
-        User userDB = userDAO.findOne(user.getPromptuary()).get();
+        User userDB = userDAO.findOne(user.getPromptuary())
+                .orElseThrow(() -> new EntityNotFoundException("User not found!"));
         user.setRole(userDB.getRole());
 
         Validator<User> validator = new UserInputRequestValidator();

@@ -14,10 +14,10 @@ import org.junit.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.UUID;
 
 public class UserClassTests {
-
     public static InMemoryUserDAO inMemoryUserDAO = new InMemoryUserDAO();
     public CreateUserUseCase createUserUseCase = new CreateUserUseCase(inMemoryUserDAO);
     public FindUserUseCase findUserUseCase = new FindUserUseCase(inMemoryUserDAO);
@@ -35,12 +35,16 @@ public class UserClassTests {
 
     @Test
     public void UserConstructor_WithInvalidArgument_IllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> new User(null));
+        // Test with null UUID
+        assertThrows(IllegalArgumentException.class, () -> new User((UUID) null));
+
+        // Test with null String
+        assertThrows(IllegalArgumentException.class, () -> new User((String) null));
     }
 
     @Test
     public void insertUser_AlreadyExists_IllegalStateException(){
-        User user = new User(UUID.randomUUID(), "Teste", Role.TEACHER, Promptuary.valueOf("SC123456"));
+        User user = new User(UUID.randomUUID(), "Teste", Role.TEACHER, "SC123456");
         createUserUseCase.insert(user);
         assertThrows(EntityAlreadyExistsException.class, () -> createUserUseCase.insert(user));
     }
@@ -48,12 +52,12 @@ public class UserClassTests {
     @Test
     public void insertUser_OnlyWithUUID_IllegalStateException(){
         User user = new User(UUID.randomUUID());
-        assertThrows(new IllegalArgumentException().getClass(), () -> createUserUseCase.insert(user));
+        assertThrows(IllegalArgumentException.class, () -> createUserUseCase.insert(user));
     }
 
     @Test
     public void insertUser_WithCorrectUser_UserClass(){
-        User user = new User(UUID.randomUUID(), "Miguel", Role.ADMIN, Promptuary.valueOf("SC1231231"));
+        User user = new User(UUID.randomUUID(), "Miguel", Role.ADMIN, "SC1231231");
         assertEquals(User.class, createUserUseCase.insert(user).getClass());
     }
 
@@ -64,7 +68,7 @@ public class UserClassTests {
 
     @Test
     public void findOneUser_withCorrectUser_OptionalUser(){
-        User test = new User(UUID.randomUUID(), "Teste 2", Role.TEACHER, Promptuary.valueOf("SC999999"));
+        User test = new User(UUID.randomUUID(), "Teste 2", Role.TEACHER, "SC999999");
         createUserUseCase.insert(test);
         assertEquals(User.class, findUserUseCase.findOne(test).get().getClass());
     }
@@ -88,24 +92,24 @@ public class UserClassTests {
 
     @Test
     public void deleteUserByKey_UserNotExists_EntityNotFoundException(){
-        assertThrows(EntityNotFoundException.class, () -> removeUserUseCase.remove(Promptuary.valueOf("SC123111")).getClass());
+        assertThrows(EntityNotFoundException.class, () -> removeUserUseCase.remove("SC123111").getClass());
     }
 
     @Test
     public void deleteUserByKey_UserExists_UserClass(){
-        User test = new User(UUID.randomUUID(), "Teste 2", Role.TEACHER, Promptuary.valueOf("SC987654"));
+        User test = new User(UUID.randomUUID(), "Teste 2", Role.TEACHER, "SC987654");
         createUserUseCase.insert(test);
-        assertEquals(User.class, removeUserUseCase.remove(Promptuary.valueOf("SC987654")).getClass());
+        assertEquals(User.class, removeUserUseCase.remove("SC987654").getClass());
     }
 
     @Test
     public void deleteUserByUser_UserNotExists_EntityNotFoundException(){
-        assertThrows(EntityNotFoundException.class, () -> removeUserUseCase.remove(new User(UUID.randomUUID(), "Teste 2", Role.TEACHER, Promptuary.valueOf("SC981154"))).getClass());
+        assertThrows(EntityNotFoundException.class, () -> removeUserUseCase.remove(new User(UUID.randomUUID(), "Teste 2", Role.TEACHER, "SC981154")).getClass());
     }
 
     @Test
     public void deleteUserByUser_UserExists_UserClass(){
-        User test = new User(UUID.randomUUID(), "Teste 2", Role.TEACHER, Promptuary.valueOf("SC987687"));
+        User test = new User(UUID.randomUUID(), "Teste 2", Role.TEACHER, "SC987687");
         createUserUseCase.insert(test);
         assertEquals(User.class, removeUserUseCase.remove(test).getClass());
     }
@@ -113,17 +117,17 @@ public class UserClassTests {
     @Test
     public void updateUser_OnlyWithUUID_IllegalStateException(){
         User user = new User(UUID.randomUUID());
-        assertThrows(new IllegalArgumentException().getClass(), () -> updateUserUseCase.update(user));
+        assertThrows(EntityNotFoundException.class, () -> updateUserUseCase.update(user));
     }
 
     @Test
     public void updateUser_UserNotExists_EntityNotFoundException(){
-        assertThrows(EntityNotFoundException.class, () -> updateUserUseCase.update(new User(UUID.randomUUID(), "Teste 2", Role.TEACHER, Promptuary.valueOf("SC987623"))).getClass());
+        assertThrows(EntityNotFoundException.class, () -> updateUserUseCase.update(new User(UUID.randomUUID(), "Teste 2", Role.TEACHER, "SC987623")).getClass());
     }
 
     @Test
     public void updateUser_UserExists_NewUser(){
-        User test = new User(UUID.randomUUID(), "Teste 2", Role.TEACHER, Promptuary.valueOf("SC987611"));
+        User test = new User(UUID.randomUUID(), "Teste 2", Role.TEACHER, "SC987611");
         createUserUseCase.insert(test);
         test.setName("TESTE 1");
         test.setRole(Role.ADMIN);

@@ -86,6 +86,8 @@ public class User implements UserDetails {
     }
 
     public User(String promptuary) {
+        if (promptuary == null)
+            throw new IllegalArgumentException("promptuary cannot be null");
         this.promptuary = promptuary;
     }
 

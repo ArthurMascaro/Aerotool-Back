@@ -11,7 +11,7 @@ import edu.br.ifsp.domain.usecases.events.RemoveEventUseCase;
 import edu.br.ifsp.domain.usecases.events.UpdateEventUseCase;
 import edu.br.ifsp.domain.usecases.utils.EntityAlreadyExistsException;
 import edu.br.ifsp.domain.usecases.utils.EntityNotFoundException;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-class EventTest {
+public class EventTest {
 
     public static InMemoryEventDAO inMemoryEventDAO = new InMemoryEventDAO();
 

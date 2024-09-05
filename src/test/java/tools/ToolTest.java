@@ -53,7 +53,7 @@ public class ToolTest {
     public void findByUUID_ToolWithCorrectArgs_ToolClass() {
         Tool tool = new Tool(UUID.randomUUID(), "Ruler", "In use", ToolType.COMMON);
         createToolUseCase.insert(tool);
-        assertEquals(Tool.class, findToolUseCase.findByUUID(tool.getId()).get().getClass());
+        assertEquals(Tool.class, findToolUseCase.findByUUID(tool.getId()).getClass());
     }
 
     @Test

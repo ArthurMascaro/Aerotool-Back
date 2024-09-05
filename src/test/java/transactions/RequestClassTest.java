@@ -3,12 +3,12 @@ package transactions;
 import edu.br.ifsp.applications.persistence.inmemory.InMemoryRequestDAO;
 import edu.br.ifsp.applications.persistence.inmemory.InMemoryUserDAO;
 import edu.br.ifsp.domain.entities.transaction.Request;
-import edu.br.ifsp.domain.entities.user.Promptuary;
 import edu.br.ifsp.domain.entities.user.Role;
 import edu.br.ifsp.domain.entities.user.User;
 import edu.br.ifsp.domain.usecases.transactions.CreateRequestUseCase;
 import edu.br.ifsp.domain.usecases.transactions.FindRequestUseCase;
 import edu.br.ifsp.domain.usecases.transactions.RemoveRequestUseCase;
+import edu.br.ifsp.domain.usecases.transactions.UpdateRequestUseCase;
 import edu.br.ifsp.domain.usecases.user.CreateUserUseCase;
 import edu.br.ifsp.domain.usecases.user.FindUserUseCase;
 import edu.br.ifsp.domain.usecases.utils.EntityNotFoundException;
@@ -28,6 +28,7 @@ public class RequestClassTest {
     public static FindRequestUseCase findRequestUseCase = new FindRequestUseCase(inMemoryRequestDAO);
     public static CreateUserUseCase createUserUseCase = new CreateUserUseCase(inMemoryUserDAO);
     public static CreateRequestUseCase createRequestUseCase = new CreateRequestUseCase(inMemoryRequestDAO, findUserUseCase);
+    public static UpdateRequestUseCase updateRequestUseCase = new UpdateRequestUseCase(inMemoryRequestDAO);
     @Test
     public void RequestConstructor_WithoutArguments_ObjectRequestWithUUID() {
         assertEquals(UUID.class, new Request().getId().getClass());
@@ -35,14 +36,14 @@ public class RequestClassTest {
 
     @Test
     public void RequestConstructor_WithArguments_ObjectRequestWithUUIDAndUser() {
-        User user = new User(UUID.randomUUID(), "Renan", Role.TEACHER, Promptuary.valueOf("SC123456"));
+        User user = new User(UUID.randomUUID(), "Renan", Role.TEACHER, "SC123456");
         assertEquals(UUID.class, new Request(UUID.randomUUID(), user).getId().getClass());
     }
 
     @Test
     // public void classeSendoTestada_CondiçãoDoTeste_ResultadoEsperado
     public void createARequest_WithCorrectRequest_RequestClass(){
-        User user = new User(UUID.randomUUID(), "Renan", Role.TEACHER, Promptuary.valueOf("SC123456"));
+        User user = new User(UUID.randomUUID(), "Renan", Role.TEACHER, "SC123456");
         Request request = new Request(UUID.randomUUID(), Timestamp.valueOf("2023-03-13 13:02:21"), user);
         createUserUseCase.insert(user);
         assertEquals(Request.class,  createRequestUseCase.createARequest(request).getClass());
@@ -67,7 +68,7 @@ public class RequestClassTest {
 
     @Test
     public void findOneRequest_withCorrectId_OptionalRequest(){
-        User user = new User(UUID.randomUUID(), "Renan", Role.TEACHER, Promptuary.valueOf("SC122456"));
+        User user = new User(UUID.randomUUID(), "Renan", Role.TEACHER, "SC122456");
         createUserUseCase.insert(user);
         Request request = new Request(UUID.randomUUID(), Timestamp.valueOf("2023-03-13 13:02:21"), user);
         createRequestUseCase.createARequest(request);
@@ -86,7 +87,7 @@ public class RequestClassTest {
 
     @Test
     public void deleteRequestByKey_RequestExists_RequestClass(){
-        User test = new User(UUID.randomUUID(), "Teste 2", Role.TEACHER, Promptuary.valueOf("SC9876533"));
+        User test = new User(UUID.randomUUID(), "Teste 2", Role.TEACHER, "SC9876533");
         createUserUseCase.insert(test);
         Request request = new Request(UUID.randomUUID(), Timestamp.valueOf("2023-03-13 13:02:21"), test);
         createRequestUseCase.createARequest(request);
@@ -95,7 +96,7 @@ public class RequestClassTest {
 
     @Test
     public void deleteRequestByRequest_RequestNotExists_EntityNotFoundException(){
-        User test = new User(UUID.randomUUID(), "Teste 2", Role.TEACHER, Promptuary.valueOf("SC987654"));
+        User test = new User(UUID.randomUUID(), "Teste 2", Role.TEACHER, "SC987654");
         createUserUseCase.insert(test);
         assertThrows(EntityNotFoundException.class, () -> removeRequestUseCase.remove(new Request(UUID.randomUUID(), Timestamp.valueOf("2023-03-13 13:02:21"), test)).getClass());
     }
@@ -108,14 +109,14 @@ public class RequestClassTest {
 
     @Test
     public void updateRequest_RequestNotExists_EntityNotFoundException(){
-        User test = new User(UUID.randomUUID(), "Teste 2", Role.TEACHER, Promptuary.valueOf("SC987444"));
+        User test = new User(UUID.randomUUID(), "Teste 2", Role.TEACHER, "SC987444");
         createUserUseCase.insert(test);
         assertThrows(EntityNotFoundException.class, () -> updateRequestUseCase.update(new Request(UUID.randomUUID(), Timestamp.valueOf("2023-03-13 13:02:21"), test))).getClass();
     }
 
     @Test
     public void updateRequest_RequestExists_NewRequest(){
-        User test = new User(UUID.randomUUID(), "Teste 2", Role.TEACHER, Promptuary.valueOf("SC987611"));
+        User test = new User(UUID.randomUUID(), "Teste 2", Role.TEACHER, "SC987611");
         createUserUseCase.insert(test);
         Request request = new Request(UUID.randomUUID(), Timestamp.valueOf("2023-03-13 13:02:21"), test);
         createRequestUseCase.createARequest(request);

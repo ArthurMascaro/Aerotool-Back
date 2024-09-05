@@ -31,6 +31,10 @@ public class CreateLineRequestUseCase {
         this.findRequestUseCase = findRequestUseCase;
     }
 
+    public CreateLineRequestUseCase(LineRequestDAO lineRequestDAO) {
+        this.lineRequestDAO = lineRequestDAO;
+    }
+
     public LineRequest createLineRequest(LineRequest lineRequest) throws LineRequestNotAllowedException {
         UUID requestID = lineRequest.getRequest().getId();
         UUID toolItemID = lineRequest.getToolItem().getId();
