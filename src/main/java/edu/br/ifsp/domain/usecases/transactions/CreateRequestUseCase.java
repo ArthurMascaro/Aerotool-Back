@@ -40,6 +40,10 @@ public class CreateRequestUseCase {
             throw new IllegalArgumentException("Request date is null.");
         }
 
+        if (request.getUser() == null || findUserUseCase.findById(request.getUser().getId()).isEmpty()) {
+            throw new IllegalArgumentException("Request user is null.");
+        }
+
         return requestDAO.create(request);
 
     }
