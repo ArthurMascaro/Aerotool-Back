@@ -5,6 +5,7 @@ import edu.br.ifsp.domain.entities.transaction.LineRequest;
 import edu.br.ifsp.domain.entities.transaction.Request;
 import edu.br.ifsp.domain.entities.transaction.RequestSituation;
 import edu.br.ifsp.domain.usecases.transactions.LineRequestDAO;
+import edu.br.ifsp.web.exception.GenericResourceException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -62,8 +63,28 @@ public class PostgresLineRequestDAOImpl implements LineRequestDAO {
     @Value("${queries.sql.line-request-dao.delete.line-request}")
     private String deleteLineRequestQuery;
 
+    public Boolean isToolAvailable(UUID toolItemId, Timestamp expectedWithdrawalDate, Timestamp expectedReturnDate) {
+        List<LineRequest> lineRequests = findALL();
+
+        for (LineRequest lr : lineRequests) {
+            if (lr.getToolItem().getId().equals(toolItemId)) {
+                if (lr.getExpectedWithdrawalDate().before(expectedWithdrawalDate) && lr.getExpectedReturnDate().after(expectedWithdrawalDate)) {
+                    return false;
+                }
+                if (lr.getExpectedWithdrawalDate().before(expectedReturnDate) && lr.getExpectedReturnDate().after(expectedReturnDate)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     @Override
     public LineRequest create(LineRequest type) {
+        if (!isToolAvailable(type.getToolItem().getId(), type.getExpectedWithdrawalDate(), type.getExpectedReturnDate())) {
+            throw new GenericResourceException("Tool is not available for this period.", "Resource Unavailable");
+        }
+
         UUID lineRequestId = UUID.randomUUID();
         jdbcTemplate.update(insertLineRequestQuery, lineRequestId, type.getExpectedReturnDate(), type.getRealReturnDate(), type.getExpectedWithdrawalDate(), type.getRealWithdrawalDate(), RequestSituation.WAITING.name(), type.getToolItem().getId(), type.getRequest().getId());
         return findOne(lineRequestId).get();
@@ -99,6 +120,10 @@ public class PostgresLineRequestDAOImpl implements LineRequestDAO {
 
     @Override
     public LineRequest update(LineRequest type) {
+        if (!isToolAvailable(type.getToolItem().getId(), type.getExpectedWithdrawalDate(), type.getExpectedReturnDate())) {
+            throw new GenericResourceException("Tool is not available for this period.", "Resource Unavailable");
+        }
+
         jdbcTemplate.update(updateLineRequestQuery, type.getSituation().name(), type.getExpectedWithdrawalDate(),
                 type.getExpectedReturnDate(), type.getRealWithdrawalDate(), type.getRealReturnDate(), type.getId());
         return findByUUID(type.getId()).get();
