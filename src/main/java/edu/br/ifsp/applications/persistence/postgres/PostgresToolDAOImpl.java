@@ -52,6 +52,13 @@ public class PostgresToolDAOImpl implements ToolDAO {
 
     @Override
     public Tool create(Tool tool) {
+        List<Tool> tools = findALL();
+
+        tools.forEach(t -> {
+            if (t.getName().equals(tool.getName()))
+                throw new GenericResourceException("Tool with name " + tool.getName() + " already exists", "Resource already exists");
+        });
+
         jdbcTemplate.update(insertToolQuery, tool.getId(), tool.getName(), tool.getDescription(), tool.getType().name());
         return tool;
     }
