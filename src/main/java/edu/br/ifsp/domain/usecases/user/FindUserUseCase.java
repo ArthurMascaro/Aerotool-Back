@@ -29,6 +29,13 @@ public class FindUserUseCase {
         return userDAO.findByPromptuary(promptuary);
     }
 
+    public Optional<User> findById(UUID id) {
+        if (id == null) {
+            throw new IllegalArgumentException("Id cannot be null");
+        }
+        return userDAO.findByUUID(id);
+    }
+
     public List<User> findAll() {
         return userDAO.findALL();
     }

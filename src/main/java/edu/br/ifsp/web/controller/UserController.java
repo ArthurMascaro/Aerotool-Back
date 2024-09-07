@@ -11,16 +11,18 @@ import edu.br.ifsp.web.model.user.response.UserResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 public class UserController {
 
     CreateUserUseCase createUserUseCase;
-    FindUserUseCase userUseCase;
+    FindUserUseCase findUserUseCase;
     UpdateUserUseCase updateUserUseCase;
 
-    public UserController(CreateUserUseCase createUserUseCase, FindUserUseCase userUseCase, UpdateUserUseCase updateUserUseCase) {
+    public UserController(CreateUserUseCase createUserUseCase, FindUserUseCase findUserUseCase, UpdateUserUseCase updateUserUseCase) {
         this.createUserUseCase = createUserUseCase;
-        this.userUseCase = userUseCase;
+        this.findUserUseCase = findUserUseCase;
         this.updateUserUseCase = updateUserUseCase;
     }
 
@@ -39,7 +41,15 @@ public class UserController {
 
     @GetMapping("api/v1/users/{promptuary}")
     public ResponseEntity<UserResponse> findUserByPromptuary(@PathVariable("promptuary") String promptuary){
-        User user = userUseCase.findByPromptuary(promptuary).orElseThrow(
+        User user = findUserUseCase.findByPromptuary(promptuary).orElseThrow(
+                () -> new GenericResourceException("User not found!", "User")
+        );
+        return ResponseEntity.ok(UserResponse.fromUser(user));
+    }
+
+    @GetMapping("api/v1/users/{id}")
+    public ResponseEntity<UserResponse> findUserById(@PathVariable UUID id){
+        User user = findUserUseCase.findById(id).orElseThrow(
                 () -> new GenericResourceException("User not found!", "User")
         );
         return ResponseEntity.ok(UserResponse.fromUser(user));
