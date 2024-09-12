@@ -11,7 +11,9 @@ import edu.br.ifsp.web.model.user.response.UserResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RestController
 public class UserController {
@@ -53,5 +55,13 @@ public class UserController {
                 () -> new GenericResourceException("User not found!", "User")
         );
         return ResponseEntity.ok(UserResponse.fromUser(user));
+    }
+
+    @GetMapping("api/v1/users")
+    public ResponseEntity<List<UserResponse>> findAllUsers(){
+        List<User> users = findUserUseCase.findAll();
+        return ResponseEntity.ok(users.stream()
+                .map(UserResponse::fromUser)
+                .collect(Collectors.toList()));
     }
 }
