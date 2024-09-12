@@ -24,6 +24,8 @@ public class CreateToolUseCase {
         if (notification.hasErros())
             throw new IllegalArgumentException(notification.errorMessage());
 
+        tool.setId(UUID.randomUUID());
+
         return toolDAO.create(tool);
     }
 }
